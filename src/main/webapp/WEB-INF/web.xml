@@ -1,10 +1,37 @@
 <web-app>
     <servlet>
-        <servlet-name>EchoServlet</servlet-name>
-        <servlet-class>ru.parsentev.EchoServlet</servlet-class>
+        <servlet-name>HomePage</servlet-name>
+        <servlet-class>com.parsentev.controller.HomeController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>EchoServlet</servlet-name>
+        <servlet-name>HomePage</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>userEdit</servlet-name>
+        <servlet-class>com.parsentev.controller.UserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userEdit</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userDelete</servlet-name>
+        <servlet-class>com.parsentev.controller.UserDeleteController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userDelete</servlet-name>
+        <url-pattern>/user-delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userUpdate</servlet-name>
+        <servlet-class>com.parsentev.controller.UserUpdateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userUpdate</servlet-name>
+        <url-pattern>/user-update</url-pattern>
+    </servlet-mapping>
+
 </web-app>
