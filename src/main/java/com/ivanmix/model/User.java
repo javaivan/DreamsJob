@@ -1,18 +1,23 @@
-package com.parsentev.model;
+package com.ivanmix.model;
 
 /**
  * Created by mix on 27.02.2016.
  */
 public class User {
-    private static int count = 1;
+    private volatile static int count = 1;
+
+    private synchronized int synchronizedCount(){
+        return count++;
+    }
+
     private int id;
     private String name;
 
     public User(){
-        this.id = count++;
+        this.id = synchronizedCount();
     }
     public User(String name){
-        this.id = count++;
+        this.id = synchronizedCount();
         this.name = name;
     }
 

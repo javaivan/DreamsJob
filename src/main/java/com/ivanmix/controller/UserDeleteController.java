@@ -1,8 +1,8 @@
-package com.parsentev.controller;
+package com.ivanmix.controller;
 
 
-import com.parsentev.model.User;
-import com.parsentev.service.UserService;
+import com.ivanmix.model.User;
+import com.ivanmix.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import java.io.Writer;
  */
 
 
-public class UserUpdateController extends HttpServlet {
+public class UserDeleteController extends HttpServlet {
 
     UserService userService = UserService.getInstance();
 
@@ -28,12 +28,9 @@ public class UserUpdateController extends HttpServlet {
         resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
-        String name = req.getParameter("name");
-        User user = userService.getUserById(id);
-        user.setName(name);
-        userService.updateUser(user);
+        userService.deleteUserById(id);
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
-        writer.write(String.format("<h2>User Update</h2>"));
+        writer.write(String.format("<h2>User DELETE</h2>"));
         writer.flush();
     }
 

@@ -1,8 +1,8 @@
-package com.parsentev.controller;
+package com.ivanmix.controller;
 
 
-import com.parsentev.model.User;
-import com.parsentev.service.UserService;
+import com.ivanmix.model.User;
+import com.ivanmix.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

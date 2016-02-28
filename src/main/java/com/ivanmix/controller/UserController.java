@@ -1,8 +1,8 @@
-package com.parsentev.controller;
+package com.ivanmix.controller;
 
 
-import com.parsentev.model.User;
-import com.parsentev.service.UserService;
+import com.ivanmix.model.User;
+import com.ivanmix.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,16 +45,26 @@ public class UserController extends HttpServlet{
 
     }
 
-/*   protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       resp.setContentType("text/html");
-       resp.getWriter().write(String.format("<h1>User Put"));
-
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        Writer writer = resp.getWriter();
+        int id = Integer.parseInt(req.getParameter("id"));
+        userService.deleteUserById(id);
+        writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
+        writer.write(String.format("<h2>User DELETE</h2>"));
+        writer.flush();
     }
 
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        Writer writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
-        userService.deleteUserById(id);
-        resp.getWriter().write(String.format("<h1>User DELETE"));
-    }*/
+        String name = req.getParameter("name");
+        User user = userService.getUserById(id);
+        user.setName(name);
+        userService.updateUser(user);
+        writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
+        writer.write(String.format("<h2>User Update</h2>"));
+        writer.flush();
+    }
 }

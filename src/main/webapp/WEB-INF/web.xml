@@ -1,7 +1,7 @@
 <web-app>
     <servlet>
         <servlet-name>HomePage</servlet-name>
-        <servlet-class>com.parsentev.controller.HomeController</servlet-class>
+        <servlet-class>com.ivanmix.controller.HomeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -9,7 +9,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>userEdit</servlet-name>
-        <servlet-class>com.parsentev.controller.UserController</servlet-class>
+        <servlet-class>com.ivanmix.controller.UserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userEdit</servlet-name>
@@ -18,7 +18,7 @@
 
     <servlet>
         <servlet-name>userDelete</servlet-name>
-        <servlet-class>com.parsentev.controller.UserDeleteController</servlet-class>
+        <servlet-class>com.ivanmix.controller.UserDeleteController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userDelete</servlet-name>
@@ -27,7 +27,7 @@
 
     <servlet>
         <servlet-name>userUpdate</servlet-name>
-        <servlet-class>com.parsentev.controller.UserUpdateController</servlet-class>
+        <servlet-class>com.ivanmix.controller.UserUpdateController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userUpdate</servlet-name>

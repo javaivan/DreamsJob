@@ -1,9 +1,8 @@
-package com.parsentev.service;
+package com.ivanmix.service;
 
 
 
-import com.parsentev.model.User;
-
+import com.ivanmix.model.User;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -12,7 +11,7 @@ import java.util.*;
  */
 public class UserService {
 
-    private Map<Integer, User> userList = new HashMap<Integer, User>();
+    private volatile Map<Integer, User> userList = new HashMap<Integer, User>();
 
     private static UserService instance;
 
