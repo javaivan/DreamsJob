@@ -23,14 +23,16 @@ public class HomeController extends HttpServlet{
     UserService userService = UserService.getInstance();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
         resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.append("<h2>All User</h2>");
         writer.append("<h3><a href='/user'>Add new User</a></h3>");
+        writer.append("<h3><a href='/count'>Count</a></h3>");
         List<User> users = userService.allUsers();
         for (User user: users){
-            writer.append(user.getName());
+            writer.append(user.toString());
             writer.append("<form action=\"/user-delete\" method=\"post\">");
             writer.append("<input type=\"hidden\" name=\"id\" value=\""+user.getId()+"\" />");
             writer.append("<input type=\"submit\" value=\"Delete\" />");

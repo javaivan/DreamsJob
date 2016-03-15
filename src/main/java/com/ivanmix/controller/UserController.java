@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by mix on 24.02.2016.
@@ -27,6 +32,9 @@ public class UserController extends HttpServlet{
         writer.append("<h2>Add User</h2>");
         writer.append("<form action=\"\" method=\"POST\">");
         writer.append("Name: <input type=\"text\" name=\"name\" />");
+        writer.append("Age: <input type=\"text\" name=\"age\" />");
+        writer.append("Height: <input type=\"text\" name=\"height\" />");
+        writer.append("Date Birth: <input type=\"text\" name=\"dateBirth\" value=\"14/03/2016\" />");
         writer.append("<input type=\"submit\" value=\"Submit\" />");
         writer.append("</form>");
 
@@ -37,7 +45,23 @@ public class UserController extends HttpServlet{
         resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         String name = req.getParameter("name");
-        User user = new User(name);
+        Integer age = Integer.parseInt(req.getParameter("age"));
+        float height = Float.parseFloat(req.getParameter("height"));
+
+        String dateBirth = req.getParameter("dateBirth");
+
+        SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateObj = null;
+        try {
+            dateObj = curFormater.parse(dateBirth);
+        } catch (ParseException e) {
+            //
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateObj);
+
+        //System.out.println(cal);
+        User user = new User(age, height, calendar, name);
         userService.setUser(user.getId(), user);
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.write(String.format("<h2>Successfully adding a user: %s</h2>", name));

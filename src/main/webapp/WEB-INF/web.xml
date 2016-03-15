@@ -1,4 +1,7 @@
 <web-app>
+
+
+
     <servlet>
         <servlet-name>HomePage</servlet-name>
         <servlet-class>com.ivanmix.controller.HomeController</servlet-class>
@@ -7,6 +10,16 @@
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CountController</servlet-name>
+        <servlet-class>com.ivanmix.controller.CountController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CountController</servlet-name>
+        <url-pattern>/count</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>userEdit</servlet-name>
         <servlet-class>com.ivanmix.controller.UserController</servlet-class>
