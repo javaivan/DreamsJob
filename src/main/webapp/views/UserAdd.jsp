@@ -23,8 +23,8 @@
 <body>
 <%@include file="/blocks/header.jsp" %>
 <form action="<%=request.getContextPath()%>/user-add" method="post">
-    <input name="id" type="hidden" value="${userId}">
-    Name:<input name="name" type="text" value="${userLogin}">
+    ID:<input name="id" type="text">
+    Name:<input name="name" type="text">
     <input type="submit" value="submit" />
 </form>
 </body>

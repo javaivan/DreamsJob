@@ -12,6 +12,7 @@
     <title>DreamsJob</title>
 </head>
 <body>
-    <a href="<%=request.getContextPath()%>/views/UserView.jsp">Users</a>
+<%@include file="/blocks/header.jsp" %>
+Home Page
 </body>
 </html>
