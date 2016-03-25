@@ -23,7 +23,7 @@ public class HomeController extends HttpServlet{
     UserService userService = UserService.getInstance();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-
+/*
         resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
@@ -45,7 +45,7 @@ public class HomeController extends HttpServlet{
             writer.append("</form>");
             writer.append("<hr>");
         }
-        writer.flush();
+        writer.flush();*/
     }
 
 }

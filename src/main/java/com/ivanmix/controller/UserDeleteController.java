@@ -25,13 +25,13 @@ public class UserDeleteController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+       /* resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
         userService.deleteUserById(id);
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.write(String.format("<h2>User DELETE</h2>"));
-        writer.flush();
+        writer.flush();*/
     }
 
 }

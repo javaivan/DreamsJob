@@ -5,26 +5,35 @@ package com.ivanmix.service;
 import com.ivanmix.model.User;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by mix on 27.02.2016.
  */
 public class UserService {
 
-    private volatile Map<Integer, User> userList = new HashMap<Integer, User>();
+    private static final UserService instance = new UserService();
 
-    private static UserService instance;
+    private final List<User> users = new CopyOnWriteArrayList<User>();
 
-    private UserService(){}
+    private UserService(){
+        users.add(new User("1","Petr"));
+        users.add(new User("2","Oleg"));
+        users.add(new User("3","Ivan"));
+    }
 
     public static UserService getInstance(){
-        if (instance == null) {
-            instance = new UserService();
-        }
         return instance;
     }
 
-    public User getUserById(Integer id){
+    public List<User> getAll(){
+        return this.users;
+    }
+
+    public void add(final User user){
+        this.users.add(user);
+    }
+/*    public User getUserById(Integer id){
         return userList.get(id);
     }
 
@@ -41,6 +50,6 @@ public class UserService {
     }
     public void updateUser(User user){
         userList.put(user.getId(),user);
-    }
+    }*/
 
 }

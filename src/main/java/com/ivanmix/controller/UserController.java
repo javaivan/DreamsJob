@@ -42,7 +42,7 @@ public class UserController extends HttpServlet{
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+    /*    resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         String name = req.getParameter("name");
         Integer age = Integer.parseInt(req.getParameter("age"));
@@ -66,21 +66,21 @@ public class UserController extends HttpServlet{
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.write(String.format("<h2>Successfully adding a user: %s</h2>", name));
         writer.flush();
-
+*/
     }
 
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        /*resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
         userService.deleteUserById(id);
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.write(String.format("<h2>User DELETE</h2>"));
-        writer.flush();
+        writer.flush();*/
     }
 
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        /*resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
@@ -89,6 +89,6 @@ public class UserController extends HttpServlet{
         userService.updateUser(user);
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.write(String.format("<h2>User Update</h2>"));
-        writer.flush();
+        writer.flush();*/
     }
 }

@@ -25,7 +25,7 @@ public class UserUpdateController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        /*resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
@@ -34,7 +34,7 @@ public class UserUpdateController extends HttpServlet {
         userService.updateUser(user);
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
         writer.write(String.format("<h2>User Update</h2>"));
-        writer.flush();
+        writer.flush();*/
     }
 
 }
