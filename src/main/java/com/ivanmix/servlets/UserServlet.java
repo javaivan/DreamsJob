@@ -1,5 +1,6 @@
 package com.ivanmix.servlets;
 
+import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
 import com.ivanmix.service.UserService;
 
@@ -23,6 +24,7 @@ public class UserServlet extends HttpServlet{
 
         req.setAttribute("userId",user.getId());
         req.setAttribute("userLogin",user.getLogin());
+        req.setAttribute("userPassword",user.getPassword());
         req.getRequestDispatcher(String.format("%s/views/UserView.jsp", req.getContextPath())).forward(req,resp);
     }
 
@@ -30,8 +32,9 @@ public class UserServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         String name = req.getParameter("name");
+        String password = req.getParameter("password");
         if (id != null && name != null) {
-            UserService.getInstance().add(new User(id, name));
+            UserService.getInstance().add(new User(id, name, password, new Role("USER")));
         }
         resp.sendRedirect(String.format("%s/views/UserView.jsp", req.getContextPath()));
     }

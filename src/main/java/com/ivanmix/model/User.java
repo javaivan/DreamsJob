@@ -9,12 +9,15 @@ import java.util.Calendar;
 public class User {
 
     private final String id;
-
     private final String login;
+    private final String password;
+    private final Role role;
 
-    public User(final String id, final String login){
+    public User(final String id, final String login, final String password, final Role role){
         this.id = id;
         this.login = login;
+        this.password = password;
+        this.role = role;
     }
 
     public String getId(){
@@ -23,6 +26,15 @@ public class User {
     public String getLogin(){
         return this.login;
     }
+    public String getPassword(){
+        return this.login;
+    }
+    public String getRole(){
+        return role.getRule();
+    }
+
+
+
 /*
     @Override
     public String toString() {

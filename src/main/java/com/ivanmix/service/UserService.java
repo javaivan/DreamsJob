@@ -2,7 +2,10 @@ package com.ivanmix.service;
 
 
 
+import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
+import sun.invoke.empty.Empty;
+
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,9 +23,9 @@ public class UserService {
     //private final List<User> users = new CopyOnWriteArrayList<User>();
 
     private UserService(){
-        users.put("1",new User("1","Petr"));
-        users.put("2",new User("2","Oleg"));
-        users.put("3",new User("3","Ivan"));
+        users.put("1",new User("1","admin","admin",new Role("ADMIN")));
+        users.put("2",new User("2","oleg","oleg",new Role("USER")));
+        users.put("3",new User("3","Ivan","ivan", new Role("USER")));
     }
 
     public static UserService getInstance(){
@@ -42,5 +45,16 @@ public class UserService {
     }
     public void deleted(String id){
         this.users.remove(id);
+    }
+
+    public User login(String login, String password){
+        for (Map.Entry<String,User> us: users.entrySet()){
+            User user = us.getValue();
+
+            if(user.getLogin().equalsIgnoreCase(login) && user.getPassword().equalsIgnoreCase(password)) {
+                return user;
+            }
+        }
+        return null;
     }
 }

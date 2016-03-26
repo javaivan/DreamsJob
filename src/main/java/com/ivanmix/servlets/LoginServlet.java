@@ -1,5 +1,8 @@
 package com.ivanmix.servlets;
 
+import com.ivanmix.model.User;
+import com.ivanmix.service.UserService;
+
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,8 +36,13 @@ public class LoginServlet extends HttpServlet{
         HttpSession session= req.getSession();
 
         synchronized (session) {
-            session.setAttribute("login", login);
-            session.setAttribute("password", password);
+            User user = UserService.getInstance().login(login,password);
+            if(user!=null){
+                session.setAttribute("userId", user.getId());
+                session.setAttribute("login", user.getLogin());
+                session.setAttribute("password", user.getPassword());
+                session.setAttribute("role", user.getRole());
+            }
         }
 
 /*
