@@ -30,5 +30,6 @@
             </tr>
         </c:forEach>
     </table>
+<%@include file="/blocks/footer.jsp" %>
 </body>
 </html>

@@ -54,6 +54,15 @@
         <url-pattern>/item</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ItemViewServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.ItemViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemViewServlet</servlet-name>
+        <url-pattern>/item-view</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>

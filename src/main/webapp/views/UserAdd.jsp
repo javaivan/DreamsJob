@@ -28,5 +28,6 @@
     Password:<input name="password" type="password"><br>
     <input type="submit" value="submit" />
 </form>
+<%@include file="/blocks/footer.jsp" %>
 </body>
 </html>
