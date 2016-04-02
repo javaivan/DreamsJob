@@ -64,10 +64,10 @@ public class ItemService {
         }
     }
 
-    public List<Item> getItemAll(ArrayList<String> itemList){
+    public List<Item> getItemAll(List<String> itemList){
         List<Item> getItems = new ArrayList<Item>();
         for (String id: itemList){
-            getItems.add(get(id));
+            getItems.add(get(id.trim()));
         }
         return getItems;
     }
