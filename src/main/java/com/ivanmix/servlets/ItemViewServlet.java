@@ -62,7 +62,8 @@ public class ItemViewServlet extends HttpServlet{
                 }
             }
         }
-        req.getRequestDispatcher(String.format("%s/views/ItemView.jsp", req.getContextPath())).forward(req,resp);
+
+        req.getRequestDispatcher("/WEB-INF/views/itemView.jsp").forward(req,resp);
     }
 
     @Override

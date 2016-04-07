@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet{
         String password = req.getParameter("password");
 
         HttpSession session= req.getSession();
+        session.setMaxInactiveInterval(Integer.MAX_VALUE);
 
         synchronized (session) {
             User user = UserService.getInstance().login(login,password);
@@ -42,17 +43,12 @@ public class LoginServlet extends HttpServlet{
                 session.setAttribute("login", user.getLogin());
                 session.setAttribute("password", user.getPassword());
                 session.setAttribute("role", user.getRole());
+                req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req,resp);
+            } else {
+                req.setAttribute("eroor.login","Invalid login password credentionals");
+                req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
             }
         }
-
-/*
-        ServletContext context = req.getServletContext();
-        synchronized (context){
-            context.setAttribute("url_connection","url");
-        }
-*/
-
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 
 }

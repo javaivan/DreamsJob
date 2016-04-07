@@ -25,7 +25,7 @@ public class ItemServlet extends HttpServlet{
 
         req.setAttribute("items",ItemService.getInstance().getAll(userId,role));
 
-        req.getRequestDispatcher(String.format("%s/views/Item.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/item.jsp").forward(req,resp);
 
     }
 
@@ -46,6 +46,6 @@ public class ItemServlet extends HttpServlet{
 
         req.setAttribute("items",ItemService.getInstance().getAll(userId,role));
 
-        req.getRequestDispatcher(String.format("%s/views/Item.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/item.jsp").forward(req,resp);
     }
 }

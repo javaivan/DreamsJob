@@ -1,11 +1,11 @@
 <web-app>
 
     <servlet>
-        <servlet-name>HomePage</servlet-name>
-        <servlet-class>com.ivanmix.controller.HomeController</servlet-class>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.MainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HomePage</servlet-name>
+        <servlet-name>MainServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
@@ -81,5 +81,4 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
 </web-app>

@@ -16,11 +16,6 @@
      if(session.isNew() || (session.getAttribute("login")==null)){
          %>
             New User
-            <form action="<%=request.getContextPath()%>/login" method="post">
-                login: <input type="text" name="login"><br>
-                Password: <input type="password" name="password"><br>
-                <input type="submit" value="Submit">
-            </form>
         <%
      } else {
         %> Welcome back, <%=session.getAttribute("login")%>. Role: <%=session.getAttribute("role")%> <a href="<%=request.getContextPath()%>/logout">Logout</a><br>

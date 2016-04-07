@@ -25,7 +25,7 @@ public class UserServlet extends HttpServlet{
         req.setAttribute("userId",user.getId());
         req.setAttribute("userLogin",user.getLogin());
         req.setAttribute("userPassword",user.getPassword());
-        req.getRequestDispatcher(String.format("%s/views/UserView.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher(String.format("%s/views/userView.jsp", req.getContextPath())).forward(req,resp);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserServlet extends HttpServlet{
         if (id != null && name != null) {
             UserService.getInstance().add(new User(id, name, password, new Role("USER")));
         }
-        resp.sendRedirect(String.format("%s/views/UserView.jsp", req.getContextPath()));
+        req.getRequestDispatcher("/WEB-INF/views/userView.jsp").forward(req,resp);
     }
 
 }

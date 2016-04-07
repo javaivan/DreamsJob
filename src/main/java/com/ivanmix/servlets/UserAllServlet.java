@@ -17,14 +17,14 @@ public class UserAllServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("users",UserService.getInstance().getAll());
-        req.getRequestDispatcher(String.format("%s/views/UserAll.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         UserService.getInstance().deleted(id);
         req.setAttribute("users",UserService.getInstance().getAll());
-        req.getRequestDispatcher(String.format("%s/views/UserAll.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
     }
 
 }
