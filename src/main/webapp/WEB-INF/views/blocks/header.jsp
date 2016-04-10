@@ -18,8 +18,10 @@
             New User
         <%
      } else {
-        %> Welcome back, <%=session.getAttribute("login")%>. Role: <%=session.getAttribute("role")%> <a href="<%=request.getContextPath()%>/logout">Logout</a><br>
-            <a href="<%=request.getContextPath()%>/item">Item</a>
+        %> Welcome back, <%=session.getAttribute("login")%>. <br>
+            Role:  <%=session.getAttribute("role")%> <br>
+            <a href="<%=request.getContextPath()%>/logout">Logout</a><br>
+            <a href="<%=request.getContextPath()%>/item-my">My Items</a>
 <%
      }
  %>
@@ -33,6 +35,8 @@
     <%
         }
     %>
+
     <li><a href="<%=request.getContextPath()%>/user-all">Users</a></li>
+    <li><a href="<%=request.getContextPath()%>/item-public">All Item</a></li>
     <li><a href="<%=request.getContextPath()%>/count">Count</a></li>
 </ul>
