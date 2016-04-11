@@ -12,7 +12,8 @@
     <title>DreamsJob</title>
 </head>
 <body>
-<%@include file="blocks/header.jsp" %>
-Home Page
+    <%@include file="blocks/header.jsp" %>
+    Home Page
+    <%@include file="blocks/footer.jsp" %>
 </body>
 </html>

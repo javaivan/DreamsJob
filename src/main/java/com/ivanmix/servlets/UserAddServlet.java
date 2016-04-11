@@ -18,6 +18,7 @@ public class UserAddServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         req.setAttribute("name","value");
+
         req.getRequestDispatcher("/WEB-INF/views/userAdd.jsp").forward(req,resp);
     }
 
@@ -26,6 +27,7 @@ public class UserAddServlet extends HttpServlet{
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
+
         if (id != null && name != null) {
             UserService.getInstance().add(new User(id, name, password, new Role("USER")));
         }

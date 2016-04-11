@@ -20,7 +20,6 @@ public class LoginServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-
         resp.setContentType("text/html");
         Writer writer = resp.getWriter();
         writer.append("<h1><a href='/'>Dreans Jod</a></h1>");
@@ -29,10 +28,8 @@ public class LoginServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-
         HttpSession session= req.getSession();
         session.setMaxInactiveInterval(Integer.MAX_VALUE);
 
@@ -50,5 +47,4 @@ public class LoginServlet extends HttpServlet{
             }
         }
     }
-
 }

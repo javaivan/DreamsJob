@@ -1,17 +1,11 @@
 package com.ivanmix.service;
 
-
 import com.ivanmix.model.Item;
 import com.ivanmix.model.User;
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by mix on 27.02.2016.
- */
 public class ItemService {
 
     private static final ItemService instance = new ItemService();
@@ -29,57 +23,48 @@ public class ItemService {
     }
 
     private ItemService(){
-        items.put("1",new Item("1","1","1","1",new Date(), listItems));
+        items.put("1",new Item("1","1","Контент-редактор","Наполнение каталога товаров (технические характеристики и описание товаров)\n" +
+                "Обновление и контроль базы товаров\n" +
+                "Подготовка, обработка изображений для загрузки на сайт\n" +
+                "Работа с vk.com и facebook.com\n" +
+                "Написание текстов и подготовка новостей\n" +
+                "Рассылка прайс-листов",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("2",new Item("2","1","2","2",new Date(), listItems));
+        items.put("2",new Item("2","1","Web дизайнер","Если Вы дизайнер, креатив из Вас так и льется, знаете что такое хорошие сайты и как они должны выглядеть, то мы рады будем принять Вас в наш дружный коллектив.",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("3",new Item("3","1","3","3",new Date(), listItems));
+        items.put("3",new Item("3","1","Front-end developer","— Реальный опыт в этом направлении от 1 года (HTML5, CSS3)\n" +
+                "— JavaScript, опыт работы с JS-фреймворками и библиотеками (jQuery)\n" +
+                "— Наличие портфолио ОБЯЗАТЕЛЬНО\n" +
+                "— Опыт работы с системами контроля версий (GIT, SVN)\n" +
+                "— Умение разбираться в чужом коде\n" +
+                "— Адаптация макетов\n" +
+                "— Чистота написания кода (Форматирование, комментарии, стандарты).",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("4",new Item("4","1","4","4",new Date(), listItems));
+        items.put("4",new Item("4","1","Project manager","Eastern Peak Software is looking for an English speaking experienced Project Manager to join the team.\n" +
+                "We have many software projects for customers from United States, Europe and Israel. We use technologies, such as: PHP, RoR, Python, iOS, Android, JavaScript, jQuery, AngularJS, and others.",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("5",new Item("5","1","5","5",new Date(), listItems));
+        items.put("5",new Item("5","2","СММ-специалист","Производитель женской одежды бренд SL_IRA, осуществляющий деятельность в 5 странах мира, ищет в компанию СММ-специалиста",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("6",new Item("6","1","6","6",new Date(), listItems));
+        items.put("6",new Item("6","2","Сustomer Relationship Manager","Компания приглашает на работу сотрудника с опытом работы на аналогичной должности не менее года.",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("7",new Item("7","1","7","7",new Date(), listItems));
+        items.put("7",new Item("7","2","Frontend Developer","Компания приглашает на работу Frontend разработчика.",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("8",new Item("8","1","8","8",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("9",new Item("9","1","9","9",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("10",new Item("10","2","10","10",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("11",new Item("11","2","11","11",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("12",new Item("12","2","12","12",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("13",new Item("13","2","13","13",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("14",new Item("14","2","14","14",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("15",new Item("15","2","15","15",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("16",new Item("16","2","16","16",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("17",new Item("17","2","17","17",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("18",new Item("18","2","18","18",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("19",new Item("19","2","19","19",new Date(), listItems));
-        itemPublicList.add(String.valueOf(getNextUniqueIndex()));
-        items.put("20",new Item("20","2","20","20",new Date(), listItems));
+        items.put("8",new Item("8","2","Software marketing manager","Компания приглашает на работу Software marketing manager для продвижения программных продуктов и интернет ресурсов компании worldwide. ",new Date(), listItems));
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
     }
 
     public static ItemService getInstance(){
         return instance;
     }
+
     public Item get(String id){
         return this.items.get(id);
     }
+
     public String getItemUserId(String id){
         return this.items.get(id).getUserId();
     }
+
     public List<Item> getAll(){
         return new ArrayList<Item>(items.values());
     }
@@ -98,8 +83,6 @@ public class ItemService {
             return getItems;
         }
     }
-
-
 
     public List<String> getItemPublicList(){
         return  new ArrayList<String> (this.itemPublicList);
@@ -122,27 +105,26 @@ public class ItemService {
         return publicItem;
     }
 
-
     public void add(final Item item) {
         String itemId = String.valueOf(getNextUniqueIndex());
         Item itemNew = new Item(itemId, item.getId(),item.getName(), item.getDescription(),item.getCreating(),item.getListItems());
         itemPublicList.add(itemId);
         this.items.put(itemId,itemNew);
     }
-    public void addItems(String itemId, String userId,  List<String> items){
+
+    public void addItems(String itemId,  List<String> items){
         List<String> insertItems = new ArrayList<String>();
+        String userId = this.get(itemId).getUserId();
 
         for (String item: items){
-            if(this.getItemUserId(item).equals(userId)){
+            if(this.get(item).getUserId().equals(userId)){
                 insertItems.add(item);
             }
         }
-
         Item oldItem = this.getInstance().get(itemId);
-        Item newItem = new Item(oldItem.getId(),oldItem.getUserId(),oldItem.getName(), oldItem.getDescription(),oldItem.getCreating(),insertItems);
-        ItemService.getInstance().add(newItem);
+        Item newItem = new Item(oldItem.getId(),userId,oldItem.getName(), oldItem.getDescription(),oldItem.getCreating(),insertItems);
+        this.items.put(newItem.getId(),newItem);
     }
-
 
     public void removeItemsInItem(String itemId, String[] items){
         Item oldItem = this.getInstance().get(itemId);
@@ -151,21 +133,9 @@ public class ItemService {
         for (String it : items) {
             listItems.remove(it);
         }
-
         Item newItem = new Item(oldItem.getId(),oldItem.getUserId(),oldItem.getName(), oldItem.getDescription(),oldItem.getCreating(),listItems);
         ItemService.getInstance().add(newItem);
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public void addToPublic(String userID, String[] items){
         User user = UserService.getInstance().get(userID);
@@ -181,6 +151,7 @@ public class ItemService {
             }
         }
     }
+
     public void removeFromPublic(String userID, String[] items){
         User user = UserService.getInstance().get(userID);
         if(user.getRole().equalsIgnoreCase("ADMIN")){
@@ -195,7 +166,4 @@ public class ItemService {
             }
         }
     }
-
-
-
 }

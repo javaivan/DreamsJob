@@ -6,7 +6,7 @@
     <title>Item</title>
 </head>
 <body>
-<%@include file="blocks/header.jsp" %>
+    <%@include file="blocks/header.jsp" %>
     <form action="<%=request.getContextPath()%>/item" method="post">
         Name:<input name="name" type="text"><br>
         Description:<input name="description" type="text"><br>
@@ -46,8 +46,6 @@
         <input type="submit" name="addToPublic" value="addToPublic">
         <input type="submit" name="removeFromPublic" value="removeFromPublic">
     </form>
-
-
-<%@include file="blocks/footer.jsp" %>
+    <%@include file="blocks/footer.jsp" %>
 </body>
 </html>

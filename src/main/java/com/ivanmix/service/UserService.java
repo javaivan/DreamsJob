@@ -1,26 +1,15 @@
 package com.ivanmix.service;
 
-
-
 import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
-import sun.invoke.empty.Empty;
-
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * Created by mix on 27.02.2016.
- */
 public class UserService {
 
     private static final UserService instance = new UserService();
 
     private final Map<String,User>  users = new ConcurrentHashMap<String, User>();
-
-    //private final List<User> users = new CopyOnWriteArrayList<User>();
 
     private UserService(){
         users.put("1",new User("1","admin","admin",new Role("ADMIN")));
@@ -43,7 +32,8 @@ public class UserService {
     public User get(String id){
         return this.users.get(id);
     }
-    public void deleted(String id){
+
+    public void delete(String id){
         this.users.remove(id);
     }
 

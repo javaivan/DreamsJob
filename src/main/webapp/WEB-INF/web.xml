@@ -9,14 +9,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>CountController</servlet-name>
-        <servlet-class>com.ivanmix.controller.CountController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CountController</servlet-name>
-        <url-pattern>/count</url-pattern>
-    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>UserServlet</servlet-name>
@@ -45,8 +38,6 @@
         <url-pattern>/user-add</url-pattern>
     </servlet-mapping>
 
-
-
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.ivanmix.servlets.LogoutServlet</servlet-class>
@@ -67,26 +58,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <servlet>
         <servlet-name>ItemServlet</servlet-name>
         <servlet-class>com.ivanmix.servlets.item.ItemServlet</servlet-class>
@@ -96,7 +67,6 @@
         <url-pattern>/item</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>ItemPublicViewServlet</servlet-name>
         <servlet-class>com.ivanmix.servlets.item.ItemPublicViewServlet</servlet-class>
@@ -105,6 +75,7 @@
         <servlet-name>ItemPublicViewServlet</servlet-name>
         <url-pattern>/item-public-view</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>ItemPublicListServlet</servlet-name>
         <servlet-class>com.ivanmix.servlets.item.ItemPublicListServlet</servlet-class>
@@ -113,9 +84,6 @@
         <servlet-name>ItemPublicListServlet</servlet-name>
         <url-pattern>/item-public</url-pattern>
     </servlet-mapping>
-
-
-
 
     <servlet>
         <servlet-name>ItemMyServlet</servlet-name>
@@ -134,6 +102,4 @@
         <servlet-name>ItemMyViewServlet</servlet-name>
         <url-pattern>/item-my-view</url-pattern>
     </servlet-mapping>
-
-
 </web-app>

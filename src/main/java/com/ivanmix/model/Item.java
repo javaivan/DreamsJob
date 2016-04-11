@@ -1,12 +1,8 @@
 package com.ivanmix.model;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by mix on 26.03.2016.
- */
 public class Item {
 
     private final String id;
@@ -56,7 +52,35 @@ public class Item {
                 ", userId='" + userId + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", creating='" + creating + '\'' +
+                ", creating=" + creating +
+                ", listItems=" + listItems +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        if (!id.equals(item.id)) return false;
+        if (!userId.equals(item.userId)) return false;
+        if (!name.equals(item.name)) return false;
+        if (!description.equals(item.description)) return false;
+        if (!creating.equals(item.creating)) return false;
+        return listItems != null ? listItems.equals(item.listItems) : item.listItems == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + userId.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + creating.hashCode();
+        result = 31 * result + (listItems != null ? listItems.hashCode() : 0);
+        return result;
     }
 }

@@ -6,7 +6,7 @@
     <title>Item</title>
 </head>
 <body>
-<%@include file="blocks/header.jsp" %>
+    <%@include file="blocks/header.jsp" %>
     <table width="100%">
         <tr>
             <th>Id</th>
@@ -18,13 +18,13 @@
             <th>checkbox</th>
         </tr>
         <tr>
-            <td><c:out value="${id}"/></td>
-            <td><c:out value="${userId}"/></td>
-            <td><c:out value="${name}"/></td>
-            <td><c:out value="${description}"/></td>
-            <td><fmt:formatDate pattern="yyyy-MM-dd H-m-s"
-                                value="${creating}" /></td>
-            <td><c:out value="${listItems}"/></td>
+            <th><c:out value="${id}"/></th>
+            <th><c:out value="${userId}"/></th>
+            <th><c:out value="${name}"/></th>
+            <th><c:out value="${description}"/></th>
+            <th><fmt:formatDate pattern="yyyy-MM-dd H-m-s"
+                                value="${creating}" /></th>
+            <th><c:out value="${listItems}"/></th>
             <th>checkbox</th>
         </tr>
     </table>
@@ -66,6 +66,6 @@
     <%
         }
     %>
-<%@include file="blocks/footer.jsp" %>
+    <%@include file="blocks/footer.jsp" %>
 </body>
 </html>

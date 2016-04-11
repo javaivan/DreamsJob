@@ -6,7 +6,7 @@
     <title>Item</title>
 </head>
 <body>
-<%@include file="blocks/header.jsp" %>
+    <%@include file="blocks/header.jsp" %>
     <table width="100%">
         <tr>
             <th>Id</th>
@@ -32,6 +32,6 @@
             </tr>
         </c:forEach>
     </table>
-<%@include file="blocks/footer.jsp" %>
+    <%@include file="blocks/footer.jsp" %>
 </body>
 </html>
