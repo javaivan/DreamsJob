@@ -1,6 +1,8 @@
 package com.ivanmix.servlets.item;
 
 import com.ivanmix.service.ItemService;
+import com.ivanmix.servlets.LogoutServlet;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +15,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ItemMyListServlet extends HttpServlet{
+    private static final Logger logger = Logger.getLogger(ItemMyListServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        logger.debug("doGet");
         HttpSession session = req.getSession();
         String userId = (String) session.getAttribute("userId");
 
@@ -25,12 +29,14 @@ public class ItemMyListServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.debug("doPost");
         HttpSession session= req.getSession();
         String userId = (String) req.getSession().getAttribute("userId");
         String[] reqItems = req.getParameterValues("item");
         List<String> listItems = new ArrayList<String>();
 
         if (req.getParameterMap().containsKey("selected")) {
+            logger.debug("doPost: selected");
             synchronized (session) {
                 for (String item : reqItems) {
                     listItems.add(item);
@@ -47,9 +53,11 @@ public class ItemMyListServlet extends HttpServlet{
             }
         }
         if (req.getParameterMap().containsKey("addToPublic")) {
+            logger.debug("doPost: addToPublic");
             ItemService.getInstance().addToPublic(userId, reqItems);
         }
         if (req.getParameterMap().containsKey("removeFromPublic")) {
+            logger.debug("doPost: removeFromPublic");
             ItemService.getInstance().removeFromPublic(userId, reqItems);
         }
         resp.sendRedirect(String.format("%s/item-my", req.getContextPath()));

@@ -2,11 +2,15 @@ package com.ivanmix.service;
 
 import com.ivanmix.model.Item;
 import com.ivanmix.model.User;
+import com.ivanmix.servlets.item.ItemMyListServlet;
+import org.apache.log4j.Logger;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ItemService {
+    private static final Logger logger = Logger.getLogger(ItemService.class);
 
     private static final ItemService instance = new ItemService();
 
@@ -19,10 +23,12 @@ public class ItemService {
     private AtomicInteger counter = new AtomicInteger(0);
 
     public  int getNextUniqueIndex() {
+        logger.debug("getNextUniqueIndex");
         return counter.getAndIncrement();
     }
 
     private ItemService(){
+        logger.debug("ItemService");
         items.put("1",new Item("1","1","Контент-редактор","Наполнение каталога товаров (технические характеристики и описание товаров)\n" +
                 "Обновление и контроль базы товаров\n" +
                 "Подготовка, обработка изображений для загрузки на сайт\n" +
@@ -54,22 +60,27 @@ public class ItemService {
     }
 
     public static ItemService getInstance(){
+        logger.debug("getInstance");
         return instance;
     }
 
     public Item get(String id){
+        logger.debug("get: id: " + id);
         return this.items.get(id);
     }
 
     public String getItemUserId(String id){
+        logger.debug("getItemUserId: id: " + id);
         return this.items.get(id).getUserId();
     }
 
     public List<Item> getAll(){
+        logger.debug("getAll");
         return new ArrayList<Item>(items.values());
     }
 
     public List<Item> getMyItems(String userID){
+        logger.debug("getMyItems: userID: " + userID);
         User user = UserService.getInstance().get(userID);
         if(user.getRole().equalsIgnoreCase("ADMIN")){
             return new ArrayList<Item>(items.values());
@@ -85,10 +96,12 @@ public class ItemService {
     }
 
     public List<String> getItemPublicList(){
+        logger.debug("getItemPublicList");
         return  new ArrayList<String> (this.itemPublicList);
     }
 
     public List<Item> getItemAll(List<String> itemList){
+        logger.debug("getItemAll: itemList: " + itemList);
         List<Item> getItems = new ArrayList<Item>();
         for (String id: itemList){
             getItems.add(get(id.trim()));
@@ -97,6 +110,7 @@ public class ItemService {
     }
 
     public List<Item> getPublicItem(){
+        logger.debug("getPublicItem");
         List<Item> publicItem = new ArrayList<Item>();
 
         for (String id: getItemPublicList()){
@@ -106,6 +120,7 @@ public class ItemService {
     }
 
     public void add(final Item item) {
+        logger.debug("add " + item);
         String itemId = String.valueOf(getNextUniqueIndex());
         Item itemNew = new Item(itemId, item.getId(),item.getName(), item.getDescription(),item.getCreating(),item.getListItems());
         itemPublicList.add(itemId);
@@ -113,6 +128,7 @@ public class ItemService {
     }
 
     public void addItems(String itemId,  List<String> items){
+        logger.debug("addItems: itemId: " + itemId + "items: " + items);
         List<String> insertItems = new ArrayList<String>();
         String userId = this.get(itemId).getUserId();
 
@@ -127,6 +143,7 @@ public class ItemService {
     }
 
     public void removeItemsInItem(String itemId, String[] items){
+        logger.debug("removeItemsInItem: itemId: " + itemId + " items: " + items);
         Item oldItem = this.getInstance().get(itemId);
         List<String> listItems = oldItem.getListItems();
 
@@ -138,6 +155,8 @@ public class ItemService {
     }
 
     public void addToPublic(String userID, String[] items){
+        logger.debug("addToPublic: userID: " + userID + "items: " + items);
+
         User user = UserService.getInstance().get(userID);
         if(user.getRole().equalsIgnoreCase("ADMIN")){
             for (String item: items){
@@ -153,6 +172,8 @@ public class ItemService {
     }
 
     public void removeFromPublic(String userID, String[] items){
+        logger.debug("removeFromPublic: userID: " + userID + "items: " + items);
+
         User user = UserService.getInstance().get(userID);
         if(user.getRole().equalsIgnoreCase("ADMIN")){
             for (String item: items){

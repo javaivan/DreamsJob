@@ -21,13 +21,13 @@
     </style>
 </head>
 <body>
-<%@include file="/blocks/header.jsp" %>
-<form action="<%=request.getContextPath()%>/user-add" method="post">
-    ID:<input name="id" type="text"><br>
-    Name:<input name="name" type="text"><br>
-    Password:<input name="password" type="password"><br>
-    <input type="submit" value="submit" />
-</form>
-<%@include file="blocks/footer.jsp" %>
+    <%@include file="blocks/header.jsp" %>
+    <form action="<%=request.getContextPath()%>/user-add" method="post">
+        ID:<input name="id" type="text"><br>
+        Name:<input name="name" type="text"><br>
+        Password:<input name="password" type="password"><br>
+        <input type="submit" value="submit" />
+    </form>
+    <%@include file="blocks/footer.jsp" %>
 </body>
 </html>

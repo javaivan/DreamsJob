@@ -2,6 +2,9 @@ package com.ivanmix.servlets.item;
 
 import com.ivanmix.model.Item;
 import com.ivanmix.service.ItemService;
+import com.ivanmix.servlets.LogoutServlet;
+import org.apache.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemMyViewServlet extends HttpServlet{
+    private static final Logger logger = Logger.getLogger(ItemMyViewServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        logger.debug("doGet");
         String id = req.getParameter("id");
         Item item = ItemService.getInstance().get(id);
 
@@ -30,6 +35,7 @@ public class ItemMyViewServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.debug("doPost");
         HttpSession session= req.getSession();
         String userId = (String) req.getSession().getAttribute("userId");
         String[] reqItems = req.getParameterValues("item");
@@ -37,6 +43,7 @@ public class ItemMyViewServlet extends HttpServlet{
         List<String> listItems = new ArrayList<String>();
 
         if (req.getParameterMap().containsKey("insert")) {
+            logger.debug("doPost: insert");
             synchronized (session) {
                 if(session.getAttribute("sessionItems")!=null){
                     listItems = (ArrayList)session.getAttribute("sessionItems");
@@ -46,6 +53,7 @@ public class ItemMyViewServlet extends HttpServlet{
             }
         }
         if (req.getParameterMap().containsKey("delete")) {
+            logger.debug("doPost: delete");
             synchronized (session) {
                 ItemService.getInstance().removeItemsInItem(itemId, reqItems);
             }

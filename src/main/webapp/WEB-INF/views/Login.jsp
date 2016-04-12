@@ -12,22 +12,23 @@
     <title>DreamsJob Login</title>
 </head>
 <body>
-<%@include file="blocks/header.jsp" %>
-<%
+    <%@include file="blocks/header.jsp" %>
+    <%
 
-    Object error = request.getAttribute("eroor.login");
-    if(error!=null){
-        %>
-            <div style="background: #f00">
-                <%=error%>
-            </div>
-        <%
-    }
-%>
-<form action="<%=request.getContextPath()%>/login" method="post">
-    login: <input type="text" name="login"><br>
-    Password: <input type="password" name="password"><br>
-    <input type="submit" value="Submit">
-</form>
+        Object error = request.getAttribute("eroor.login");
+        if(error!=null){
+            %>
+                <div style="background: #f00">
+                    <%=error%>
+                </div>
+            <%
+        }
+    %>
+    <form action="<%=request.getContextPath()%>/login" method="post">
+        login: <input type="text" name="login"><br>
+        Password: <input type="password" name="password"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <%@include file="blocks/footer.jsp" %>
 </body>
 </html>
