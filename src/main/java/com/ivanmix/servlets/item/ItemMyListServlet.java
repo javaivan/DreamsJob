@@ -1,7 +1,6 @@
 package com.ivanmix.servlets.item;
 
 import com.ivanmix.service.ItemService;
-import com.ivanmix.servlets.LogoutServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

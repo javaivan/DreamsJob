@@ -59,11 +59,21 @@ public class ItemService {
         itemPublicList.add(String.valueOf(getNextUniqueIndex()));
     }
 
+
+    /**
+     *
+     * @return
+     */
     public static ItemService getInstance(){
         logger.debug("getInstance");
         return instance;
     }
 
+    /**
+     *
+     * @param id
+     * @return Item by id
+     */
     public Item get(String id){
         logger.debug("get: id: " + id);
         return this.items.get(id);
@@ -137,14 +147,14 @@ public class ItemService {
                 insertItems.add(item);
             }
         }
-        Item oldItem = this.getInstance().get(itemId);
+        Item oldItem = getInstance().get(itemId);
         Item newItem = new Item(oldItem.getId(),userId,oldItem.getName(), oldItem.getDescription(),oldItem.getCreating(),insertItems);
         this.items.put(newItem.getId(),newItem);
     }
 
     public void removeItemsInItem(String itemId, String[] items){
         logger.debug("removeItemsInItem: itemId: " + itemId + " items: " + items);
-        Item oldItem = this.getInstance().get(itemId);
+        Item oldItem = getInstance().get(itemId);
         List<String> listItems = oldItem.getListItems();
 
         for (String it : items) {
@@ -187,4 +197,28 @@ public class ItemService {
             }
         }
     }
+
+    public List<Item> getItemFirstLevel(){
+
+        logger.debug("getItemFirstLevel");
+
+        HashSet<String> itemAll = new HashSet<String>();
+        HashSet<String> itemWithParent = new HashSet<String>();
+        for (Item item: this.items.values()){
+           itemAll.add(item.getId());
+           for (String id: item.getListItems()){
+               itemWithParent.add(id);
+           }
+        }
+        for (String id: itemWithParent){
+            itemAll.remove(id);
+        }
+
+        List<Item> publicItem = new ArrayList<Item>();
+        for (String id: itemAll){
+            publicItem.add(get(id));
+        }
+        return publicItem;
+    }
+
 }
