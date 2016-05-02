@@ -1,7 +1,7 @@
 package com.ivanmix.servlets;
 
-import com.ivanmix.model.User;
 import com.ivanmix.service.UserService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,22 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by mix on 25.03.2016.
- */
 public class UserAllServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(UserAllServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.debug("doGet");
+
         req.setAttribute("users",UserService.getInstance().getAll());
-        req.getRequestDispatcher(String.format("%s/views/UserAll.jsp", req.getContextPath())).forward(req,resp);
-    }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        UserService.getInstance().deleted(id);
-        req.setAttribute("users",UserService.getInstance().getAll());
-        req.getRequestDispatcher(String.format("%s/views/UserAll.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.debug("doPost");
+        String id = req.getParameter("id");
+        UserService.getInstance().delete(id);
+
+        req.setAttribute("users",UserService.getInstance().getAll());
+        req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
+    }
 }

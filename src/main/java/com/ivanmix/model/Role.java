@@ -1,8 +1,5 @@
 package com.ivanmix.model;
 
-/**
- * Created by mix on 26.03.2016.
- */
 public class Role {
 
     private final String rule;
@@ -14,5 +11,26 @@ public class Role {
 
     public String getRule(){
         return this.rule;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "rule='" + rule + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Role role = (Role) o;
+        return rule.equals(role.rule);
+    }
+
+    @Override
+    public int hashCode() {
+        return rule.hashCode();
     }
 }
