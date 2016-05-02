@@ -22,7 +22,7 @@
 </head>
 <body>
     <%@include file="blocks/header.jsp" %>
-    <form action="<%=request.getContextPath()%>/user-add" method="post">
+    <form action="${pageContext.servletContext.contextPath}/user-add" method="post">
         ID:<input name="id" type="text"><br>
         Name:<input name="name" type="text"><br>
         Password:<input name="password" type="password"><br>
