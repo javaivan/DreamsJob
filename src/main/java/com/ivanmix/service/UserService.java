@@ -2,13 +2,15 @@ package com.ivanmix.service;
 
 import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserService {
-    private static final Logger logger = Logger.getLogger(UserService.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(UserService.class);
 
     private static final UserService instance = new UserService();
 
@@ -26,26 +28,43 @@ public class UserService {
         return instance;
     }
 
+    /**
+     * @return List<User>
+     */
     public List<User> getAll(){
         logger.debug("getAll");
         return new ArrayList<User>(users.values());
     }
 
+    /**
+     * @param  User user
+     */
     public void add(final User user){
         logger.debug("add " + user);
         this.users.put(user.getId(),user);
     }
 
+    /**
+     * @param  String id
+     * @return User
+     */
     public User get(String id){
         logger.debug("get " + id);
         return this.users.get(id);
     }
 
+    /**
+     * @param  String id
+     */
     public void delete(String id){
         logger.debug("getInstance: " + id);
         this.users.remove(id);
     }
 
+    /**
+     * @param  String login, String password
+     * @return User
+     */
     public User login(String login, String password){
         logger.debug("login: login " + login + "password " + password);
         for (Map.Entry<String,User> us: users.entrySet()){

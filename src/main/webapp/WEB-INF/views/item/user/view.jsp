@@ -24,7 +24,9 @@
         <select name="parent">
             <option value="0">select</option>
             <c:forEach items="${items}" var="i">
-                <option value="<c:out value="${i.getId()}" />"><c:out value="${i.getName()}" /></option>
+                <c:if test="${i.getId()}!=${item.getId()}">
+                    <option value="<c:out value="${i.getId()}" />"><c:out value="${i.getId()}" /> <c:out value="${i.getName()}" /></option>
+                </c:if>
             </c:forEach>
         </select>
         <hr>

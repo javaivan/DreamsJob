@@ -3,7 +3,9 @@ package com.ivanmix.servlets;
 import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
 import com.ivanmix.service.UserService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,8 @@ import java.io.IOException;
  * Created by mix on 25.03.2016.
  */
 public class UserAddServlet extends HttpServlet{
-    private static final Logger logger = Logger.getLogger(UserAddServlet.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(UserAddServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

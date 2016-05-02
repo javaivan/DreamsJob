@@ -3,14 +3,18 @@ package com.ivanmix.service;
 import com.ivanmix.helper.ItemBilder;
 import com.ivanmix.model.Item;
 import com.ivanmix.model.User;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ItemService {
-    private static final Logger logger = Logger.getLogger(ItemService.class);
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(ItemService.class);
 
     private static final ItemService instance = new ItemService();
 
@@ -23,13 +27,12 @@ public class ItemService {
     private AtomicInteger counter = new AtomicInteger(1);
 
 
-    public  int getNextUniqueIndex() {
+    private int getNextUniqueIndex() {
         logger.debug("getNextUniqueIndex");
         return counter.getAndIncrement();
     }
 
     private ItemService(){
-        Set<String> installItems = new HashSet<String>();
         logger.debug("ItemService");
         String id = String.valueOf(getNextUniqueIndex());
         items.put(id,new Item(id,"1","0","Контент-редактор","Наполнение каталога товаров (технические характеристики и описание товаров)\n" +
@@ -37,9 +40,9 @@ public class ItemService {
                 "Подготовка, обработка изображений для загрузки на сайт\n" +
                 "Работа с vk.com и facebook.com\n" +
                 "Написание текстов и подготовка новостей\n" +
-                "Рассылка прайс-листов",new Date(), installItems));
+                "Рассылка прайс-листов",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
-        items.put(id,new Item(id,"1","0","Web дизайнер","Если Вы дизайнер, креатив из Вас так и льется, знаете что такое хорошие сайты и как они должны выглядеть, то мы рады будем принять Вас в наш дружный коллектив.",new Date(), installItems));
+        items.put(id,new Item(id,"1","0","Web дизайнер","Если Вы дизайнер, креатив из Вас так и льется, знаете что такое хорошие сайты и как они должны выглядеть, то мы рады будем принять Вас в наш дружный коллектив.",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
         items.put(id,new Item(id,"1","0","Front-end developer","— Реальный опыт в этом направлении от 1 года (HTML5, CSS3)\n" +
                 "— JavaScript, опыт работы с JS-фреймворками и библиотеками (jQuery)\n" +
@@ -47,18 +50,18 @@ public class ItemService {
                 "— Опыт работы с системами контроля версий (GIT, SVN)\n" +
                 "— Умение разбираться в чужом коде\n" +
                 "— Адаптация макетов\n" +
-                "— Чистота написания кода (Форматирование, комментарии, стандарты).",new Date(), installItems));
+                "— Чистота написания кода (Форматирование, комментарии, стандарты).",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
         items.put(id,new Item(id,"1","0","Project manager","Eastern Peak Software is looking for an English speaking experienced Project Manager to join the team.\n" +
-                "We have many software projects for customers from United States, Europe and Israel. We use technologies, such as: PHP, RoR, Python, iOS, Android, JavaScript, jQuery, AngularJS, and others.",new Date(), installItems));
+                "We have many software projects for customers from United States, Europe and Israel. We use technologies, such as: PHP, RoR, Python, iOS, Android, JavaScript, jQuery, AngularJS, and others.",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
-        items.put(id,new Item(id,"2","0","СММ-специалист","Производитель женской одежды бренд SL_IRA, осуществляющий деятельность в 5 странах мира, ищет в компанию СММ-специалиста",new Date(), installItems));
+        items.put(id,new Item(id,"2","0","СММ-специалист","Производитель женской одежды бренд SL_IRA, осуществляющий деятельность в 5 странах мира, ищет в компанию СММ-специалиста",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
-        items.put(id,new Item(id,"2","0","Сustomer Relationship Manager","Компания приглашает на работу сотрудника с опытом работы на аналогичной должности не менее года.",new Date(), installItems));
+        items.put(id,new Item(id,"2","0","Сustomer Relationship Manager","Компания приглашает на работу сотрудника с опытом работы на аналогичной должности не менее года.",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
-        items.put(id,new Item(id,"2","0","Frontend Developer","Компания приглашает на работу Frontend разработчика.",new Date(), installItems));
+        items.put(id,new Item(id,"2","0","Frontend Developer","Компания приглашает на работу Frontend разработчика.",new Date(), new HashSet<String>()));
         id = String.valueOf(getNextUniqueIndex());
-        items.put(id,new Item(id,"2","0","Software marketing manager","Компания приглашает на работу Software marketing manager для продвижения программных продуктов и интернет ресурсов компании worldwide. ",new Date(), installItems));
+        items.put(id,new Item(id,"2","0","Software marketing manager","Компания приглашает на работу Software marketing manager для продвижения программных продуктов и интернет ресурсов компании worldwide. ",new Date(), new HashSet<String>()));
     }
 
 
@@ -72,25 +75,18 @@ public class ItemService {
     }
 
     /**
-     *
      * @param id
-     * @return Item by id
+     * @return Item
      */
     public Item get(String id){
         logger.debug("get: id: " + id);
         return this.items.get(id);
     }
 
-    public String getItemUserId(String id){
-        logger.debug("getItemUserId: id: " + id);
-        return this.items.get(id).getUser();
-    }
-
-    public List<Item> getAll(){
-        logger.debug("getAll");
-        return new ArrayList<Item>(items.values());
-    }
-
+    /**
+     * @param Userid
+     * @return List<Item>
+     */
     public List<Item> getMyItems(String userID){
         logger.debug("getMyItems: userID: " + userID);
         User user = UserService.getInstance().get(userID);
@@ -107,11 +103,10 @@ public class ItemService {
         }
     }
 
-    public List<String> getItemPublicList(){
-        logger.debug("getItemPublicList");
-        return  new ArrayList<String> (this.itemPublicList);
-    }
-
+    /**
+     * @param Set Item ud
+     * @return List<Item>
+     */
     public List<Item> getItemAll(Set<String> itemList){
         logger.debug("getItemAll: itemList: " + itemList);
         List<Item> getItems = new ArrayList<Item>();
@@ -121,6 +116,10 @@ public class ItemService {
         return getItems;
     }
 
+    /**
+     * @param  Item item
+     * @return Add new Item
+     */
     public void add(final Item item) {
         logger.debug("add " + item);
         String itemId = String.valueOf(getNextUniqueIndex());
@@ -128,6 +127,9 @@ public class ItemService {
         this.items.put(itemId,itemNew);
     }
 
+    /**
+     * @return List<Item>
+     */
     public List<Item> getItemFirstLevel(){
 
         logger.debug("getItemFirstLevel");
@@ -154,8 +156,10 @@ public class ItemService {
 
 
 
-
-        /*if exit a first level*/
+    /**
+     * @param  Item id
+     * @return boolean
+     */
     public boolean exitTofirstLevel(String id, int amountRepetitions, int maxAmountRepetitions){
         if(amountRepetitions > maxAmountRepetitions){
             return false;
@@ -169,122 +173,30 @@ public class ItemService {
         }
         return false;
     }
-/*
-    public void addItemsToItem(String parentId, Set<String> children){
-        if(exitTofirstLevel(parentId,0,items.size())){
-            Item parentItem = this.get(parentId);
-            Set<String> subItem = parentItem.getChildren();
 
-            for (String id: children){
-                if(this.get(id).getUser().equals(parentItem.getUser())){
-                    subItem.add(id);
-                    Item childrenItem = this.get(id);
-                    Item newChildrenItem = ItemBilder.newItem(childrenItem, parentId);
-                    this.items.put(newChildrenItem.getId(), newChildrenItem);
-                }
-            }
-
-            Item newItem = ItemBilder.newItem(parentItem, subItem);
-            this.items.put(newItem.getId(),newItem);
-        }
-    }
-    public void addItemsToItem(String parentId,  String[] children){
-        if(exitTofirstLevel(parentId,0,items.size())){
-            Item parentItem = this.get(parentId);
-            Set<String> subItem = parentItem.getChildren();
-
-            for (String id: children){
-                if(this.get(id).getUser().equals(parentItem.getUser())){
-                    subItem.add(id);
-                    Item childrenItem = this.get(id);
-                    Item newChildrenItem = ItemBilder.newItem(childrenItem, parentId);
-                    this.items.put(newChildrenItem.getId(), newChildrenItem);
-                }
-            }
-
-            Item newItem = ItemBilder.newItem(parentItem, subItem);
-            this.items.put(newItem.getId(),newItem);
-        }
-    }
-
-
-
-    public void addItemsToItem(String parentId,  List<String> children){
-        if(exitTofirstLevel(parentId,0,items.size())){
-            Item parentItem = this.get(parentId);
-            Set<String> subItem = parentItem.getChildren();
-
-            for (String id: children){
-                if(this.get(id).getUser().equals(parentItem.getUser())){
-                    subItem.add(id);
-                    Item childrenItem = this.get(id);
-                    Item newChildrenItem = ItemBilder.newItem(childrenItem, parentId);
-                    this.items.put(newChildrenItem.getId(), newChildrenItem);
-                }
-            }
-
-            Item newItem = ItemBilder.newItem(parentItem, subItem);
-            this.items.put(newItem.getId(),newItem);
-        }
-    }
-
-
-
-    public void removeItemsFromItem(String parent, Set<String> children){
-        Item parentItem = this.get(parent);
-        Set<String> subItem = parentItem.getChildren();
-
-        for (String id: children){
-            if(this.get(id).getUser().equals(parentItem.getUser())){
-                subItem.remove(id);
-                Item childrenItem = this.get(id);
-                Item newChildrenItem = ItemBilder.newItem(childrenItem,"0");
-                this.items.put(newChildrenItem.getId(), newChildrenItem);
-            }
-        }
-
-        Item newParentItem = ItemBilder.newItem(parentItem, subItem);
-        this.items.put(newParentItem.getId(), newParentItem);
-    }
-
-    public void removeItemsFromItem(String parent, String[] children){
-        Item parentItem = this.get(parent);
-        Set<String> subItem = parentItem.getChildren();
-
-        for (String id: children){
-            if(this.get(id).getUser().equals(parentItem.getUser())){
-                subItem.remove(id);
-                Item childrenItem = this.get(id);
-                Item newChildrenItem = ItemBilder.newItem(childrenItem,"0");
-                this.items.put(newChildrenItem.getId(), newChildrenItem);
-            }
-        }
-
-        Item newParentItem = ItemBilder.newItem(parentItem, subItem);
-        this.items.put(newParentItem.getId(), newParentItem);
-    }
-
-
-    */
-
-
-
+    /**
+     * @param itemId, userId, parent, name, description
+     */
     public void updateItem(String itemId, String userId, String parent, String name, String  description){
         logger.debug("updateItem: itemId: " + itemId + " userId: " + userId + " parent: " + parent + " name: " + name + " description: " + description);
 
         Item itemOld = this.items.get(itemId);
         User user = UserService.getInstance().get(userId);
         if(user.getRole().equalsIgnoreCase("ADMIN") || (user.getId()==userId)){
-            if(itemOld.getParent()==parent){
-               // if(exitTofirstLevel(parent,0,items.size())) {
+            if(!itemOld.getParent().equalsIgnoreCase(parent)){
+                if(exitTofirstLevel(parent,0,items.size())) {
                     this.updateParent(parent, itemId);
-                //}
+                }
             }
             Item newItem = ItemBilder.newItem(itemOld, parent, name, description);
             this.items.put(newItem.getId(),newItem);
         }
 
     }
+
+    /**
+     * @param itemId, itemParentId
+     */
     public void updateParent(String itemId, String itemParentId){
         Item itemOld = this.items.get(itemParentId);
         Set<String> itemChilder = itemOld.getChildren();
@@ -296,8 +208,4 @@ public class ItemService {
         Item newItem = ItemBilder.newItem(itemOld, itemChilder);
         this.items.put(newItem.getId(),newItem);
     }
-
-
-
-
 }

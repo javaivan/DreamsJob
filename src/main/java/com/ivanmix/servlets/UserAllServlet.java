@@ -1,7 +1,9 @@
 package com.ivanmix.servlets;
 
 import com.ivanmix.service.UserService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UserAllServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(UserAllServlet.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(UserAllServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

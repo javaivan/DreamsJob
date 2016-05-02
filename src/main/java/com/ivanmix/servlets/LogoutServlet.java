@@ -1,6 +1,7 @@
 package com.ivanmix.servlets;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,8 @@ import java.io.IOException;
  * Created by mix on 26.03.2016.
  */
 public class LogoutServlet extends HttpServlet{
-    private static final Logger logger = Logger.getLogger(LogoutServlet.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(LogoutServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
