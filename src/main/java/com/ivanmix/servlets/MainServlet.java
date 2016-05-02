@@ -19,7 +19,7 @@ public class MainServlet extends HttpServlet {
         if(session == null || session.getAttribute("login") == null){
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
         } else {
-            resp.sendRedirect(String.format("%s/item-public", req.getContextPath()));
+            resp.sendRedirect(String.format("%s/item-public-list", req.getContextPath()));
         }
     }
 }

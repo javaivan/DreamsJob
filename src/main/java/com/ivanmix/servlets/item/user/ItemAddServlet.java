@@ -1,8 +1,7 @@
-package com.ivanmix.servlets.item;
+package com.ivanmix.servlets.item.user;
 
 import com.ivanmix.model.Item;
 import com.ivanmix.service.ItemService;
-import com.ivanmix.servlets.LogoutServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -11,15 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.HashSet;
 
-public class ItemServlet extends HttpServlet{
-    private static final Logger logger = Logger.getLogger(ItemServlet.class);
+public class ItemAddServlet extends HttpServlet{
+    private static final Logger logger = Logger.getLogger(ItemAddServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         logger.debug("doGet");
-        resp.sendRedirect(String.format("%s/item-my", req.getContextPath()));
+
+        req.getRequestDispatcher("/WEB-INF/views/item/user/add.jsp").forward(req,resp);
     }
 
     @Override
@@ -30,11 +30,11 @@ public class ItemServlet extends HttpServlet{
         String userId = (String) req.getSession().getAttribute("userId");
 
         if (name != null && description != null && userId != null) {
-            LinkedList<String> listItems = new LinkedList<String>();
-            Item item = new Item("new",userId, name,description, new Date(), listItems);
+            HashSet<String> listItems = new HashSet<String>();
+            Item item = new Item("new",userId, "0", name,description, new Date(), listItems);
             logger.debug("doPost: " + item );
             ItemService.getInstance().add(item);
         }
-        resp.sendRedirect(String.format("%s/item-my", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/item-user-list", req.getContextPath()));
     }
 }

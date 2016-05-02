@@ -18,11 +18,11 @@
         <c:forEach var="user" items="${users}">
             <tr>
                 <td><c:out value="${user.getId()}"/></td>
-                <td><a href="<%=request.getContextPath()%>/user?id=<c:out value="${user.getId()}"/>"><c:out value="${user.getLogin()}"/></a></td>
+                <td><a href="${pageContext.servletContext.contextPath}/user?id=<c:out value="${user.getId()}"/>"><c:out value="${user.getLogin()}"/></a></td>
                 <td><c:out value="${user.getPassword()}"/></td>
                 <td><c:out value="${user.getRole()}"/></td>
                 <td>
-                    <form action="<%=request.getContextPath()%>/user-all" method="post">
+                    <form action="${pageContext.servletContext.contextPath}/user-all" method="post">
                         <input name="id" type="hidden" value="<c:out value="${user.getId()}"/>">
                         <input type="submit" value="deleted" />
                     </form>

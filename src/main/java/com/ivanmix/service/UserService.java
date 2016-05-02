@@ -2,7 +2,6 @@ package com.ivanmix.service;
 
 import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
-import com.ivanmix.servlets.item.ItemMyListServlet;
 import org.apache.log4j.Logger;
 
 import java.util.*;

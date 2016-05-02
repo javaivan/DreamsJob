@@ -19,13 +19,8 @@ public class ItemPublicViewServlet extends HttpServlet{
         String id = req.getParameter("id");
         Item item = ItemService.getInstance().get(id);
 
-        req.setAttribute("id",item.getId());
-        req.setAttribute("userId",item.getUserId());
-        req.setAttribute("name",item.getName());
-        req.setAttribute("description",item.getDescription());
-        req.setAttribute("creating",item.getCreating());
-        req.setAttribute("listItems",item.getListItems());
-        req.setAttribute("items",ItemService.getInstance().getItemAll(item.getListItems()));
-        req.getRequestDispatcher("/WEB-INF/views/itemPublicView.jsp").forward(req,resp);
+        req.setAttribute("item",item);
+        req.setAttribute("items",ItemService.getInstance().getItemAll(item.getChildren()));
+        req.getRequestDispatcher("/WEB-INF/views/item/public/view.jsp").forward(req,resp);
     }
 }

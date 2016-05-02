@@ -9,34 +9,31 @@
     <%@include file="/resources/css/main.css" %>
 </style>
 <link rel="stylesheet" href="resources/css/main.css"/>
-<link href="<%=request.getContextPath()%>/resources/css/main.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.servletContext.contextPath}/resources/css/main.css" rel="stylesheet" type="text/css">
 
-
- <%
-     if(session.isNew() || (session.getAttribute("login")==null)){
-         %>
-            New User
-        <%
-     } else {
-        %> Welcome back, <%=session.getAttribute("login")%>. <br>
-            Role:  <%=session.getAttribute("role")%> <br>
-            <a href="<%=request.getContextPath()%>/logout">Logout</a><br>
-            <a href="<%=request.getContextPath()%>/item-my">My Items</a>
-<%
-     }
- %>
+<c:choose>
+    <c:when test="${sessionScope.login == null}">
+        New User
+    </c:when>
+    <c:otherwise>
+        Welcome back, ${sessionScope.login}. <br>
+        Role:  <%=session.getAttribute("role")%> <br>
+        <a href="${pageContext.servletContext.contextPath}/logout">Logout</a><br>
+        <a href="${pageContext.servletContext.contextPath}/item-user-list">My Items</a><br>
+        <a href="${pageContext.servletContext.contextPath}/item-user-add">add Items</a><br>
+    </c:otherwise>
+</c:choose>
 
 <ul>
     <li><a href="<%=request.getContextPath()%>/">Home</a></li>
     <%
         if(session.getAttribute("role")=="ADMIN"){
     %>
-        <li><a href="<%=request.getContextPath()%>/user-add">Add User</a></li>
+        <li><a href="${pageContext.servletContext.contextPath}/user-add">Add User</a></li>
     <%
         }
     %>
-
-    <li><a href="<%=request.getContextPath()%>/user-all">Users</a></li>
-    <li><a href="<%=request.getContextPath()%>/item-public">All Item</a></li>
-    <li><a href="<%=request.getContextPath()%>/count">Count</a></li>
+    <li><a href="${pageContext.servletContext.contextPath}/user-all">Users</a></li>
+    <li><a href="${pageContext.servletContext.contextPath}/item-public-list">All Item</a></li>
+    <li><a href="${pageContext.servletContext.contextPath}/count">Count</a></li>
 </ul>

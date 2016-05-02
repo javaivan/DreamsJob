@@ -58,7 +58,7 @@
 
 
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>ItemServlet</servlet-name>
         <servlet-class>com.ivanmix.servlets.item.ItemServlet</servlet-class>
     </servlet>
@@ -101,5 +101,57 @@
     <servlet-mapping>
         <servlet-name>ItemMyViewServlet</servlet-name>
         <url-pattern>/item-my-view</url-pattern>
+    </servlet-mapping>-->
+
+
+
+
+    <servlet>
+        <servlet-name>ItemPublicListServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.item.ItemPublicListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemPublicListServlet</servlet-name>
+        <url-pattern>/item-public-list</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ItemPublicViewServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.item.ItemPublicViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemPublicViewServlet</servlet-name>
+        <url-pattern>/item-public-view</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ItemUserViewServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.item.user.ItemViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemUserViewServlet</servlet-name>
+        <url-pattern>/item-user-view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ItemUserAddServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.item.user.ItemAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemUserAddServlet</servlet-name>
+        <url-pattern>/item-user-add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ItemUserListServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.item.user.ItemListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemUserListServlet</servlet-name>
+        <url-pattern>/item-user-list</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>

@@ -6,7 +6,7 @@
     <title>Item</title>
 </head>
 <body>
-    <%@include file="blocks/header.jsp" %>
+    <%@include file="/WEB-INF/views/blocks/header.jsp" %>
     <table width="100%">
         <tr>
             <th>Id</th>
@@ -16,33 +16,22 @@
             <th>creating</th>
             <th>listItems</th>
         </tr>
-        <tr>
-            <th><a href="/item-public-view?id=<c:out value="${id}"/>"><c:out value="${id}"/></a></th>
-            <th><c:out value="${userId}"/></th>
-            <th><c:out value="${name}"/></th>
-            <th><c:out value="${description}"/></th>
-            <th><fmt:formatDate pattern="yyyy-MM-dd H-m-s"
-                                value="${creating}" /></th>
-            <th><c:out value="${listItems}"/></th>
-        </tr>
         <c:forEach var="item" items="${items}">
-            <%-- <c:if test="${id != item.getId()}">--%>
             <tr>
-                <td><a href="/item-public-view?id=<c:out value="${item.getId()}"/>"><c:out value="${item.getId()}"/></a></td>
-                <td><c:out value="${item.getUserId()}"/></td>
+                <td><a href="${pageContext.servletContext.contextPath}/item-public-view?id=<c:out value="${item.getId()}"/>"><c:out value="${item.getId()}"/></a></td>
+                <td><c:out value="${item.getUser()}"/></td>
                 <td><c:out value="${item.getName()}"/></td>
                 <td><c:out value="${item.getDescription()}"/></td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd H-m-s"
                                     value="${item.getCreating()}" /></td>
                 <td>
-                    <c:forEach items="${item.getListItems()}" var="itemId">
-                        <c:out value="${itemId}" />,
+                    <c:forEach items="${item.getChildren()}" var="itemId">
+                            <c:out value="${itemId}" />,
                     </c:forEach>
                 </td>
             </tr>
-            <%--</c:if>--%>
         </c:forEach>
     </table>
-    <%@include file="blocks/footer.jsp" %>
+    <%@include file="/WEB-INF/views/blocks/footer.jsp" %>
 </body>
 </html>

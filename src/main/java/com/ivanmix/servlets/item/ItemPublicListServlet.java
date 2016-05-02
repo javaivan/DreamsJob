@@ -17,6 +17,6 @@ public class ItemPublicListServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         logger.debug("doGet");
         req.setAttribute("items",ItemService.getInstance().getItemFirstLevel());
-        req.getRequestDispatcher("/WEB-INF/views/itemPublicList.jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/item/public/list.jsp").forward(req,resp);
     }
 }

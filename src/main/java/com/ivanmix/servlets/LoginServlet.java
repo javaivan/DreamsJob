@@ -43,10 +43,10 @@ public class LoginServlet extends HttpServlet{
                 session.setAttribute("login", user.getLogin());
                 session.setAttribute("password", user.getPassword());
                 session.setAttribute("role", user.getRole());
-                resp.sendRedirect(String.format("%s/item-public", req.getContextPath()));
+                resp.sendRedirect(String.format("%s/item-public-list", req.getContextPath()));
             } else {
                 logger.debug("doPost: synchronized: user == null");
-                req.setAttribute("eroor.login","Invalid login password credentionals");
+                req.setAttribute("eroor_login","Invalid login password credentionals");
                 req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
             }
         }
