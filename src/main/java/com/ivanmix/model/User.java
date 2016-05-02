@@ -1,11 +1,5 @@
 package com.ivanmix.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-/**
- * Created by mix on 27.02.2016.
- */
 public class User {
 
     private final String id;
@@ -23,28 +17,49 @@ public class User {
     public String getId(){
         return this.id;
     }
+
     public String getLogin(){
         return this.login;
     }
+
     public String getPassword(){
         return this.login;
     }
+
     public String getRole(){
         return role.getRule();
     }
 
-
-
-/*
     @Override
     public String toString() {
-
-        SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-
-        return "User[id='"+this.id+"'; dateBirth='"+curFormater.format(this.dateBirth.getTime())+"'; name='"+this.name+"']";
+        return "User{" +
+                "id='" + id + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 
-*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
+
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return role != null ? role.equals(user.role) : user.role == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
 }
