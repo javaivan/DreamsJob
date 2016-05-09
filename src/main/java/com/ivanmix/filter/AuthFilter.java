@@ -1,14 +1,10 @@
 package com.ivanmix.filter;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by ivan on 02.05.2016.
- */
 public class AuthFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -25,6 +21,8 @@ public class AuthFilter implements Filter {
         } else {
             filterChain.doFilter(servletRequest,servletResponse);
         }
+
+        System.out.println("filter");
     }
 
     public void destroy() {

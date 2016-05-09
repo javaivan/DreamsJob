@@ -4,9 +4,7 @@ import com.ivanmix.model.Item;
 
 import java.util.Set;
 
-/**
- * Created by Ivan on 25.04.2016.
- */
+
 public class ItemBilder {
 
     public static Item newItem(Item item, Set<String> items){

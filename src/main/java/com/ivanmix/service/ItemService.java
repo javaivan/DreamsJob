@@ -84,7 +84,7 @@ public class ItemService {
     }
 
     /**
-     * @param Userid
+     * @param String
      * @return List<Item>
      */
     public List<Item> getMyItems(String userID){
@@ -104,7 +104,7 @@ public class ItemService {
     }
 
     /**
-     * @param Set Item ud
+     * @param itemList
      * @return List<Item>
      */
     public List<Item> getItemAll(Set<String> itemList){
@@ -182,7 +182,7 @@ public class ItemService {
 
         Item itemOld = this.items.get(itemId);
         User user = UserService.getInstance().get(userId);
-        if(user.getRole().equalsIgnoreCase("ADMIN") || (user.getId()==userId)){
+        if(user.getRole().equalsIgnoreCase("ADMIN") || (user.getId().equalsIgnoreCase(userId))){
             if(!itemOld.getParent().equalsIgnoreCase(parent)){
                 if(exitTofirstLevel(parent,0,items.size())) {
                     this.updateParent(parent, itemId);

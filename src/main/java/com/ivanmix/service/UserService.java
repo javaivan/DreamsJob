@@ -50,7 +50,10 @@ public class UserService {
      */
     public User get(String id){
         logger.debug("get " + id);
-        return this.users.get(id);
+        if(this.users.get(id) != null){
+            return this.users.get(id);
+        }
+        throw new IllegalStateException(String.format("Not found user with id %s", id));
     }
 
     /**

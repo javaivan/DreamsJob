@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet{
     private static final Logger logger =
             LoggerFactory.getLogger(UserServlet.class);
 
-    @Override
+/*    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         logger.debug("doGet");
         String id = req.getParameter("id");
@@ -40,5 +40,5 @@ public class UserServlet extends HttpServlet{
             UserService.getInstance().add(new User(id, name, password, new Role("USER")));
         }
         req.getRequestDispatcher("/WEB-INF/views/userView.jsp").forward(req,resp);
-    }
+    }*/
 }

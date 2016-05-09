@@ -18,7 +18,6 @@ public class UserAllServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug("doGet");
-
         req.setAttribute("users",UserService.getInstance().getAll());
         req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
     }
@@ -28,7 +27,6 @@ public class UserAllServlet extends HttpServlet {
         logger.debug("doPost");
         String id = req.getParameter("id");
         UserService.getInstance().delete(id);
-
         req.setAttribute("users",UserService.getInstance().getAll());
         req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
     }

@@ -1,7 +1,6 @@
 package com.ivanmix.servlets.item;
 
 import com.ivanmix.service.ItemService;
-import com.ivanmix.servlets.LogoutServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
