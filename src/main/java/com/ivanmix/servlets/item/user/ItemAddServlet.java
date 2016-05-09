@@ -31,6 +31,9 @@ public class ItemAddServlet extends HttpServlet{
         String name = req.getParameter("name");
         String description = req.getParameter("description");
         String userId = (String) req.getSession().getAttribute("userId");
+        logger.debug("doPost: name: " + name );
+        logger.debug("doPost: description: " + description );
+        logger.debug("doPost: userId: " + userId );
 
         if (name != null && description != null && userId != null) {
             HashSet<String> listItems = new HashSet<String>();

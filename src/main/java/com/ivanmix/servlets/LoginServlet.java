@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet{
         logger.debug("doPost");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        HttpSession session= req.getSession();
+        HttpSession session = req.getSession();
         session.setMaxInactiveInterval(Integer.MAX_VALUE);
 
         synchronized (session) {

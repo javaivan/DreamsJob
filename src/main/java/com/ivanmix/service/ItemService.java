@@ -104,6 +104,15 @@ public class ItemService {
     }
 
     /**
+     * @return List<Item>
+     */
+    public List<Item> getItemAll(){
+        logger.debug("getItemAll");
+        return  new ArrayList<Item>(items.values());
+    }
+
+
+    /**
      * @param itemList
      * @return List<Item>
      */

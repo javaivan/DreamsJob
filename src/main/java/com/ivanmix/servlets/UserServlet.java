@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet{
     private static final Logger logger =
             LoggerFactory.getLogger(UserServlet.class);
 
-/*    @Override
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         logger.debug("doGet");
         String id = req.getParameter("id");
@@ -26,7 +26,7 @@ public class UserServlet extends HttpServlet{
         req.setAttribute("userId",user.getId());
         req.setAttribute("userLogin",user.getLogin());
         req.setAttribute("userPassword",user.getPassword());
-        req.getRequestDispatcher(String.format("%s/views/userView.jsp", req.getContextPath())).forward(req,resp);
+        req.getRequestDispatcher(String.format("/WEB-INF/views/userView.jsp", req.getContextPath())).forward(req,resp);
     }
 
     @Override
@@ -35,10 +35,9 @@ public class UserServlet extends HttpServlet{
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-
         if (id != null && name != null) {
             UserService.getInstance().add(new User(id, name, password, new Role("USER")));
         }
         req.getRequestDispatcher("/WEB-INF/views/userView.jsp").forward(req,resp);
-    }*/
+    }
 }

@@ -44,6 +44,18 @@ public class UserService {
         this.users.put(user.getId(),user);
     }
 
+
+    /**
+     * @param  User user
+     */
+    /*
+    public void update(final User user){
+        logger.debug("add " + user);
+        User oldUser = this.users.get(user.getId());
+
+        this.users.put(user.getId(),user);
+    }*/
+
     /**
      * @param  String id
      * @return User

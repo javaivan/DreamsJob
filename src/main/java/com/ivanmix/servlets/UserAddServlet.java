@@ -30,7 +30,6 @@ public class UserAddServlet extends HttpServlet{
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-
         if (id != null && name != null) {
             logger.debug("UserAddServlet: doPost id: " + id +  " name: " + name);
             UserService.getInstance().add(new User(id, name, password, new Role("USER")));
