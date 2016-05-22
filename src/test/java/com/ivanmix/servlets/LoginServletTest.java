@@ -1,5 +1,6 @@
 package com.ivanmix.servlets;
 
+import com.ivanmix.service.UserService;
 import org.junit.Test;
 
 import javax.servlet.RequestDispatcher;
@@ -10,10 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.*;
 
 /**
  * Created by ivan on 09.05.2016.
@@ -23,6 +21,7 @@ public class LoginServletTest {
     @Test
     public void loginUser() throws ServletException, IOException {
         LoginServlet servlet = new LoginServlet();
+        UserService userService = mock(UserService.class);
 
         HttpSession httpSession = mock(HttpSession.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -33,11 +32,17 @@ public class LoginServletTest {
 
         when(request.getParameter("login")).thenReturn("admin");
         when(request.getParameter("password")).thenReturn("admin");
+
+
         when(request.getSession()).thenReturn(httpSession);
 
+
         servlet.doPost(request, response);
+/*
+        request.getSession().getAttribute()
+*/
 
-
+        verify(userService, atLeastOnce()).getInstance().getAll();
 
     }
 }
