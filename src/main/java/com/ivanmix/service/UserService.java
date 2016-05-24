@@ -1,5 +1,6 @@
 package com.ivanmix.service;
 
+import com.ivanmix.dao.UserDAO;
 import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ public class UserService {
             LoggerFactory.getLogger(UserService.class);
 
     private static final UserService instance = new UserService();
+
+    private UserDAO userDAO = new UserDAO();
 
     private final Map<String,User>  users = new ConcurrentHashMap<String, User>();
 
@@ -41,7 +44,7 @@ public class UserService {
      */
     public void add(final User user){
         logger.debug("add " + user);
-        this.users.put(user.getId(),user);
+        userDAO.add(user);
     }
 
 
@@ -62,10 +65,8 @@ public class UserService {
      */
     public User get(String id){
         logger.debug("get " + id);
-        if(this.users.get(id) != null){
-            return this.users.get(id);
-        }
-        throw new IllegalStateException(String.format("Not found user with id %s", id));
+
+        return userDAO.get(id);
     }
 
     /**
@@ -73,7 +74,7 @@ public class UserService {
      */
     public void delete(String id){
         logger.debug("getInstance: " + id);
-        this.users.remove(id);
+        userDAO.delete(id);
     }
 
     /**
@@ -81,13 +82,10 @@ public class UserService {
      * @return User
      */
     public User login(String login, String password){
-        logger.debug("login: login " + login + "password " + password);
-        for (Map.Entry<String,User> us: users.entrySet()){
-            User user = us.getValue();
 
-            if(user.getLogin().equalsIgnoreCase(login) && user.getPassword().equalsIgnoreCase(password)) {
-                return user;
-            }
+        logger.debug("login: login " + login + "password " + password);
+        if(userDAO.userLogin(login,password)){
+            return userDAO.getUser(login);
         }
         return null;
     }
