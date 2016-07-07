@@ -22,7 +22,7 @@ public class ConnectionPool {
 
         connectionPool.setDriverClassName("org.postgresql.Driver");
         connectionPool.setUrl(dbUrl);
-        connectionPool.setInitialSize(1);
+        connectionPool.setInitialSize(10);
 
         return connectionPool;
     }

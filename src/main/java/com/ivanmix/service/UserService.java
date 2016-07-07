@@ -1,6 +1,7 @@
 package com.ivanmix.service;
 
 import com.ivanmix.dao.UserDAO;
+import com.ivanmix.exception.UserIsNotFound;
 import com.ivanmix.model.Role;
 import com.ivanmix.model.User;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class UserService {
         logger.debug("UserService");
         users.put("1",new User("1","admin","admin",new Role("ADMIN")));
         users.put("2",new User("2","oleg","oleg",new Role("USER")));
-        users.put("3",new User("3","Ivan","ivan", new Role("USER")));
+        users.put("3",new User("3","Ivan","ivan333", new Role("USER")));
     }
 
     public static UserService getInstance(){
@@ -36,21 +37,17 @@ public class UserService {
      */
     public List<User> getAll(){
         logger.debug("getAll");
-        return new ArrayList<User>(users.values());
+        return userDAO.getAll();
     }
 
-    /**
-     * @param  User user
-     */
+
     public void add(final User user){
         logger.debug("add " + user);
         userDAO.add(user);
     }
 
 
-    /**
-     * @param  User user
-     */
+
     /*
     public void update(final User user){
         logger.debug("add " + user);
@@ -59,34 +56,33 @@ public class UserService {
         this.users.put(user.getId(),user);
     }*/
 
-    /**
-     * @param  String id
-     * @return User
-     */
+
     public User get(String id){
         logger.debug("get " + id);
 
-        return userDAO.get(id);
+        try {
+            return userDAO.get(id);
+        } catch (UserIsNotFound userIsNotFound) {
+            logger.error(String.valueOf(userIsNotFound));
+            return null;
+        }
     }
 
-    /**
-     * @param  String id
-     */
+
     public void delete(String id){
         logger.debug("getInstance: " + id);
         userDAO.delete(id);
     }
 
-    /**
-     * @param  String login, String password
-     * @return User
-     */
+
     public User login(String login, String password){
 
         logger.debug("login: login " + login + "password " + password);
-        if(userDAO.userLogin(login,password)){
-            return userDAO.getUser(login);
+        try {
+            return userDAO.userLogin(login,password);
+        } catch (UserIsNotFound userIsNotFound) {
+            logger.error(String.valueOf(userIsNotFound));
+            return null;
         }
-        return null;
     }
 }
