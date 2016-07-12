@@ -191,7 +191,7 @@ public class ItemService {
 
         Item itemOld = this.items.get(itemId);
         User user = UserService.getInstance().get(userId);
-        if(user.getRole().equalsIgnoreCase("ADMIN") || (user.getId().equalsIgnoreCase(userId))){
+       /* if(user.getRole().equalsIgnoreCase("ADMIN") || (user.getId().equalsIgnoreCase(userId))){
             if(!itemOld.getParent().equalsIgnoreCase(parent)){
                 if(exitTofirstLevel(parent,0,items.size())) {
                     this.updateParent(parent, itemId);
@@ -199,7 +199,7 @@ public class ItemService {
             }
             Item newItem = ItemBilder.newItem(itemOld, parent, name, description);
             this.items.put(newItem.getId(),newItem);
-        }
+        }*/
 
     }
 

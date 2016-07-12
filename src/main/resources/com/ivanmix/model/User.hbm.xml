@@ -1,0 +1,28 @@
+<!--
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+&lt;!&ndash; Generated 25 April 2011 7:52:33 PM by Hibernate Tools 3.4.0.CR1 &ndash;&gt;
+<hibernate-mapping>
+    <class name="com.ivanmix.model.User" table="client" catalog="dreams_jos">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="login" type="string">
+            <column name="LOGIN" length="255" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="255" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>-->
+<hibernate-mapping>
+    <class name="com.ivanmix.model.User" table="client">
+        <id name="id" column="id">
+            <generator class="identity" />
+        </id>
+        <property name="login" column="login"/>
+        <property name="password" column="password"/>
+    </class>
+</hibernate-mapping>

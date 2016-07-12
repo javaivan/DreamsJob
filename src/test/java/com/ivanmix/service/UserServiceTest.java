@@ -21,7 +21,7 @@ public class UserServiceTest {
     public void add() throws Exception {
         int numberUsers = UserService.getInstance().getAll().size();
         numberUsers ++;
-        UserService.getInstance().add(new User("10", "10", "10", new Role("USER")));
+      //  UserService.getInstance().add(new User("10", "10", "10", new Role("USER")));
         assertEquals(numberUsers,UserService.getInstance().getAll().size());
     }
 

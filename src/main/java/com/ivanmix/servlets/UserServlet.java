@@ -35,9 +35,9 @@ public class UserServlet extends HttpServlet{
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        if (id != null && name != null) {
+        /*if (id != null && name != null) {
             UserService.getInstance().add(new User(id, name, password, new Role("USER")));
-        }
+        }*/
         req.getRequestDispatcher("/WEB-INF/views/userView.jsp").forward(req,resp);
     }
 }

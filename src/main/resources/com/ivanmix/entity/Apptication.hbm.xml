@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<hibernate-mapping>
+    <class name="com.ivanmix.entity.Application" table="application">
+        <id name="id">
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" length="255" not-null="true" unique="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true" unique="true" />
+        </property>
+        <property name="created" column="created"/>
+        <property name="parent" type="int" column="parent"/>
+       <!-- <many-to-one name="accountId" column="account" class="com.ivanmix.entity.Account"/>-->
+    </class>
+</hibernate-mapping>

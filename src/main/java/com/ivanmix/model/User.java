@@ -2,25 +2,25 @@ package com.ivanmix.model;
 
 public class User {
 
-    private String id;
+    private int id;
     private String login;
     private String password;
     private Role role;
 
     public User(){}
 
-    public User(String id, String login, String password, Role role){
+    public User(int id, String login, String password, Role role){
         this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,7 +57,7 @@ public class User {
                 ", role=" + role +
                 '}';
     }
-
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,7 +80,7 @@ public class User {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
-
+*/
     /*
     public User(String id, String login, String password, Role role){
         this.id = id;

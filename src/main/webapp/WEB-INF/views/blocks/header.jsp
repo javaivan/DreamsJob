@@ -21,6 +21,7 @@
         <a href="${pageContext.servletContext.contextPath}/logout">Logout</a><br>
         <a href="${pageContext.servletContext.contextPath}/item-user-list">My Items</a><br>
         <a href="${pageContext.servletContext.contextPath}/item-user-add">add Items</a><br>
+        <li><a href="${pageContext.servletContext.contextPath}/application-add">Add Application</a></li>
     </c:otherwise>
 </c:choose>
 
@@ -35,5 +36,5 @@
     %>
     <li><a href="${pageContext.servletContext.contextPath}/user-all">Users</a></li>
     <li><a href="${pageContext.servletContext.contextPath}/item-public-list">All Item</a></li>
-    <li><a href="${pageContext.servletContext.contextPath}/count">Count</a></li>
+    <li><a href="${pageContext.servletContext.contextPath}/application-all">All Application</a></li>
 </ul>

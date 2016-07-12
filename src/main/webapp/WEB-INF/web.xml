@@ -164,5 +164,54 @@
     </servlet-mapping>
 
 
+    <!-- Account -->
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.AccountServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <!-- Account -->
+
+
+    <!-- Application -->
+    <servlet>
+        <servlet-name>ApplicationAllServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.application.ApplicationAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplicationAllServlet</servlet-name>
+        <url-pattern>/application-all</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ApplicationServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.application.ApplicationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplicationServlet</servlet-name>
+        <url-pattern>/application</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ApplicationAddServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.application.ApplicationAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplicationAddServlet</servlet-name>
+        <url-pattern>/application-add</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ApplicationUpdateServlet</servlet-name>
+        <servlet-class>com.ivanmix.servlets.application.ApplicationUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ApplicationUpdateServlet</servlet-name>
+        <url-pattern>/application-update</url-pattern>
+    </servlet-mapping>
+    <!-- Application -->
 
 </web-app>

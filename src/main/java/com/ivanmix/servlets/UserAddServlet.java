@@ -32,7 +32,7 @@ public class UserAddServlet extends HttpServlet{
         String password = req.getParameter("password");
         if (id != null && name != null) {
             logger.debug("UserAddServlet: doPost id: " + id +  " name: " + name);
-            UserService.getInstance().add(new User(id, name, password, new Role("USER")));
+          //  UserService.getInstance().add(new User(id, name, password, new Role("USER")));
         }
         resp.sendRedirect(String.format("%s/user-all", req.getContextPath()));
     }
