@@ -1,11 +1,9 @@
 package com.ivanmix;
 
-import java.sql.*;
-
-import com.ivanmix.configuration.ConnectionPool;
-import com.ivanmix.dao.UserDAO;
-import com.ivanmix.model.User;
-import org.apache.commons.dbcp2.BasicDataSource;
+import com.ivanmix.configuration.HibernateUtil;
+import com.ivanmix.entity.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * Created by ivan on 22.05.2016.
@@ -13,6 +11,65 @@ import org.apache.commons.dbcp2.BasicDataSource;
  * jdbc:postgresql://localhost:5432/my-resume
  */
 public class Main {
+
+    public static void main(String[] args){
+
+
+        SessionFactory factory  = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+
+
+
+      /*  User user = new User();
+        //user.setId("20");
+       /* user.setLogin("1test");
+        user.setPassword("1test");
+        //session.save(user);*/
+
+        //System.out.println(session.get(User.class,1));
+        System.out.println(session.createQuery("from User").list());
+
+
+
+        /*
+        Account account = new Account();
+        account.setLogin("root2");
+        account.setPassword("root2");
+        account.setRole("0");
+        session.save(account);
+        */
+
+
+        ///////System.out.println(session.get(Account.class,7));
+        /*
+        System.out.println(session.createQuery("from Account a WHERE a.login = root");*/
+
+/*
+        String hql = "FROM Account a WHERE a.login = :login";
+        Query query = session.createQuery(hql);
+        query.setParameter("login","root");
+        Account a = (Account)query.uniqueResult();
+        System.out.println(a);*/
+
+
+        /*
+        List results = query.list();
+        System.out.println(results);*/
+
+        //////////////////System.out.println(session.createQuery("from Account ").list());
+
+/*
+
+        session.getTransaction().commit();
+        session.close();
+        factory.close();*/
+
+        //      System.out.println(new UserDAO().getAccountById(7));
+
+
+
+    }
 
 
 

@@ -1,22 +1,45 @@
-<%@ page import="com.ivanmix.model.User" %>
-<%@ page import="com.ivanmix.service.UserService" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>DreamsJob Login</title>
+    <title>Maven + Spring MVC</title>
+    <%@ include file="/WEB-INF/views/section/head.jsp" %>
 </head>
 <body>
-    <%@include file="blocks/header.jsp" %><Br>
-    <c:if test="${eroor_login != null}">
-        <div style="background: #f00">
-            ${eroor_login}
+<div id="wrapper">
+    <%@ include file="/WEB-INF/views/section/header.jsp" %>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Login</h1>
+            </div>
         </div>
-    </c:if>
-    <form action="${pageContext.servletContext.contextPath}/login" method="post">
-        login: <input type="text" name="login"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit" value="Submit">
-    </form>
-    <%@include file="blocks/footer.jsp" %>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label>Login</label>
+                                        <input type="text" class="form-control" placeholder="login">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" placeholder="password">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%@ include file="/WEB-INF/views/section/footerJs.jsp" %>
 </body>
 </html>

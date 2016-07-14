@@ -1,6 +1,7 @@
 package com.ivanmix.servlets;
 
 import com.ivanmix.service.UserService;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.servlet.RequestDispatcher;
@@ -17,8 +18,9 @@ import static org.mockito.Mockito.*;
  * Created by ivan on 09.05.2016.
  */
 public class LoginServletTest {
-
+/*
     @Test
+    @Ignore
     public void loginUser() throws ServletException, IOException {
         LoginServlet servlet = new LoginServlet();
         UserService userService = mock(UserService.class);
@@ -38,11 +40,11 @@ public class LoginServletTest {
 
 
         servlet.doPost(request, response);
-/*
+
         request.getSession().getAttribute()
-*/
+
 
         verify(userService, atLeastOnce()).getInstance().getAll();
 
-    }
+    }*/
 }

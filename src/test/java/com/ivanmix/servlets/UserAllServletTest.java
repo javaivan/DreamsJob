@@ -1,6 +1,7 @@
 package com.ivanmix.servlets;
 
 import com.ivanmix.service.UserService;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.servlet.RequestDispatcher;
@@ -15,8 +16,9 @@ import static org.mockito.Mockito.when;
  * Created by ivan on 09.05.2016.
  */
 public class UserAllServletTest {
-
+/*
     @Test
+    @Ignore
     public void deleteUser() throws Exception {
 
 
@@ -35,8 +37,6 @@ public class UserAllServletTest {
 
         assertEquals(numberUsers.toString(),UserService.getInstance().getAll().size()+"");
 
-
-
-    }
+    }*/
 
 }

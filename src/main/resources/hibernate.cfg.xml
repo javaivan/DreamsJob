@@ -22,6 +22,7 @@
 <!--		<mapping resource="com/ivanmix/model/User.hbm.xml" />-->
 		<mapping resource="com/ivanmix/entity/Account.hbm.xml" />
 		<mapping resource="com/ivanmix/entity/Apptication.hbm.xml" />
+		<mapping resource="com/ivanmix/entity/User.hbm.xml" />
 		<!--<mapping resource="com/ivanmix/model/Item.hbm.xml" />-->
 	</session-factory>
 </hibernate-configuration>

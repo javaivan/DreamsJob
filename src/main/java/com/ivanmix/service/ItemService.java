@@ -89,7 +89,7 @@ public class ItemService {
      */
     public List<Item> getMyItems(String userID){
         logger.debug("getMyItems: userID: " + userID);
-        User user = UserService.getInstance().get(userID);
+       /* User user = UserService.getInstance().get(userID);
         if(user.getRole().equalsIgnoreCase("ADMIN")){
             return new ArrayList<Item>(items.values());
         } else {
@@ -100,7 +100,8 @@ public class ItemService {
                 }
             }
             return getItems;
-        }
+        }*/
+        return null;
     }
 
     /**
@@ -190,7 +191,7 @@ public class ItemService {
         logger.debug("updateItem: itemId: " + itemId + " userId: " + userId + " parent: " + parent + " name: " + name + " description: " + description);
 
         Item itemOld = this.items.get(itemId);
-        User user = UserService.getInstance().get(userId);
+        //User user = UserService.getInstance().get(userId);
        /* if(user.getRole().equalsIgnoreCase("ADMIN") || (user.getId().equalsIgnoreCase(userId))){
             if(!itemOld.getParent().equalsIgnoreCase(parent)){
                 if(exitTofirstLevel(parent,0,items.size())) {

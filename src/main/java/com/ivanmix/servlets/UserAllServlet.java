@@ -14,7 +14,7 @@ import java.io.IOException;
 public class UserAllServlet extends HttpServlet {
     private static final Logger logger =
             LoggerFactory.getLogger(UserAllServlet.class);
-
+/*
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug("doGet");
@@ -29,5 +29,5 @@ public class UserAllServlet extends HttpServlet {
         UserService.getInstance().delete(id);
         req.setAttribute("users",UserService.getInstance().getAll());
         req.getRequestDispatcher("/WEB-INF/views/userAll.jsp").forward(req,resp);
-    }
+    }*/
 }
