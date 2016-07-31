@@ -1,22 +1,46 @@
 package com.ivanmix.entity;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Set;
 
+/**
+ * Created by ivan on 19.07.2016.
+ */
+
+@Entity(name = "users")
 public class User {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String login;
+
     private String email;
+
     private String password;
+
+    @Column(name = "first_name")
     private String firstName;
-    private String LastName;
-    private Date creared;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    private Date created;
+
     private String type;
 
-    public int getId() {
+    private String status;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<UserRole> userRole;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,19 +77,19 @@ public class User {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
-    public Date getCreared() {
-        return creared;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreared(Date creared) {
-        this.creared = creared;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     public String getType() {
@@ -76,6 +100,22 @@ public class User {
         this.type = type;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Set<UserRole> getUserRole() {
+        return this.userRole;
+    }
+
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,27 +123,29 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (LastName != null ? !LastName.equals(user.LastName) : user.LastName != null) return false;
-        if (creared != null ? !creared.equals(user.creared) : user.creared != null) return false;
-        return type != null ? type.equals(user.type) : user.type == null;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (created != null ? !created.equals(user.created) : user.created != null) return false;
+        if (type != null ? !type.equals(user.type) : user.type != null) return false;
+        return status != null ? status.equals(user.status) : user.status == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (LastName != null ? LastName.hashCode() : 0);
-        result = 31 * result + (creared != null ? creared.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 
@@ -115,9 +157,10 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", creared=" + creared +
+                ", lastName='" + lastName + '\'' +
+                ", created=" + created +
                 ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
