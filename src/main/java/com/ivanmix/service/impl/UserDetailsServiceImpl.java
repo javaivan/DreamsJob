@@ -1,5 +1,6 @@
 package com.ivanmix.service.impl;
 
+import com.ivanmix.models.CurrentUser;
 import com.ivanmix.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,10 +34,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getUserRole());
 
-        UserDetails userDetails =
-                new org.springframework.security.core.userdetails.User(user.getLogin(),
+        UserDetails userDetails = new CurrentUser(user.getLogin(), user.getPassword(), authorities, user.getId());
+/*                new org.springframework.security.core.userdetails.User(user.getLogin(),
                         user.getPassword(),
-                        authorities);
+                        authorities);*/
 
         return userDetails;
     }

@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" class="form-control" name="j_password" placeholder="Password" required value="1234">
+                                        <input type="password" class="form-control" name="j_password" placeholder="Password" required value="123456">
                                     </div>
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
                                 </form>

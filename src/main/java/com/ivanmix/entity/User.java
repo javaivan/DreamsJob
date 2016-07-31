@@ -1,6 +1,8 @@
 package com.ivanmix.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Set;
 
@@ -15,21 +17,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(max=255, min = 5)
     private String login;
 
+    @NotNull
+    @Size(max=255, min = 5)
     private String email;
 
+    @NotNull
+    @Size(max=255, min = 5)
     private String password;
 
+    @Size(max=255, min = 5)
     @Column(name = "first_name")
     private String firstName;
 
+    @Size(max=255, min = 5)
     @Column(name = "last_name")
     private String lastName;
 
     private Date created;
-
-    private String type;
 
     private String status;
 
@@ -92,14 +100,6 @@ public class User {
         this.created = created;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -130,7 +130,6 @@ public class User {
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (created != null ? !created.equals(user.created) : user.created != null) return false;
-        if (type != null ? !type.equals(user.type) : user.type != null) return false;
         return status != null ? status.equals(user.status) : user.status == null;
 
     }
@@ -144,7 +143,6 @@ public class User {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
@@ -159,7 +157,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", created=" + created +
-                ", type='" + type + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

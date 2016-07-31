@@ -33,7 +33,6 @@
                                         <th>firstName</th>
                                         <th>lastName</th>
                                         <th>created</th>
-                                        <th>type</th>
                                         <th>status</th>
                                     </tr>
                                 </thead>
@@ -47,7 +46,6 @@
                                             <td><c:out value="${user.firstName}"/></td>
                                             <td><c:out value="${user.lastName}"/></td>
                                             <td><c:out value="${user.created}"/></td>
-                                            <td><c:out value="${user.type}"/></td>
                                             <td><c:out value="${user.status}"/></td>
                                         </tr>
                                     </c:forEach>
