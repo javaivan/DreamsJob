@@ -1,9 +1,11 @@
 package com.ivanmix.form;
 
+import com.ivanmix.annotation.FieldMatch;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class RegistrationForm {
+public class RegistrationForm extends PasswordForm {
 
     @NotNull
     @Size(max=255, min = 5)
@@ -12,14 +14,6 @@ public class RegistrationForm {
     @NotNull
     @Size(max=255, min = 5)
     private String email;
-
-    @NotNull
-    @Size(max=255, min = 5)
-    private String password;
-
-    @NotNull
-    @Size(max=255, min = 5)
-    private String confirmPassword;
 
     @NotNull
     @Size(max=10, min = 1)
@@ -41,21 +35,6 @@ public class RegistrationForm {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 
     public String getRole() {
         return role;

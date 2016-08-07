@@ -1,9 +1,12 @@
 package com.ivanmix.controller;
 
 import com.ivanmix.entity.User;
+import com.ivanmix.form.PasswordForm;
+import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
+import com.ivanmix.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +35,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
         model.addAttribute("projects", projectService.findAll());
-        return "projects";
+        return "project-all";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -58,10 +61,9 @@ public class UserController {
     public String saveRegistrationContactsProfile(@Valid @ModelAttribute("registrationForm") RegistrationForm registrationForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "registration";
-        } else {
-            userService.createUser(registrationForm);
-            return "redirect:/registration/success";
         }
+        userService.createUser(registrationForm);
+        return "redirect:/registration/success";
     }
 
     @RequestMapping(value = "/registration/success", method = RequestMethod.GET)
@@ -71,15 +73,37 @@ public class UserController {
 
     @RequestMapping(value = "/user-profile", method = RequestMethod.GET)
     public String userProfile(ModelMap model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        Object principal = authentication.getPrincipal();
-
-        System.out.println(principal);
-        //model.addAttribute("user", user);
+        User user = userService.findUserById(SecurityUtil.getCurrentUserId());
+        model.addAttribute("profileForm", user);
         return "user-profile";
     }
 
+    @RequestMapping(value = "/user-profile", method = RequestMethod.POST)
+    public String saveUserProfile(@Valid @ModelAttribute("profileForm") ProfileForm profileForm, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "user-profile";
+        }
+        userService.updateUser(SecurityUtil.getCurrentUserId(), profileForm);
+        return "redirect:/user-profile";
+    }
+
+
+
+    @RequestMapping(value = "/user-profile-change-password", method = RequestMethod.GET)
+    public String userProfileChangePassword(ModelMap model) {
+        PasswordForm password = new PasswordForm();
+        model.addAttribute("password", password);
+        return "user-profile-change-password";
+    }
+
+    @RequestMapping(value = "/user-profile-change-password", method = RequestMethod.POST)
+    public String saveUserProfileChangePassword(@Valid @ModelAttribute("password") PasswordForm password, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "user-profile-change-password";
+        }
+        userService.updateUserPassword(SecurityUtil.getCurrentUserId(), password);
+        return "redirect:/user-profile";
+    }
 
 
     @RequestMapping(value = "/bootstap", method = RequestMethod.GET)

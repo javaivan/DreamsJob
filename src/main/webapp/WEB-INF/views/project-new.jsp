@@ -12,7 +12,7 @@
         <div id="page-wrapper">
             <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Login</h1>
+                <h1 class="page-header">Project new</h1>
             </div>
         </div>
         <div class="row">
@@ -21,21 +21,18 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="/security_check" method="post">
-                                    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-                                        <div class="form-group has-error">
-                                            <label class="control-label" for="inputError">There was error with your Login/Password combination. Please try again.</label>
-                                        </div>
-                                    </c:if>
+                                <form action="/project-new" method="post">
                                     <div class="form-group">
-                                        <label for="login">Login</label>
-                                        <input id="login" type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus value="admin">
+                                        <label for="title">Title</label>
+                                        <input id="title" type="text" class="form-control" name="title" placeholder="Title" required autofocus value="${project.title}" />
+                                        <form:errors path="project.title" cssClass="alert alert-danger" element="div" />
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input id="password" type="password" class="form-control" name="j_password" placeholder="Password" required value="123456">
+                                        <label for="description">Description</label>
+                                        <textarea id="description" class="form-control" name="description" rows="3">${project.description}</textarea>
+                                        <form:errors path="project.description" cssClass="alert alert-danger" element="div" />
                                     </div>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Добавить</button>
                                 </form>
                             </div>
                         </div>

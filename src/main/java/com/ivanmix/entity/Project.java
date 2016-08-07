@@ -1,10 +1,10 @@
 package com.ivanmix.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity(name = "projects")
 public class Project {
@@ -13,13 +13,22 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private long author_id;
+    @Column(name = "author_id")
+    private long authorId;
 
+    @NotNull
+    @Size(max=255, min = 5)
     private String title;
 
+    @NotNull
+    @Size(min = 5)
     private String description;
 
-    private Date created;
+    @Column(insertable=false)
+    private Timestamp created;
+
+    @Column(insertable=false)
+    private Date update;
 
     private String status;
 
@@ -31,12 +40,12 @@ public class Project {
         this.id = id;
     }
 
-    public long getAuthor_id() {
-        return author_id;
+    public long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(long author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
     }
 
     public String getTitle() {
@@ -55,12 +64,21 @@ public class Project {
         this.description = description;
     }
 
-    public Date getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Timestamp created) {
         this.created = created;
+
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 
     public String getStatus() {
@@ -71,6 +89,11 @@ public class Project {
         this.status = status;
     }
 
+    @PreUpdate
+    protected void onUpdate() {
+        this.update = new Date();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,7 +102,7 @@ public class Project {
         Project project = (Project) o;
 
         if (id != project.id) return false;
-        if (author_id != project.author_id) return false;
+        if (authorId != project.authorId) return false;
         if (title != null ? !title.equals(project.title) : project.title != null) return false;
         if (description != null ? !description.equals(project.description) : project.description != null) return false;
         if (created != null ? !created.equals(project.created) : project.created != null) return false;
@@ -90,7 +113,7 @@ public class Project {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (int) (author_id ^ (author_id >>> 32));
+        result = 31 * result + (int) (authorId ^ (authorId >>> 32));
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
@@ -102,7 +125,7 @@ public class Project {
     public String toString() {
         return "Project{" +
                 "id=" + id +
-                ", author_id=" + author_id +
+                ", authorId=" + authorId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", created=" + created +
