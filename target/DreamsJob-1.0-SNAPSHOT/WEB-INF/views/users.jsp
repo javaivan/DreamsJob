@@ -27,22 +27,26 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>author_id</th>
-                                        <th>title</th>
-                                        <th>description</th>
+                                        <th>login</th>
+                                        <th>email</th>
+                                        <th>password</th>
+                                        <th>firstName</th>
+                                        <th>lastName</th>
                                         <th>created</th>
                                         <th>status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${projects}" var="project" varStatus="status">
+                                    <c:forEach items="${users}" var="user" varStatus="status">
                                         <tr class="gradeA">
-                                            <td><c:out value="${project.id}"/></td>
-                                            <td><c:out value="${project.author_id}"/></td>
-                                            <td><c:out value="${project.title}"/></td>
-                                            <td><c:out value="${project.description}"/></td>
-                                            <td><c:out value="${project.created}"/></td>
-                                            <td><c:out value="${project.status}"/></td>
+                                            <td><c:out value="${user.id}"/></td>
+                                            <td><c:out value="${user.login}"/></td>
+                                            <td><c:out value="${user.email}"/></td>
+                                            <td><c:out value="${user.password}"/></td>
+                                            <td><c:out value="${user.firstName}"/></td>
+                                            <td><c:out value="${user.lastName}"/></td>
+                                            <td><c:out value="${user.created}"/></td>
+                                            <td><c:out value="${user.status}"/></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
