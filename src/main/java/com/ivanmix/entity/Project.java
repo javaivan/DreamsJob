@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity(name = "projects")
 public class Project {
@@ -29,6 +30,10 @@ public class Project {
 
     @Column(insertable=false)
     private Date update;
+
+    //@OneToMany(mappedBy = "project", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+    private List<ProjectReply> projectReplies;
 
     private String status;
 
@@ -70,7 +75,6 @@ public class Project {
 
     public void setCreated(Timestamp created) {
         this.created = created;
-
     }
 
     public Date getUpdate() {
@@ -92,6 +96,14 @@ public class Project {
     @PreUpdate
     protected void onUpdate() {
         this.update = new Date();
+    }
+
+    public List<ProjectReply> getProjectReplies() {
+        return projectReplies;
+    }
+
+    public void setProjectReplies(List<ProjectReply> projectReplies) {
+        this.projectReplies = projectReplies;
     }
 
     @Override

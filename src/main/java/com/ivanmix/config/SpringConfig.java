@@ -68,6 +68,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,	env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
 
+
         /*properties.put("hbm2ddl.auto","create");*/
         return properties;
     }

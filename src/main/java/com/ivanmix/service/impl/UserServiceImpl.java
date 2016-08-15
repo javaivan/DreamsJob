@@ -52,11 +52,13 @@ public class UserServiceImpl implements UserService {
 
         user = userRepository.save(user);
 
-        Set<UserRole> userRoles = new HashSet<UserRole>();
-        UserRole role = new UserRole();
-        role.setUser(user);
-        role.setRole("ROLE_" + form.getRole().toUpperCase());
-        userRoleRepository.save(role);
+        if( form.getRole()!=null){
+            Set<UserRole> userRoles = new HashSet<UserRole>();
+            UserRole role = new UserRole();
+            role.setUser(user);
+            role.setRole("ROLE_" + form.getRole().toUpperCase());
+            userRoleRepository.save(role);
+        }
 
         return user;
     }
@@ -84,4 +86,11 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return Lists.newArrayList(userRepository.findAll());
     }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.delete(id);
+    }
+
+
 }

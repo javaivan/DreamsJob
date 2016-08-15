@@ -20,4 +20,6 @@ public interface UserService {
     void updateUserPassword(Long id, PasswordForm form);
 
     List<User> findAll();
+
+    void deleteUser(Long id);
 }

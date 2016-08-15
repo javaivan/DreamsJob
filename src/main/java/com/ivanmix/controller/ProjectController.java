@@ -1,10 +1,13 @@
 package com.ivanmix.controller;
 
 import com.ivanmix.entity.Project;
+import com.ivanmix.entity.ProjectReply;
 import com.ivanmix.entity.User;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
+import com.ivanmix.form.ProjectReplyForm;
 import com.ivanmix.form.RegistrationForm;
+import com.ivanmix.service.ProjectReplyService;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import com.ivanmix.util.SecurityUtil;
@@ -28,20 +31,33 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private ProjectReplyService projectReplyService;
+
     @RequestMapping(value = "/project-new", method = RequestMethod.GET)
     public String addNewProject(ModelMap model){
         model.addAttribute("project", new Project());
         return "project-new";
     }
 
+    @RequestMapping(value = "/project-reply/{id}", method = { RequestMethod.GET, RequestMethod.POST })
+    public String saveNewProjectReply(@PathVariable Long id, @Valid @ModelAttribute("projectReply") ProjectReply projectReply, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/project/" + id;
+        }
+        projectReplyService.createProjectReply(projectReply, id, SecurityUtil.getCurrentUserId());
+        return "redirect:/";
+    }
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public String project(@PathVariable Long id, Model model) {
         Project project = projectService.findById(id);
+        model.addAttribute("projectReplyForm", new ProjectReplyForm());
         if(project == null){
             return "project-not-found";
         } else {
             model.addAttribute("project", project);
+            model.addAttribute("replies", projectReplyService.findByProjectId(project.getId()));
             return "project";
         }
     }

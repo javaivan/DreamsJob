@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,6 +44,10 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> userRole;
+
+    //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ProjectReply> projectReplies;
 
     public Long getId() {
         return id;
@@ -114,6 +119,14 @@ public class User {
 
     public void setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
+    }
+
+    public List<ProjectReply> getProjectReplies() {
+        return projectReplies;
+    }
+
+    public void setProjectReplies(List<ProjectReply> projectReplies) {
+        this.projectReplies = projectReplies;
     }
 
     @Override

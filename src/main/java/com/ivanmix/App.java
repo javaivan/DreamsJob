@@ -15,42 +15,6 @@ public class App
     public static void main( String[] args ) throws IOException, InterruptedException, SQLException {
 
 
-        Connection con = null;
-        PreparedStatement pst = null;
-
-        String url = "jdbc:postgresql://127.0.0.1:5432/dreams_job";
-        String user = "dreams_job";
-        String password = "dreams_job";
-
-        try {
-            int id = 2;
-            String userLogin = "Test User Login";
-            String userEmail = "Test User Email";
-            String userPassword = "Test User passwpord";
-            con = DriverManager.getConnection(url, user, password);
-            String stm = "INSERT INTO users(id, login, email, password) VALUES(?, ?, ?, ?)";
-            pst = con.prepareStatement(stm);
-            pst.setInt(1, id);
-            pst.setString(2, userLogin);
-            pst.setString(3, userEmail);
-            pst.setString(4, userPassword);
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            try {
-                if (pst != null) {
-                    pst.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
-        }
-
-
 
 
 
