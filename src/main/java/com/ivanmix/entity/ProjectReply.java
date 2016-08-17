@@ -80,14 +80,22 @@ public class ProjectReply {
     private List<ProjectReply> subProjectReply;
 */
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    private List<ProjectReply> subProjectReply = new LinkedList<ProjectReply>();
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_id")
+    private List<ProjectReply> subProjectReply;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_id", insertable=true)
     private ProjectReply parent;
+/*
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name = "parent_id")
+    private List<ProjectReply> subProjectReply;
 
-
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "parent_id",insertable=false,updatable=false)
+    private ProjectReply parent;
+    */
     public ProjectReply() {
     }
 
