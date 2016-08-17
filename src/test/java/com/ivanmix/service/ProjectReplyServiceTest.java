@@ -29,7 +29,8 @@ public class ProjectReplyServiceTest {
 
     @Test
     public void createProjectReplyTest(){
-        projectReplyService.createProjectReply("99999999999999",(long)1,(long)1,(long)1);
+        ProjectReply projectReply = projectReplyService.createProjectReply("0099999999999999",(long)1,(long)1,(long)1);
+        System.out.println(projectReply);
     }
 
     //void updateProjectReply(ProjectReply reply);

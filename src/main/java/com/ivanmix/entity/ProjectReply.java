@@ -1,8 +1,13 @@
 package com.ivanmix.entity;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity(name = "project_reply")
@@ -20,13 +25,86 @@ public class ProjectReply {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+
+
+    /*
+       @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL, optional = true)
+   @JoinColumn(name = "PARENT_CATEGORY_ID", nullable = true)
+   @Fetch(FetchMode.SELECT)
+   @Cascade({   org.hibernate.annotations.CascadeType.ALL,
+            org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+  private Category parentCategory;
+
+   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="parentCategory")
+   @Sort(type = SortType.NATURAL)
+   @Fetch(FetchMode.SUBSELECT)
+   @Cascade({   org.hibernate.annotations.CascadeType.ALL,
+            org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+  private SortedSet<Category> childCategories;
+
+
+     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "parent_id",insertable=false,updatable=false)
     private ProjectReply parent;
 
     @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name = "parent_id")
     private List<ProjectReply> subProjectReply;
+
+/*
+    * */
+
+    /*
+    * https://forum.hibernate.org/viewtopic.php?p=2382004
+    * */
+    /*
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL, optional = true)
+    @JoinColumn(name = "parent_id", nullable = true)
+    @Fetch(FetchMode.SELECT)
+    private ProjectReply parent;
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="parent_id")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<ProjectReply> subProjectReply;
+
+
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "parent_id",insertable=false,updatable=false)
+    private ProjectReply parent;
+
+    @OneToMany(mappedBy = "parent_id")
+    private List<ProjectReply> subProjectReply;
+*/
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
+    private List<ProjectReply> subProjectReply = new LinkedList<ProjectReply>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", nullable = false)
+    private ProjectReply parent;
+
+
+    public ProjectReply() {
+    }
+
+    public ProjectReply(Project project, User user, ProjectReply parent, String reply) {
+        this.project = project;
+        this.user = user;
+        this.parent = parent;
+        this.reply = reply;
+    }
+
+    public ProjectReply(Project project, User user, ProjectReply parent, List<ProjectReply> subProjectReply, String reply) {
+        this.project = project;
+        this.user = user;
+        this.parent = parent;
+        this.subProjectReply = subProjectReply;
+        this.reply = reply;
+    }
 
     @NotNull
     @Size(min = 5)
@@ -70,6 +148,7 @@ public class ProjectReply {
 
     public void setParent(ProjectReply parent) {
         this.parent = parent;
+        //this.parent.subProjectReply.add(parent);
     }
 
     public List<ProjectReply> getSubProjectReply() {
@@ -97,16 +176,6 @@ public class ProjectReply {
 
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (project != null ? project.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (parent != null ? parent.hashCode() : 0);
-        result = 31 * result + (subProjectReply != null ? subProjectReply.hashCode() : 0);
-        result = 31 * result + (reply != null ? reply.hashCode() : 0);
-        return result;
-    }
 /*
     @Override
     public String toString() {
