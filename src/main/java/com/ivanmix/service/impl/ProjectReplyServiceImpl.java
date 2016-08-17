@@ -40,14 +40,18 @@ public class ProjectReplyServiceImpl implements ProjectReplyService {
     }
 
     @Override
-    public ProjectReply createProjectReply(ProjectReply projectReply, Long projectId, Long userId) {
-        ProjectReply reply = new ProjectReply();
+    public ProjectReply createProjectReply(String reply, Long projectId, Long projectReplyId, Long userId) {
+        ProjectReply projectReply = new ProjectReply();
         Project project = projectRepository.findById(projectId);
         User user = userRepository.findById(userId);
-        reply.setProject(project);
-        reply.setUser(user);
-        reply.setReply(projectReply.getReply());
-        return replyRepository.save(reply);
+        projectReply.setProject(project);
+        projectReply.setUser(user);
+        if(projectReplyId != null){
+            ProjectReply pr = replyRepository.findById(projectReplyId);
+            projectReply.setParent(pr);
+        }
+        projectReply.setReply(reply);
+        return replyRepository.save(projectReply);
     }
 
     @Override

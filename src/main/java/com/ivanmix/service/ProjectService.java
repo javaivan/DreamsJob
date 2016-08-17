@@ -8,7 +8,7 @@ public interface ProjectService {
 
     Project findById(Long id);
 
-    Project findByIdAndAuthorId(Long id, Long authorId);
+    //Project findByIdAndAuthorId(Long id, Long authorId);
 
     Project createProject(Project project);
 
@@ -16,6 +16,6 @@ public interface ProjectService {
 
     List<Project> findAll();
 
-    List<Project> findProjecByAuthorId(Long id);
+    //List<Project> findProjecByAuthorId(Long id);
 
 }

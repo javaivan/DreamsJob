@@ -35,6 +35,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
         model.addAttribute("projects", projectService.findAll());
+        /*System.out.println(projectService.findAll());*/
         return "project-all";
     }
 

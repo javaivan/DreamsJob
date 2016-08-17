@@ -14,8 +14,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "author_id")
-    private long authorId;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
 
     @NotNull
     @Size(max=255, min = 5)
@@ -45,12 +47,12 @@ public class Project {
         this.id = id;
     }
 
-    public long getAuthorId() {
-        return authorId;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthorId(long authorId) {
-        this.authorId = authorId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {
@@ -113,11 +115,14 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (id != project.id) return false;
-        if (authorId != project.authorId) return false;
+        if (id != null ? !id.equals(project.id) : project.id != null) return false;
+        if (user != null ? !user.equals(project.user) : project.user != null) return false;
         if (title != null ? !title.equals(project.title) : project.title != null) return false;
         if (description != null ? !description.equals(project.description) : project.description != null) return false;
         if (created != null ? !created.equals(project.created) : project.created != null) return false;
+        if (update != null ? !update.equals(project.update) : project.update != null) return false;
+        if (projectReplies != null ? !projectReplies.equals(project.projectReplies) : project.projectReplies != null)
+            return false;
         return status != null ? status.equals(project.status) : project.status == null;
 
     }
@@ -125,23 +130,39 @@ public class Project {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (int) (authorId ^ (authorId >>> 32));
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (update != null ? update.hashCode() : 0);
+        result = 31 * result + (projectReplies != null ? projectReplies.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
-
+/*
     @Override
-    public String toString() {
+    public String
+    toString() {
+        String projectReplyItem = "";
+        for (ProjectReply item: projectReplies){
+            projectReplyItem += item.toString();
+            projectReplyItem += " | ";
+        }
+
         return "Project{" +
                 "id=" + id +
-                ", authorId=" + authorId +
+                ", user=" + user +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", created=" + created +
+                ", update=" + update +
+                ", projectReplies=" + projectReplyItem +
                 ", status='" + status + '\'' +
                 '}';
-    }
+    }*/
+/*
+    @Override
+    public String toString() {
+        return String.format("%s[id=%s]", getClass().getSimpleName(),  getId());
+    }*/
 }

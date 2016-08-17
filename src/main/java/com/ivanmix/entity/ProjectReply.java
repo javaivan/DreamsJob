@@ -24,9 +24,8 @@ public class ProjectReply {
     @JoinColumn(name = "parent_id",insertable=false,updatable=false)
     private ProjectReply parent;
 
-    @OneToMany
-    @OrderColumn
-    @JoinColumn(name = "id")
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name = "parent_id")
     private List<ProjectReply> subProjectReply;
 
     @NotNull
@@ -108,16 +107,26 @@ public class ProjectReply {
         result = 31 * result + (reply != null ? reply.hashCode() : 0);
         return result;
     }
-
+/*
     @Override
     public String toString() {
+        String subProjectReplyItem = "";
+        for (ProjectReply item: subProjectReply){
+            subProjectReplyItem += item.getId();
+            subProjectReplyItem += " | ";
+        }
         return "ProjectReply{" +
                 "id=" + id +
-                ", project=" + project +
+                ", project=" + project.getId() +
                 ", user=" + user +
-                ", parent=" + parent +
-                ", subProjectReply=" + subProjectReply +
+                ", parent=" + parent.getId() +
+                ", subProjectReply=" + subProjectReplyItem +
                 ", reply='" + reply + '\'' +
                 '}';
-    }
+    }*/
+/*
+    @Override
+    public String toString() {
+        return String.format("%s[id=%s]", getClass().getSimpleName(),  getId());
+    }*/
 }

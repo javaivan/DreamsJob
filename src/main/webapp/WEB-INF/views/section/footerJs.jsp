@@ -19,9 +19,9 @@
 
 <spring:url value="/resources/bower_components/morrisjs/morris.min.js" var="morrisMinJs" />
 <script src="${morrisMinJs}"></script>
-
-<spring:url value="/resources/js/morris-data.js" var="morrisDataJs" />
-<script src="${morrisDataJs}"></script>--%>
+--%>
+<spring:url value="/resources/js/main.js" var="mainJs" />
+<script src="${mainJs}"></script>
 
 <!-- Custom Theme JavaScript -->
 <spring:url value="/resources/dist/js/sb-admin-2.js" var="sbAdminJs" />

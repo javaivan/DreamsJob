@@ -19,11 +19,11 @@ public class ProjectServiceImpl implements ProjectService {
     public Project findById(Long id) {
         return projectRepository.findById(id);
     }
-
+/*
     @Override
     public Project findByIdAndAuthorId(Long id, Long authorId) {
         return projectRepository.findByIdAndAuthorId(id, authorId);
-    }
+    }*/
 
     @Override
     public Project createProject(Project project) {
@@ -42,11 +42,11 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findAll() {
         return Lists.newArrayList(projectRepository.findAll());
     }
-
+/*
     @Override
     public List<Project> findProjecByAuthorId(Long id) {
         return Lists.newArrayList(projectRepository.findByAuthorId(id));
-    }
+    }*/
 
 
 }

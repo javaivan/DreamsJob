@@ -38,13 +38,13 @@
                                     <c:forEach items="${projects}" var="project" varStatus="status">
                                         <tr class="gradeA">
                                             <td><a href="/project/<c:out value="${project.id}"/>"><c:out value="${project.id}"/></a></td>
-                                            <td><c:out value="${project.authorId}"/></td>
+                                            <td>111<%--<c:out value="${project.authorId}"/>--%></td>
                                             <td>
                                                 <a href="/project/<c:out value="${project.id}"/>"><c:out value="${project.title}"/></a>
-                                                <c:if test="${authorId.equals(project.authorId)}">
+                                                <%--<c:if test="${authorId.equals(project.authorId)}">
                                                     <br>
                                                     <a href="/project/update/<c:out value="${project.id}"/>">Update Project</a>
-                                                </c:if>
+                                                </c:if>--%>
                                             </td>
                                             <td><c:out value="${project.description}"/></td>
                                             <td><c:out value="${project.created}"/></td>

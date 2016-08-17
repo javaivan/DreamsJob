@@ -16,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,12 +37,9 @@ public class ProjectController {
         return "project-new";
     }
 
-    @RequestMapping(value = "/project-reply/{id}", method = { RequestMethod.GET, RequestMethod.POST })
-    public String saveNewProjectReply(@PathVariable Long id, @Valid @ModelAttribute("projectReply") ProjectReply projectReply, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/project/" + id;
-        }
-        projectReplyService.createProjectReply(projectReply, id, SecurityUtil.getCurrentUserId());
+    @RequestMapping(value = "/project-reply", method = RequestMethod.POST)
+    public String saveNewProjectReply(@RequestParam("id") Long id, @RequestParam("parent") Long parent, @RequestParam("reply") String reply) {
+        projectReplyService.createProjectReply(reply, id, parent , SecurityUtil.getCurrentUserId());
         return "redirect:/";
     }
 
@@ -57,22 +51,22 @@ public class ProjectController {
             return "project-not-found";
         } else {
             model.addAttribute("project", project);
-            model.addAttribute("replies", projectReplyService.findByProjectId(project.getId()));
+            /*model.addAttribute("replies", projectReplyService.findByProjectId(project.getId()));*/
             return "project";
         }
     }
 
-
+/*
     @RequestMapping(value = "/project-new", method = RequestMethod.POST)
     public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "project-new";
         }
-        project.setAuthorId(SecurityUtil.getCurrentUserId());
+        project.setUser(SecurityUtil.getCurrentUserId());
         projectService.createProject(project);
         return "redirect:/project-new/success";
     }
-
+*/
     @RequestMapping(value = "/project-new/success", method = RequestMethod.GET)
     public String addNewProjectSuccess(ModelMap model){
         return "project-new-success";
@@ -85,11 +79,15 @@ public class ProjectController {
         return "project-all";
     }
 
+
+/*
     @RequestMapping(value = "/project-my", method = RequestMethod.GET)
     public String allMyProject(ModelMap model) {
         model.addAttribute("projects", projectService.findProjecByAuthorId(SecurityUtil.getCurrentUserId()));
         return "project-all";
     }
+
+
 
     @RequestMapping(value = "/project/update/{id}", method = RequestMethod.GET)
     public String updateProject(@PathVariable Long id, Model model) {
@@ -112,6 +110,8 @@ public class ProjectController {
         projectService.updateProject(project);
         return "redirect:/project-update/success";
     }
+*/
+
 
     @RequestMapping(value = "/project-update/success", method = RequestMethod.GET)
     public String successUpdateProject(ModelMap model){

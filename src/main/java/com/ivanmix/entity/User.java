@@ -49,6 +49,9 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private List<ProjectReply> projectReplies;
 
+    @OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Project> projects;
+
     public Long getId() {
         return id;
     }
@@ -127,6 +130,14 @@ public class User {
 
     public void setProjectReplies(List<ProjectReply> projectReplies) {
         this.projectReplies = projectReplies;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     @Override
