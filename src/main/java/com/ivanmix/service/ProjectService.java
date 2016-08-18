@@ -8,14 +8,14 @@ public interface ProjectService {
 
     Project findById(Long id);
 
-    //Project findByIdAndAuthorId(Long id, Long authorId);
+    Project findByIdAndUserId(Long id, Long userID);
 
-    Project createProject(Project project);
+    Project create(Project project, Long userID);
 
-    void updateProject(Project project);
+    void update(Project project);
 
     List<Project> findAll();
 
-    //List<Project> findProjecByAuthorId(Long id);
+    List<Project> findByUserId(Long id);
 
 }

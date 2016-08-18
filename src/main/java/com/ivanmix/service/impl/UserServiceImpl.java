@@ -12,6 +12,7 @@ import com.ivanmix.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,8 +40,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
-
     @Override
+    @Transactional
     public User createUser(RegistrationForm form) {
         User user = new User();
         user.setEmail(form.getEmail());
@@ -64,6 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void updateUser(Long id, ProfileForm form) {
         User user = userRepository.findById(id);
         user.setLogin(form.getLogin());
@@ -74,6 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void updateUserPassword(Long id, PasswordForm form) {
         User user = userRepository.findById(id);
         String encoderPassword = passwordEncoder.encode(form.getPassword());

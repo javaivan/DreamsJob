@@ -64,7 +64,7 @@
             </div>
         </sec:authorize>--%>
         <div class="row">
-            <c:forEach items="${project.projectReplies}" var="replyOne" >
+            <c:forEach items="${project.replies}" var="replyOne" >
                 <c:if test="${empty replyOne.parent}">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -75,7 +75,7 @@
                                             class="pull-right btn btn-primary btn_project_replies"
                                             data-toggle="modal"
                                             project-replies="<c:out value="${replyOne.id}"/>"
-                                            data-target="#projectReplies">
+                                            data-target="#replies">
                                         Ответить
                                     </button>
                                     </br></br>
@@ -83,9 +83,9 @@
                             </div>
                             <div class="panel-body">
                                 <p><c:out value="${replyOne.reply}"/></p>
-                                <c:if test="${not empty replyOne.subProjectReply}">
+                                <c:if test="${not empty replyOne.children}">
                                     <div class="row">
-                                        <c:forEach items="${replyOne.subProjectReply}" var="replyTwo" >
+                                        <c:forEach items="${replyOne.children}" var="replyTwo" >
                                             <div class="col-lg-12">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
@@ -95,7 +95,7 @@
                                                                     class="pull-right btn btn-primary btn_project_replies"
                                                                     data-toggle="modal"
                                                                     project-replies="<c:out value="${replyTwo.id}"/>"
-                                                                    data-target="#projectReplies">
+                                                                    data-target="#replies">
                                                                 Ответить
                                                             </button>
                                                             </br></br>
@@ -103,9 +103,9 @@
                                                     </div>
                                                     <div class="panel-body">
                                                         <p><c:out value="${replyTwo.reply}"/></p>
-                                                        <c:if test="${not empty replyTwo.subProjectReply}">
+                                                        <c:if test="${not empty replyTwo.children}">
                                                             <div class="row">
-                                                                <c:forEach items="${replyTwo.subProjectReply}" var="replyTree" >
+                                                                <c:forEach items="${replyTwo.children}" var="replyTree" >
                                                                     <div class="col-lg-12">
                                                                         <div class="panel panel-default">
                                                                             <div class="panel-heading">
@@ -115,7 +115,7 @@
                                                                                             class="pull-right btn btn-primary btn_project_replies"
                                                                                             data-toggle="modal"
                                                                                             project-replies="<c:out value="${replyTree.id}"/>"
-                                                                                            data-target="#projectReplies">
+                                                                                            data-target="#replies">
                                                                                         Ответить
                                                                                     </button>
                                                                                     </br></br>
@@ -123,9 +123,9 @@
                                                                             </div>
                                                                             <div class="panel-body">
                                                                                 <p><c:out value="${replyTree.reply}"/></p>
-                                                                                <c:if test="${not empty replyTree.subProjectReply}">
+                                                                                <c:if test="${not empty replyTree.children}">
                                                                                     <div class="row">
-                                                                                        <c:forEach items="${replyTree.subProjectReply}" var="replyFour" >
+                                                                                        <c:forEach items="${replyTree.children}" var="replyFour" >
                                                                                             <div class="col-lg-12">
                                                                                                 <div class="panel panel-default">
                                                                                                     <div class="panel-heading">
@@ -160,7 +160,7 @@
     </div>
     <%@ include file="/WEB-INF/views/section/footerJs.jsp" %>
     <sec:authorize access="hasRole('ROLE_FREELANCER')">
-        <div class="modal fade" id="projectReplies" tabindex="-1" role="dialog" aria-labelledby="projectRepliesLabel" aria-hidden="true">
+        <div class="modal fade" id="replies" tabindex="-1" role="dialog" aria-labelledby="repliesLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="/project-reply" method="post">
@@ -168,7 +168,7 @@
                         <input type="hidden" name="id" value="<c:out value="${project.id}"/>">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="projectRepliesLabel">Ответить на проэкт</h4>
+                            <h4 class="modal-title" id="repliesLabel">Ответить на проэкт</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">

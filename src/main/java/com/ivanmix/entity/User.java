@@ -47,7 +47,7 @@ public class User {
 
     //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private List<ProjectReply> projectReplies;
+    private List<Reply> projectReplies;
 
     @OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private List<Project> projects;
@@ -124,11 +124,11 @@ public class User {
         this.userRole = userRole;
     }
 
-    public List<ProjectReply> getProjectReplies() {
+    public List<Reply> getProjectReplies() {
         return projectReplies;
     }
 
-    public void setProjectReplies(List<ProjectReply> projectReplies) {
+    public void setProjectReplies(List<Reply> projectReplies) {
         this.projectReplies = projectReplies;
     }
 

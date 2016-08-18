@@ -1,13 +1,13 @@
 package com.ivanmix.controller;
 
 import com.ivanmix.entity.Project;
-import com.ivanmix.entity.ProjectReply;
+import com.ivanmix.entity.Reply;
 import com.ivanmix.entity.User;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.ProjectReplyForm;
 import com.ivanmix.form.RegistrationForm;
-import com.ivanmix.service.ProjectReplyService;
+import com.ivanmix.service.ReplyService;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import com.ivanmix.util.SecurityUtil;
@@ -29,7 +29,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @Autowired
-    private ProjectReplyService projectReplyService;
+    private ReplyService replyService;
 
     @RequestMapping(value = "/project-new", method = RequestMethod.GET)
     public String addNewProject(ModelMap model){
@@ -39,7 +39,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/project-reply", method = RequestMethod.POST)
     public String saveNewProjectReply(@RequestParam("id") Long id, @RequestParam("parent") Long parent, @RequestParam("reply") String reply) {
-        projectReplyService.createProjectReply(reply, id, parent , SecurityUtil.getCurrentUserId());
+        replyService.createProjectReply(reply, id, parent , SecurityUtil.getCurrentUserId());
         return "redirect:/";
     }
 
@@ -56,17 +56,15 @@ public class ProjectController {
         }
     }
 
-/*
     @RequestMapping(value = "/project-new", method = RequestMethod.POST)
     public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "project-new";
         }
-        project.setUser(SecurityUtil.getCurrentUserId());
-        projectService.createProject(project);
+        projectService.create(project,SecurityUtil.getCurrentUserId());
         return "redirect:/project-new/success";
     }
-*/
+
     @RequestMapping(value = "/project-new/success", method = RequestMethod.GET)
     public String addNewProjectSuccess(ModelMap model){
         return "project-new-success";
@@ -79,11 +77,9 @@ public class ProjectController {
         return "project-all";
     }
 
-
-/*
     @RequestMapping(value = "/project-my", method = RequestMethod.GET)
     public String allMyProject(ModelMap model) {
-        model.addAttribute("projects", projectService.findProjecByAuthorId(SecurityUtil.getCurrentUserId()));
+        model.addAttribute("projects", projectService.findByUserId(SecurityUtil.getCurrentUserId()));
         return "project-all";
     }
 
@@ -91,7 +87,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/project/update/{id}", method = RequestMethod.GET)
     public String updateProject(@PathVariable Long id, Model model) {
-        Project project = projectService.findByIdAndAuthorId(id,SecurityUtil.getCurrentUserId());
+        Project project = projectService.findByIdAndUserId(id,SecurityUtil.getCurrentUserId());
         if(project == null){
             return "project-not-found";
         } else {
@@ -104,14 +100,12 @@ public class ProjectController {
     public String saveUpdateProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "project-update";
-        } else if(projectService.findByIdAndAuthorId(project.getId(),SecurityUtil.getCurrentUserId()) == null) {
+        } else if(projectService.findByIdAndUserId(project.getId(),SecurityUtil.getCurrentUserId()) == null) {
             return "project-update";
         }
-        projectService.updateProject(project);
+        projectService.update(project);
         return "redirect:/project-update/success";
     }
-*/
-
 
     @RequestMapping(value = "/project-update/success", method = RequestMethod.GET)
     public String successUpdateProject(ModelMap model){

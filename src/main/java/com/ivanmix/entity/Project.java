@@ -33,9 +33,8 @@ public class Project {
     @Column(insertable=false)
     private Date update;
 
-    //@OneToMany(mappedBy = "project", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
-    private List<ProjectReply> projectReplies;
+    private List<Reply> replies;
 
     private String status;
 
@@ -100,12 +99,12 @@ public class Project {
         this.update = new Date();
     }
 
-    public List<ProjectReply> getProjectReplies() {
-        return projectReplies;
+    public List<Reply> getReplies() {
+        return replies;
     }
 
-    public void setProjectReplies(List<ProjectReply> projectReplies) {
-        this.projectReplies = projectReplies;
+    public void setReplies(List<Reply> replies) {
+        this.replies = replies;
     }
 
     @Override
@@ -121,8 +120,7 @@ public class Project {
         if (description != null ? !description.equals(project.description) : project.description != null) return false;
         if (created != null ? !created.equals(project.created) : project.created != null) return false;
         if (update != null ? !update.equals(project.update) : project.update != null) return false;
-        if (projectReplies != null ? !projectReplies.equals(project.projectReplies) : project.projectReplies != null)
-            return false;
+        if (replies != null ? !replies.equals(project.replies) : project.replies != null) return false;
         return status != null ? status.equals(project.status) : project.status == null;
 
     }
@@ -135,11 +133,12 @@ public class Project {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (update != null ? update.hashCode() : 0);
-        result = 31 * result + (projectReplies != null ? projectReplies.hashCode() : 0);
+        result = 31 * result + (replies != null ? replies.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
-/*
+
+    /*
     @Override
     public String
     toString() {

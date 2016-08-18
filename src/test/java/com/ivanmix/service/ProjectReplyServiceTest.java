@@ -1,15 +1,13 @@
 package com.ivanmix.service;
 
 import com.ivanmix.config.SpringConfig;
-import com.ivanmix.entity.ProjectReply;
+import com.ivanmix.entity.Reply;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.List;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,11 +23,11 @@ public class ProjectReplyServiceTest {
     //ProjectReply createProjectReplyTest(String reply, Long projectId, Long ProjectReplyId, Long userId);
 
     @Autowired
-    ProjectReplyService projectReplyService;
+    ReplyService projectReplyService;
 
     @Test
     public void createProjectReplyTest(){
-        ProjectReply projectReply = projectReplyService.createProjectReply("000000000000000",(long)1,(long)1,(long)1);
+        Reply projectReply = projectReplyService.createProjectReply("000000000000000",(long)1,(long)1,(long)1);
         System.out.println(projectReply);
     }
 
