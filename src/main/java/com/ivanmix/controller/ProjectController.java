@@ -39,7 +39,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/project-reply", method = RequestMethod.POST)
     public String saveNewProjectReply(@RequestParam("id") Long id, @RequestParam("parent") Long parent, @RequestParam("reply") String reply) {
-        replyService.createProjectReply(reply, id, parent , SecurityUtil.getCurrentUserId());
+        replyService.create(reply, id, parent , SecurityUtil.getCurrentUserId());
         return "redirect:/";
     }
 

@@ -28,6 +28,11 @@ public class AllTests {
             insertUserToDelete(con);
             insertUserToGetByIdAndLogin(con);
             deleteUser(con);
+
+
+            insertReplyToFindByReply(con);
+            deleteReply(con);
+
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -82,5 +87,33 @@ public class AllTests {
     }
 
 
+    private static void insertReplyToFindByReply(Connection con) throws SQLException {
 
+        String stmDelete = "DELETE FROM project_reply WHERE id =?";
+        PreparedStatement pstDelete = con.prepareStatement(stmDelete);
+        pstDelete.setLong(1, 1);
+        pstDelete.executeUpdate();
+
+        int id = 1;
+        int projectID = 1;
+        int userID = 1;
+        String reply = "TestFindByReply";
+        String stm = "INSERT INTO project_reply(id, project, reply, user) VALUES(?, ?, ?, ?)";
+        PreparedStatement pstReply = con.prepareStatement(stm);
+        pstReply.setInt(1, id);
+        pstReply.setInt(2, projectID);
+        pstReply.setString(3, reply);
+        pstReply.setInt(4, userID);
+        pstReply.executeUpdate();
+    }
+
+    private static void deleteReply(Connection con) throws SQLException {
+        String stm = "DELETE FROM project_reply WHERE reply =?";
+        PreparedStatement pst = con.prepareStatement(stm);
+        pst.setString(1, "TestCreateReplyReplyParent");
+        pst.executeUpdate();
+
+        pst.setString(1, "TestCreateReplyReplyChildren");
+        pst.executeUpdate();
+    }
 }

@@ -12,4 +12,6 @@ public interface ReplyRepository extends CrudRepository<Reply, Long> {
     List<Reply> findByUserId(Long id);
 
     List<Reply> findByProjectId(Long id);
+
+    List<Reply> findByReply(String reply);
 }

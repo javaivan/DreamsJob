@@ -12,7 +12,9 @@ public interface ReplyService {
 
     List<Reply> findByProjectId(Long id);
 
-    Reply createProjectReply(String reply, Long projectId, Long ProjectReplyId, Long userId);
+    Reply create(String reply, Long projectId, Long ProjectReplyId, Long userId);
 
-    void updateProjectReply(Reply reply);
+    void update(Reply reply);
+
+    List<Reply> findByReply(String reply);
 }

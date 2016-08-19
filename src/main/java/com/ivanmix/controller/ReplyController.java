@@ -14,9 +14,9 @@ public class ReplyController {
     @Autowired
     ReplyService replyService;
 
-    @RequestMapping(value = "/project-replies", method = RequestMethod.GET)
+    @RequestMapping(value = "/replies-my", method = RequestMethod.GET)
     public String myReplies(Model model) {
         model.addAttribute("replies", replyService.findByUserId(SecurityUtil.getCurrentUserId()));
-        return "project-replies";
+        return "replies-my";
     }
 }

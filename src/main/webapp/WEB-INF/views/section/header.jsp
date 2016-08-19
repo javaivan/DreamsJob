@@ -106,7 +106,7 @@
                     <li><a href="<c:out value="${rootURL}"/>project-answer"><i class="fa fa-money"></i>Project Answer</a></li>
                 </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_FREELANCER')">
-                    <li><a href="<c:out value="${rootURL}"/>project-replies"><i class="fa fa-money"></i>My Replies</a></li>
+                    <li><a href="<c:out value="${rootURL}"/>replies-my"><i class="fa fa-money"></i>My Replies</a></li>
                 </sec:authorize>
             </ul>
         </li>

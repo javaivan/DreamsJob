@@ -61,4 +61,9 @@ public class ReplyServiceImpl implements ReplyService {
     public void updateProjectReply(Reply reply) {
         replyRepository.save(reply);
     }
+
+    @Override
+    public List<Reply> findByReply(String reply){
+        return replyRepository.findByReply(reply);
+    }
 }

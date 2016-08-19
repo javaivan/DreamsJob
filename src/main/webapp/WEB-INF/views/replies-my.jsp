@@ -25,6 +25,9 @@
                         <div class="panel-body">
                             <p><c:out value="${reply.reply}"/></p>
                         </div>
+                        <div class="panel-footer">
+                            <a href="/project/<c:out value="${reply.project}"/>"><c:out value="${reply.project}"/></a>
+                        </div>
                     </div>
                 </div>
             </c:forEach>
