@@ -1,15 +1,10 @@
 package com.ivanmix.controller;
 
 import com.ivanmix.entity.Project;
-import com.ivanmix.entity.Reply;
-import com.ivanmix.entity.User;
-import com.ivanmix.form.PasswordForm;
-import com.ivanmix.form.ProfileForm;
+import com.ivanmix.entity.Status;
 import com.ivanmix.form.ProjectReplyForm;
-import com.ivanmix.form.RegistrationForm;
 import com.ivanmix.service.ReplyService;
 import com.ivanmix.service.ProjectService;
-import com.ivanmix.service.UserService;
 import com.ivanmix.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 
 @Controller
@@ -34,6 +28,7 @@ public class ProjectController {
     @RequestMapping(value = "/project-new", method = RequestMethod.GET)
     public String addNewProject(ModelMap model){
         model.addAttribute("project", new Project());
+        model.addAttribute("status",  Status.values());
         return "project-new";
     }
 
@@ -57,8 +52,9 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/project-new", method = RequestMethod.POST)
-    public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult) {
+    public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("status",  Status.values());
             return "project-new";
         }
         projectService.create(project,SecurityUtil.getCurrentUserId());
@@ -91,13 +87,15 @@ public class ProjectController {
         if(project == null){
             return "project-not-found";
         } else {
+            model.addAttribute("status",  Status.values());
             model.addAttribute("project", project);
             return "project-update";
         }
     }
 
     @RequestMapping(value = "/project/update", method = RequestMethod.POST)
-    public String saveUpdateProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult) {
+    public String saveUpdateProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult, Model model) {
+        model.addAttribute("status",  Status.values());
         if (bindingResult.hasErrors()) {
             return "project-update";
         } else if(projectService.findByIdAndUserId(project.getId(),SecurityUtil.getCurrentUserId()) == null) {

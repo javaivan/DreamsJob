@@ -27,6 +27,16 @@
                                         <input id="title" type="text" class="form-control" name="title" placeholder="Title" required autofocus value="${project.title}" />
                                         <form:errors path="project.title" cssClass="alert alert-danger" element="div" />
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select name="status" id="status" class="form-control" >
+                                            <c:forEach items="${status}" var="state">
+                                                <option value="${state}">${state}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="description">Description</label>
                                         <textarea id="description" class="form-control" name="description" rows="3">${project.description}</textarea>

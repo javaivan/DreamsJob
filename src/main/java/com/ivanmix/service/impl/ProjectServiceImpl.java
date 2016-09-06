@@ -35,6 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
     public Project create(Project project, Long userID) {
         User user = userService.findUserById(userID);
         project.setUser(user);
+        System.out.println(project);
         return projectRepository.save(project);
     }
 
@@ -43,6 +44,7 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(p.getId());
         project.setTitle(p.getTitle());
         project.setDescription(p.getDescription());
+        project.setStatus(p.getStatus());
         projectRepository.save(project);
     }
 

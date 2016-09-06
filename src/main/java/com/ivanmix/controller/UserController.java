@@ -1,5 +1,6 @@
 package com.ivanmix.controller;
 
+import com.ivanmix.entity.Project;
 import com.ivanmix.entity.User;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;

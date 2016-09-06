@@ -42,7 +42,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     @Transactional
-    public Reply createProjectReply(String reply, Long projectID, Long replyID, Long userID) {
+    public Reply create(String reply, Long projectID, Long replyID, Long userID) {
         Reply projectReply = new Reply();
         Project project = projectRepository.findById(projectID);
         User user = userRepository.findById(userID);
@@ -58,7 +58,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     @Transactional
-    public void updateProjectReply(Reply reply) {
+    public void update(Reply reply) {
         replyRepository.save(reply);
     }
 

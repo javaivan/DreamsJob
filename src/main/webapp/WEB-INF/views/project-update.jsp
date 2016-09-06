@@ -30,6 +30,14 @@
                                         <form:errors path="project.id" cssClass="alert alert-danger" element="div" />
                                     </div>
                                     <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select name="status" id="status" class="form-control" >
+                                            <c:forEach items="${status}" var="state">
+                                                <option <c:if test="${state.equals(project.status)}">selected</c:if> value="${state}">${state}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="description">Description</label>
                                         <textarea id="description" class="form-control" name="description" rows="3">${project.description}</textarea>
                                         <form:errors path="project.description" cssClass="alert alert-danger" element="div" />
