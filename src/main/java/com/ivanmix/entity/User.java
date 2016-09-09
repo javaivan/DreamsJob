@@ -52,6 +52,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private List<Project> projects;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reader", cascade = CascadeType.ALL)
+    private List<Reply> projectReaderReplies;
+
+
     public Long getId() {
         return id;
     }
@@ -140,6 +144,15 @@ public class User {
         this.projects = projects;
     }
 
+    public List<Reply> getProjectReaderReplies() {
+        return projectReaderReplies;
+    }
+
+    public void setProjectReaderReplies(List<Reply> projectReaderReplies) {
+        this.projectReaderReplies = projectReaderReplies;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -154,7 +167,12 @@ public class User {
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (created != null ? !created.equals(user.created) : user.created != null) return false;
-        return status != null ? status.equals(user.status) : user.status == null;
+        if (status != null ? !status.equals(user.status) : user.status != null) return false;
+        if (userRole != null ? !userRole.equals(user.userRole) : user.userRole != null) return false;
+        if (projectReplies != null ? !projectReplies.equals(user.projectReplies) : user.projectReplies != null)
+            return false;
+        if (projects != null ? !projects.equals(user.projects) : user.projects != null) return false;
+        return projectReaderReplies != null ? projectReaderReplies.equals(user.projectReaderReplies) : user.projectReaderReplies == null;
 
     }
 
@@ -168,6 +186,10 @@ public class User {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
+        result = 31 * result + (projectReplies != null ? projectReplies.hashCode() : 0);
+        result = 31 * result + (projects != null ? projects.hashCode() : 0);
+        result = 31 * result + (projectReaderReplies != null ? projectReaderReplies.hashCode() : 0);
         return result;
     }
 

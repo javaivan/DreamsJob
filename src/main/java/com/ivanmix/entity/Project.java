@@ -6,7 +6,6 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import com.ivanmix.entity.Status;
 
 @Entity(name = "projects")
 public class Project {
@@ -35,8 +34,8 @@ public class Project {
     private Date update;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="status", columnDefinition="default 'PENDING'")
-    private Status status;
+    @Column(name="status")
+    private ProjectStatus status;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
     private List<Reply> replies;
@@ -89,11 +88,11 @@ public class Project {
         this.update = update;
     }
 
-    public Status getStatus() {
+    public ProjectStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(ProjectStatus status) {
         this.status = status;
     }
 

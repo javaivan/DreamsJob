@@ -2,6 +2,7 @@ package com.ivanmix.service.impl;
 
 import com.ivanmix.entity.Project;
 import com.ivanmix.entity.Reply;
+import com.ivanmix.entity.ReplyStatus;
 import com.ivanmix.entity.User;
 import com.ivanmix.repository.ReplyRepository;
 import com.ivanmix.repository.ProjectRepository;
@@ -40,18 +41,29 @@ public class ReplyServiceImpl implements ReplyService {
         return replyRepository.findByProjectId(id);
     }
 
+
+    @Override
+    public List<Reply> findToUserId(Long id) {
+       /* return projectRepository.findByUserId(id);*/
+       return null;
+    }
+
     @Override
     @Transactional
     public Reply create(String reply, Long projectID, Long replyID, Long userID) {
         Reply projectReply = new Reply();
         Project project = projectRepository.findById(projectID);
         User user = userRepository.findById(userID);
+        User reader = project.getUser();
         projectReply.setProject(project);
         projectReply.setUser(user);
+        projectReply.setReader(reader);
         if(replyID != null){
             Reply pr = replyRepository.findById(replyID);
             projectReply.setParent(pr);
         }
+
+        projectReply.setReplyStatus(ReplyStatus.NEW);
         projectReply.setReply(reply);
         return replyRepository.save(projectReply);
     }
@@ -65,5 +77,10 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public List<Reply> findByReply(String reply){
         return replyRepository.findByReply(reply);
+    }
+
+    @Override
+    public List<Reply> findToReaderId(Long id) {
+        return replyRepository.findByReaderId(id);
     }
 }

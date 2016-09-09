@@ -25,6 +25,10 @@ public class Reply {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="reader_id", nullable=false)
+    private User reader;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_id")
     private List<Reply> children;
@@ -37,23 +41,9 @@ public class Reply {
     @Size(min = 5)
     private String reply;
 
-    public Reply() {
-    }
-
-    public Reply(Project project, User user, Reply parent, String reply) {
-        this.project = project;
-        this.user = user;
-        this.parent = parent;
-        this.reply = reply;
-    }
-
-    public Reply(Project project, User user, Reply parent, List<Reply> children, String reply) {
-        this.project = project;
-        this.user = user;
-        this.parent = parent;
-        this.children = children;
-        this.reply = reply;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private ReplyStatus replyStatus;
 
     public Long getId() {
         return id;
@@ -103,6 +93,22 @@ public class Reply {
         this.reply = reply;
     }
 
+    public User getReader() {
+        return reader;
+    }
+
+    public void setReader(User reader) {
+        this.reader = reader;
+    }
+
+    public ReplyStatus getReplyStatus() {
+        return replyStatus;
+    }
+
+    public void setReplyStatus(ReplyStatus replyStatus) {
+        this.replyStatus = replyStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,9 +119,11 @@ public class Reply {
         if (id != null ? !id.equals(reply1.id) : reply1.id != null) return false;
         if (project != null ? !project.equals(reply1.project) : reply1.project != null) return false;
         if (user != null ? !user.equals(reply1.user) : reply1.user != null) return false;
+        if (reader != null ? !reader.equals(reply1.reader) : reply1.reader != null) return false;
         if (children != null ? !children.equals(reply1.children) : reply1.children != null) return false;
         if (parent != null ? !parent.equals(reply1.parent) : reply1.parent != null) return false;
-        return reply != null ? reply.equals(reply1.reply) : reply1.reply == null;
+        if (reply != null ? !reply.equals(reply1.reply) : reply1.reply != null) return false;
+        return replyStatus == reply1.replyStatus;
 
     }
 
@@ -124,12 +132,13 @@ public class Reply {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (project != null ? project.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (reader != null ? reader.hashCode() : 0);
         result = 31 * result + (children != null ? children.hashCode() : 0);
         result = 31 * result + (parent != null ? parent.hashCode() : 0);
         result = 31 * result + (reply != null ? reply.hashCode() : 0);
+        result = 31 * result + (replyStatus != null ? replyStatus.hashCode() : 0);
         return result;
     }
-
 
     @Override
     public String toString() {

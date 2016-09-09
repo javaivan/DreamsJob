@@ -24,6 +24,7 @@
                 </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_FREELANCER')">
                     <li><a href="<c:out value="${rootURL}"/>replies-my"><i class="fa fa-money"></i>My Replies</a></li>
+                    <li><a href="<c:out value="${rootURL}"/>replies-to-me"><i class="fa fa-money"></i>To Me</a></li>
                 </sec:authorize>
             </ul>
         </li>

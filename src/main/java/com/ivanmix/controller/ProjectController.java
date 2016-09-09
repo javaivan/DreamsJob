@@ -1,7 +1,7 @@
 package com.ivanmix.controller;
 
 import com.ivanmix.entity.Project;
-import com.ivanmix.entity.Status;
+import com.ivanmix.entity.ProjectStatus;
 import com.ivanmix.form.ProjectReplyForm;
 import com.ivanmix.service.ReplyService;
 import com.ivanmix.service.ProjectService;
@@ -28,7 +28,7 @@ public class ProjectController {
     @RequestMapping(value = "/project-new", method = RequestMethod.GET)
     public String addNewProject(ModelMap model){
         model.addAttribute("project", new Project());
-        model.addAttribute("status",  Status.values());
+        model.addAttribute("status",  ProjectStatus.values());
         return "project-new";
     }
 
@@ -54,7 +54,7 @@ public class ProjectController {
     @RequestMapping(value = "/project-new", method = RequestMethod.POST)
     public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("status",  Status.values());
+            model.addAttribute("status",  ProjectStatus.values());
             return "project-new";
         }
         projectService.create(project,SecurityUtil.getCurrentUserId());
@@ -80,22 +80,28 @@ public class ProjectController {
     }
 
 
-
     @RequestMapping(value = "/project/update/{id}", method = RequestMethod.GET)
     public String updateProject(@PathVariable Long id, Model model) {
         Project project = projectService.findByIdAndUserId(id,SecurityUtil.getCurrentUserId());
         if(project == null){
             return "project-not-found";
         } else {
-            model.addAttribute("status",  Status.values());
+            model.addAttribute("status",  ProjectStatus.values());
             model.addAttribute("project", project);
             return "project-update";
         }
     }
 
+
+    @RequestMapping(value = "/project-answer", method = RequestMethod.GET)
+    public String repliesToUser(ModelMap model) {
+        model.addAttribute("replies", replyService.findToUserId(SecurityUtil.getCurrentUserId()));
+        return "replies-my";
+    }
+
     @RequestMapping(value = "/project/update", method = RequestMethod.POST)
     public String saveUpdateProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult, Model model) {
-        model.addAttribute("status",  Status.values());
+        model.addAttribute("status",  ProjectStatus.values());
         if (bindingResult.hasErrors()) {
             return "project-update";
         } else if(projectService.findByIdAndUserId(project.getId(),SecurityUtil.getCurrentUserId()) == null) {

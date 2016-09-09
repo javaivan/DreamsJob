@@ -24,10 +24,11 @@
                             <button
                                     class="pull-right btn btn-primary btn_project_replies"
                                     data-toggle="modal"
-                                    project-replies="<c:out value=""/>"
-                                    data-target="#projectReplies">
+                                    project-replies=""
+                                    data-target="#replies">
                                 Ответить
                             </button>
+                            </br></br>
                         </sec:authorize>
                         </br></br>
                     </div>
@@ -178,7 +179,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Submit</button>
                             <input type="submit" class="btn btn-primary" value="Submit">
                         </div>
                     </form>
