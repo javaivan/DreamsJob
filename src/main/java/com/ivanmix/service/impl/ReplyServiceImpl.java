@@ -4,6 +4,7 @@ import com.ivanmix.entity.Project;
 import com.ivanmix.entity.Reply;
 import com.ivanmix.entity.ReplyStatus;
 import com.ivanmix.entity.User;
+import com.ivanmix.helper.ServiceHelper;
 import com.ivanmix.repository.ReplyRepository;
 import com.ivanmix.repository.ProjectRepository;
 import com.ivanmix.repository.UserRepository;
@@ -33,19 +34,12 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public List<Reply> findByUserId(Long id) {
-        return replyRepository.findByUserId(id);
+        return replyRepository.findByUserId(id, ServiceHelper.getSortById());
     }
 
     @Override
     public List<Reply> findByProjectId(Long id) {
-        return replyRepository.findByProjectId(id);
-    }
-
-
-    @Override
-    public List<Reply> findToUserId(Long id) {
-       /* return projectRepository.findByUserId(id);*/
-       return null;
+        return replyRepository.findByProjectId(id, ServiceHelper.getSortById());
     }
 
     @Override
@@ -76,11 +70,11 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public List<Reply> findByReply(String reply){
-        return replyRepository.findByReply(reply);
+        return replyRepository.findByReply(reply, ServiceHelper.getSortById());
     }
 
     @Override
     public List<Reply> findToReaderId(Long id) {
-        return replyRepository.findByReaderId(id);
+        return replyRepository.findByReaderId(id, ServiceHelper.getSortById());
     }
 }

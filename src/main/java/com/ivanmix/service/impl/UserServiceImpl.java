@@ -6,6 +6,7 @@ import com.ivanmix.entity.UserRole;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
+import com.ivanmix.helper.ServiceHelper;
 import com.ivanmix.repository.UserRepository;
 import com.ivanmix.repository.UserRoleRepository;
 import com.ivanmix.service.UserService;
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return Lists.newArrayList(userRepository.findAll());
+        return Lists.newArrayList(userRepository.findAll(ServiceHelper.getSortById()));
     }
 
     @Override

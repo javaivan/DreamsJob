@@ -20,11 +20,10 @@
                 <sec:authorize access="hasRole('ROLE_EMPLOYER')">
                     <li><a href="<c:out value="${rootURL}"/>project-new"><i class="fa fa-money"></i>Project Add</a></li>
                     <li><a href="<c:out value="${rootURL}"/>project-my"><i class="fa fa-money"></i>Project My</a></li>
-                    <li><a href="<c:out value="${rootURL}"/>project-answer"><i class="fa fa-money"></i>Project Answer</a></li>
+                    <li><a href="<c:out value="${rootURL}"/>replies-to-me"><i class="fa fa-money"></i>To Me</a></li>
                 </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_FREELANCER')">
                     <li><a href="<c:out value="${rootURL}"/>replies-my"><i class="fa fa-money"></i>My Replies</a></li>
-                    <li><a href="<c:out value="${rootURL}"/>replies-to-me"><i class="fa fa-money"></i>To Me</a></li>
                 </sec:authorize>
             </ul>
         </li>

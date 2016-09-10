@@ -12,8 +12,6 @@ public interface ReplyService {
 
     List<Reply> findByProjectId(Long id);
 
-    List<Reply> findToUserId(Long id);
-
     Reply create(String reply, Long projectId, Long ProjectReplyId, Long userId);
 
     void update(Reply reply);

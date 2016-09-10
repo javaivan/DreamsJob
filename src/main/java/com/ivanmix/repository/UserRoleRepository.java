@@ -1,9 +1,9 @@
 package com.ivanmix.repository;
 
 import com.ivanmix.entity.UserRole;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserRoleRepository extends CrudRepository<UserRole, Long> {
+public interface UserRoleRepository extends PagingAndSortingRepository<UserRole, Long> {
 
 }
 

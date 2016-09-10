@@ -3,10 +3,13 @@ package com.ivanmix.service.impl;
 import com.google.common.collect.Lists;
 import com.ivanmix.entity.Project;
 import com.ivanmix.entity.User;
+import com.ivanmix.helper.ServiceHelper;
 import com.ivanmix.repository.ProjectRepository;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findByIdAndUserId(Long id, Long userID) {
-        return projectRepository.findByIdAndUserId(id, userID);
+        return projectRepository.findByIdAndUserId(id, userID, ServiceHelper.getSortById());
     }
 
     @Override
@@ -50,12 +53,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> findAll() {
-        return Lists.newArrayList(projectRepository.findAll());
+        return Lists.newArrayList(projectRepository.findAll(ServiceHelper.getSortById()));
     }
 
     @Override
     public List<Project> findByUserId(Long id) {
-        return Lists.newArrayList(projectRepository.findByUserId(id));
+        return Lists.newArrayList(projectRepository.findByUserId(id, ServiceHelper.getSortById()));
     }
-
 }

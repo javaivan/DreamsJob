@@ -92,13 +92,6 @@ public class ProjectController {
         }
     }
 
-
-    @RequestMapping(value = "/project-answer", method = RequestMethod.GET)
-    public String repliesToUser(ModelMap model) {
-        model.addAttribute("replies", replyService.findToUserId(SecurityUtil.getCurrentUserId()));
-        return "replies-my";
-    }
-
     @RequestMapping(value = "/project/update", method = RequestMethod.POST)
     public String saveUpdateProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult, Model model) {
         model.addAttribute("status",  ProjectStatus.values());

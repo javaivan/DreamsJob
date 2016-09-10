@@ -1,7 +1,7 @@
 package com.ivanmix.repository;
 
-import org.springframework.data.repository.CrudRepository;
 import com.ivanmix.entity.Project;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public interface ProjectRepository  extends PagingAndSortingRepository<Project, 
 
     Project findById(Long id);
 
-    Project findByIdAndUserId(Long id, Long userId);
+    Project findByIdAndUserId(Long id, Long userId, Sort sort);
 
-    List<Project> findByUserId(Long id);
+    List<Project> findByUserId(Long id, Sort sort);
 }
