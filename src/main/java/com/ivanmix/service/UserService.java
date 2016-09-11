@@ -5,6 +5,8 @@ import com.ivanmix.entity.UserRole;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
+import com.ivanmix.models.UploadImage;
+import com.ivanmix.util.SecurityUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -27,4 +29,7 @@ public interface UserService {
     List<UserRole> findByRole(String role, int page, int size);
 
     void deleteUser(Long id);
+
+    void addUserPhoto(Long id, UploadImage image);
+
 }

@@ -6,6 +6,8 @@ import com.ivanmix.entity.UserRole;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
+import com.ivanmix.models.UploadImage;
+import com.ivanmix.service.ImageUploadService;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import com.ivanmix.util.SecurityUtil;
@@ -18,9 +20,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -39,6 +40,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ImageUploadService imageUploadService;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -121,5 +125,19 @@ public class UserController {
     public String bootstapPage(ModelMap model){
         return "bootstap";
     }
+
+
+
+
+    @RequestMapping(value="/user-profile-photo", method=RequestMethod.POST)
+    @ResponseBody
+    public String savePhoto(@RequestParam("photoFile") MultipartFile file){
+
+        UploadImage image = imageUploadService.uploadNewImage(file);
+
+        userService.addUserPhoto(SecurityUtil.getCurrentUserId(), image);
+        return "success";
+    }
+
 
 }

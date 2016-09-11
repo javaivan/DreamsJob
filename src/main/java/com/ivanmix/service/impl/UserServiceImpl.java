@@ -7,6 +7,7 @@ import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
 import com.ivanmix.helper.ServiceHelper;
+import com.ivanmix.models.UploadImage;
 import com.ivanmix.repository.UserRepository;
 import com.ivanmix.repository.UserRoleRepository;
 import com.ivanmix.service.UserService;
@@ -101,6 +102,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.delete(id);
+    }
+
+
+    @Override
+    @Transactional
+    public void addUserPhoto(Long id, UploadImage image){
+        User user = userRepository.findById(id);
+
+        user.setBigImage(image.getBigImage());
+        user.setSmallImage(image.getSmallImage());
+        userRepository.save(user);
     }
 
 

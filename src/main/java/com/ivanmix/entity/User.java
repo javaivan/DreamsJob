@@ -42,8 +42,16 @@ public class User {
 
     private String status;
 
-    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+
+    @Column(name = "big_image", length=250)
+    private String bigImage;
+
+    @Column(name = "small_image", length=250)
+    private String smallImage;
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private Set<UserRole> userRole;
 
     //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
@@ -151,6 +159,22 @@ public class User {
 
     public void setProjectReaderReplies(List<Reply> projectReaderReplies) {
         this.projectReaderReplies = projectReaderReplies;
+    }
+
+    public String getBigImage() {
+        return bigImage;
+    }
+
+    public void setBigImage(String bigImage) {
+        this.bigImage = bigImage;
+    }
+
+    public String getSmallImage() {
+        return smallImage;
+    }
+
+    public void setSmallImage(String smallImage) {
+        this.smallImage = smallImage;
     }
 
 
