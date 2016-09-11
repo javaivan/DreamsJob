@@ -57,6 +57,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Project> findAll(int page, int size) {
+        return Lists.newArrayList(projectRepository.findAll(new PageRequest(page, size, ServiceHelper.getSortById())));
+    }
+
+    @Override
     public List<Project> findByUserId(Long id) {
         return Lists.newArrayList(projectRepository.findByUserId(id, ServiceHelper.getSortById()));
     }

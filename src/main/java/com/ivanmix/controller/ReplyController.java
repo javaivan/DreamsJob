@@ -15,8 +15,6 @@ public class ReplyController {
     ReplyService replyService;
 
 
-
-
     @RequestMapping(value = "/replies-my", method = RequestMethod.GET)
     public String myReplies(Model model) {
         model.addAttribute("replies", replyService.findByUserId(SecurityUtil.getCurrentUserId()));

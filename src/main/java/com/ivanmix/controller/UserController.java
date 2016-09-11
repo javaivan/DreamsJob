@@ -10,6 +10,8 @@ import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import com.ivanmix.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,13 +22,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
 
 @Controller
+@PropertySource("classpath:config.properties")
 public class UserController {
 
+    @Resource
+    private Environment env;
 
     @Autowired
     private ProjectService projectService;
@@ -37,9 +43,9 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
-        model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("freelancers", userService.findByRole("ROLE_FREELANCER", 0, 2));
-        model.addAttribute("employers", userService.findByRole("ROLE_EMPLOYER", 0, 2));
+        model.addAttribute("projects", projectService.findAll(0, Integer.parseInt(env.getProperty("home.project"))));
+        model.addAttribute("freelancers", userService.findByRole("ROLE_FREELANCER", 0, Integer.parseInt(env.getProperty("home.user"))));
+        model.addAttribute("employers", userService.findByRole("ROLE_EMPLOYER", 0, Integer.parseInt(env.getProperty("home.user"))));
         return "home";
     }
 
