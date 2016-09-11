@@ -11,6 +11,9 @@ import com.ivanmix.repository.UserRepository;
 import com.ivanmix.repository.UserRoleRepository;
 import com.ivanmix.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,6 +92,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return Lists.newArrayList(userRepository.findAll(ServiceHelper.getSortById()));
+    }
+
+    public List<UserRole> findByRole(String role, int page, int size){
+        return userRoleRepository.findByRole(role, new PageRequest(page, size, ServiceHelper.getSortById()));
     }
 
     @Override

@@ -42,7 +42,8 @@ public class User {
 
     private String status;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private Set<UserRole> userRole;
 
     //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
@@ -191,6 +192,7 @@ public class User {
         result = 31 * result + (projects != null ? projects.hashCode() : 0);
         result = 31 * result + (projectReaderReplies != null ? projectReaderReplies.hashCode() : 0);
         return result;
+
     }
 
     @Override
@@ -203,7 +205,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", created=" + created +
-                ", status='" + status + '\'' +
                 '}';
     }
+
 }

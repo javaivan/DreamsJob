@@ -1,9 +1,12 @@
 package com.ivanmix.service;
 
 import com.ivanmix.entity.User;
+import com.ivanmix.entity.UserRole;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -20,6 +23,8 @@ public interface UserService {
     void updateUserPassword(Long id, PasswordForm form);
 
     List<User> findAll();
+
+    List<UserRole> findByRole(String role, int page, int size);
 
     void deleteUser(Long id);
 }

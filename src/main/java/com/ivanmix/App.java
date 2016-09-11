@@ -109,8 +109,27 @@ public class App
     * new PageRequest(
     *
     * Sort.Direction.DESC
-    *
-    * */
+/*
+    @Query("select u from User u JOIN ReplyStatus r where r.role = :role")
+    List<User> findByRole(@Param("role") String role);
+*/
+/*
+
+
+        @Query("select b FROM BidReceivedEventEntity b JOIN PushEventEntity p " +
+            "WHERE (p.eventId=b.eventId and p.itemId =:itemId and p.eventPrice=:eventPrice)")
+        public Iterable searchBidsByItemIdAndPrice(@Param("itemId") String itemId, @Param("eventPrice") double eventPrice);
+
+
+
+    @Query("select u from de.ppi.samples.fuwesta.model.User u inner join u.postings Post "
+            + "where (u.firstName = :firstname1 or "
+            + "u.irstName = :firstname2) and Post.title = :title\")\n" +
+            "    List<User> nonsensFinder(@Param(\"firstname1\") String firstname1,f
+                             @Param("firstname2") String firstname2,
+                             @Param("title") String title);*/
+
+
 
 
 

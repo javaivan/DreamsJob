@@ -11,8 +11,8 @@ public class UserRole{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id", nullable=false)
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="user", nullable=false)
     private User user;
 
     @Column(name = "role")

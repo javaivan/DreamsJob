@@ -2,6 +2,7 @@ package com.ivanmix.controller;
 
 import com.ivanmix.entity.Project;
 import com.ivanmix.entity.User;
+import com.ivanmix.entity.UserRole;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
@@ -9,6 +10,7 @@ import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import com.ivanmix.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,8 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
         model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("freelancers", userService.findByRole("ROLE_FREELANCER", 0, 2));
+        model.addAttribute("employers", userService.findByRole("ROLE_EMPLOYER", 0, 2));
         return "home";
     }
 
