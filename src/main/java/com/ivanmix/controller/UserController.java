@@ -90,12 +90,14 @@ public class UserController {
     public String userProfile(ModelMap model) {
         User user = userService.findUserById(SecurityUtil.getCurrentUserId());
         model.addAttribute("profileForm", user);
+        model.addAttribute("images", user.getSmallImage());
         return "user-profile";
     }
 
     @RequestMapping(value = "/user-profile", method = RequestMethod.POST)
-    public String saveUserProfile(@Valid @ModelAttribute("profileForm") ProfileForm profileForm, BindingResult bindingResult) {
+    public String saveUserProfile(@Valid @ModelAttribute("profileForm") ProfileForm profileForm, BindingResult bindingResult, ModelMap model) {
         if(bindingResult.hasErrors()){
+            model.addAttribute("images", userService.findUserById(SecurityUtil.getCurrentUserId()).getSmallImage());
             return "user-profile";
         }
         userService.updateUser(SecurityUtil.getCurrentUserId(), profileForm);

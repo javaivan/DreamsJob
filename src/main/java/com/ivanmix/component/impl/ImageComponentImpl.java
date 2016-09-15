@@ -40,7 +40,7 @@ public class ImageComponentImpl implements ImageComponent {
 
     @Override
     public Path getUploadPath(String bigImageUrl) {
-        return Paths.get("D:\\" + bigImageUrl);
+        return Paths.get("D:\\DreamsJob\\src\\main\\webapp\\resources\\upload\\" + bigImageUrl);
     }
 
 

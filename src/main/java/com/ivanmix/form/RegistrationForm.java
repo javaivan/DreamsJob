@@ -1,10 +1,11 @@
 package com.ivanmix.form;
 
+import com.ivanmix.annotation.FieldExists;
 import com.ivanmix.annotation.FieldMatch;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+@FieldExists(login = "login", email = "email", message = "The user is exists")
 public class RegistrationForm extends PasswordForm {
 
     @NotNull

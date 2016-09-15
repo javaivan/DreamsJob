@@ -16,6 +16,8 @@ public interface UserService {
 
     User findUserByLogin(String login);
 
+    User findByEmail(String email);
+
     User findUserById(Long id);
 
     User createUser(RegistrationForm form);

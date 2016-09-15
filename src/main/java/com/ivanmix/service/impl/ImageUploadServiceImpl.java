@@ -31,15 +31,15 @@ public class ImageUploadServiceImpl implements ImageUploadService {
     }
 
     protected UploadImage processUpload(MultipartFile file) throws IOException{
-        String bigImageUrl = imageComponent.getBigImageName();
-        Path bigImagePath = imageComponent.getUploadPath(bigImageUrl);
+        String bigImageName = imageComponent.getBigImageName();
+        Path bigImagePath = imageComponent.getUploadPath(bigImageName);
         multipartFileUploadToJpeg(file, bigImagePath);
 
-        String smallImageUrl = imageComponent.getSmallImageName(bigImageUrl);
-        Path smallImagePath = imageComponent.getUploadPath(smallImageUrl);
+        String smallImageName = imageComponent.getSmallImageName(bigImageName);
+        Path smallImagePath = imageComponent.getUploadPath(smallImageName);
 
         Thumbnails.of(bigImagePath.toString()).size(100, 100).toFile(smallImagePath.toString());
-        return new  UploadImage(bigImagePath.toString(), smallImagePath.toString());
+        return new  UploadImage(bigImageName, smallImageName);
     }
 
     protected void multipartFileUploadToJpeg(MultipartFile file, Path path) throws IOException{
