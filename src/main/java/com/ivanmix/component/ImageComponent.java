@@ -1,5 +1,7 @@
 package com.ivanmix.component;
 
+import com.ivanmix.models.UploadImage;
+
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -12,4 +14,5 @@ public interface ImageComponent {
     String getSmallImageName(String bigImage);
 
     Path getUploadPath(String bigImageUrl);
+
 }

@@ -22,6 +22,11 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form action="/project/update" method="post">
+                                    <div class="form-group">
+                                        <label>Imagas</label>
+                                        <a class="btn btn-primary" id=""  href="javascript:edit.showUploadDialog();">Upload Imagas</a>
+                                    </div>
+
                                     <input type="hidden" name="id" required value="${project.id}" />
                                     <div class="form-group">
                                         <label for="title">Title</label>
@@ -46,11 +51,48 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Images</div>
+                                    <div class="panel-body">
+                                        <c:forEach items="${project.images}" var="image" >
+                                            <p><c:out value="${image.big}"/></p>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <%@ include file="/WEB-INF/views/section/footerJs.jsp" %>
+
+    <form:form action="/project/add-image/{id}" method="POST" commandName="projectImage" enctype="multipart/form-data">
+    <div id="photoUploaderBox" class="modal fade" role="dialog" >
+        <input type="hidden" name="project_id" id="project_id" required value="${project.id}" />
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Загрузить Фотографию</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <input id="image" name="image" type="file" multiple placeholder="Выберите файл-картинку" >
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <a href="javascript:edit.addImage()" class="btn btn-primary" >Загрузить Фотографию</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form:form>
+
 </body>
 </html>

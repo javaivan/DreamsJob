@@ -135,8 +135,8 @@ public class UserController {
     @ResponseBody
     public String savePhoto(@RequestParam("photoFile") MultipartFile file){
 
-        UploadImage image = imageUploadService.uploadNewImage(file);
-
+        UploadImage newImage = imageUploadService.uploadNewImage(file);
+        UploadImage image = imageUploadService.approveImage(newImage);
         userService.addUserPhoto(SecurityUtil.getCurrentUserId(), image);
         return "success";
     }

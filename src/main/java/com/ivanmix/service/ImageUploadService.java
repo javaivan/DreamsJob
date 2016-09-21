@@ -5,4 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageUploadService {
     UploadImage uploadNewImage(MultipartFile file);
+
+    UploadImage approveImage(UploadImage image);
 }

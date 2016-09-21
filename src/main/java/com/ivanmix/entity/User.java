@@ -51,18 +51,19 @@ public class User {
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private Set<UserRole> userRole;
 
-    //@OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Reply> projectReplies;
 
-    @OneToMany(mappedBy = "user", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "user")
     private List<Project> projects;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reader", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reader")
     private List<Reply> projectReaderReplies;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Image> images;
 
 
     public Long getId() {
@@ -177,6 +178,13 @@ public class User {
         this.smallImage = smallImage;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     @Override
     public boolean equals(Object o) {

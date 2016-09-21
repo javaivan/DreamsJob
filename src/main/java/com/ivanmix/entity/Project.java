@@ -1,5 +1,8 @@
 package com.ivanmix.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,8 +40,11 @@ public class Project {
     @Column(name="status")
     private ProjectStatus status;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
     private List<Reply> replies;
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="project")
+    private List<Image> images;
 
     public Long getId() {
         return id;
@@ -96,6 +102,13 @@ public class Project {
         this.status = status;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     @PreUpdate
     protected void onUpdate() {

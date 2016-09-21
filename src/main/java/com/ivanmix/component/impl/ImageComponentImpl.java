@@ -1,14 +1,19 @@
 package com.ivanmix.component.impl;
 
+import com.ivanmix.Constants;
+import com.ivanmix.models.UploadImage;
 import org.springframework.stereotype.Component;
 import com.ivanmix.component.ImageComponent;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -40,8 +45,6 @@ public class ImageComponentImpl implements ImageComponent {
 
     @Override
     public Path getUploadPath(String bigImageUrl) {
-        return Paths.get("D:\\DreamsJob\\src\\main\\webapp\\resources\\upload\\" + bigImageUrl);
+        return Paths.get(Constants.FILE_UPLOAD_DIRECTORY + "/media/loading/" + bigImageUrl);
     }
-
-
 }

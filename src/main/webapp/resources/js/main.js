@@ -38,6 +38,28 @@ var edit = {
         });
 
     },
+    addImage : function () {
+        var image = $('#image').prop('files')[0];
+        var id = $('#project_id').val();
+        var form_data = new FormData();
+        form_data.append('image', image);
+        $.ajax({
+            url: '/project/add-image/' + id, // point to server-side PHP script
+            //dataType: 'json',  // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function(response){
+                alert(response);
+                location.reload();
 
-
+            },
+            error : function(error) {
+                alert(error);
+                console.log('error: ', error);
+            }
+        });
+    },
 };

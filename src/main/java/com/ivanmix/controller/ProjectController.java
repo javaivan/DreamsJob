@@ -3,6 +3,9 @@ package com.ivanmix.controller;
 import com.ivanmix.entity.Project;
 import com.ivanmix.entity.ProjectStatus;
 import com.ivanmix.form.ProjectReplyForm;
+import com.ivanmix.models.UploadImage;
+import com.ivanmix.service.ImageService;
+import com.ivanmix.service.ImageUploadService;
 import com.ivanmix.service.ReplyService;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.util.SecurityUtil;
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -24,6 +28,12 @@ public class ProjectController {
 
     @Autowired
     private ReplyService replyService;
+
+    @Autowired
+    private ImageUploadService imageUploadService;
+
+    @Autowired
+    private ImageService imageService;
 
     @RequestMapping(value = "/project-new", method = RequestMethod.GET)
     public String addNewProject(ModelMap model){
@@ -102,6 +112,16 @@ public class ProjectController {
         }
         projectService.update(project);
         return "redirect:/project-update/success";
+    }
+
+    @RequestMapping(value="/project/add-image/{id}", method=RequestMethod.POST)
+    @ResponseBody
+    public String addImages(@RequestParam("image") MultipartFile file, @PathVariable Long id){
+        UploadImage newImage = imageUploadService.uploadNewImage(file);
+        UploadImage image = imageUploadService.approveImage(newImage);
+        imageService.addImage(SecurityUtil.getCurrentUserId(),id,image);
+
+        return "success";
     }
 
     @RequestMapping(value = "/project-update/success", method = RequestMethod.GET)

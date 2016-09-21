@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form action="/user-profile" method="post">
-                                    <img src="http://localhost:8080/resources/upload/${images}">
+                                    <img src="http://localhost:8080/${images}" width="100px" >
                                     <form:errors path="profileForm.*"  cssClass="alert alert-danger" element="div" />
                                     <div class="form-group">
                                         <label>Imagas</label>
@@ -80,6 +80,5 @@
         </div>
     </div>
     </form:form>
-
 </body>
 </html>

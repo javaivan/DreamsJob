@@ -1,9 +1,11 @@
 package com.ivanmix.service.impl;
 
 import com.google.common.collect.Lists;
+import com.ivanmix.entity.Image;
 import com.ivanmix.entity.Project;
 import com.ivanmix.entity.User;
 import com.ivanmix.helper.ServiceHelper;
+import com.ivanmix.models.UploadImage;
 import com.ivanmix.repository.ProjectRepository;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
@@ -41,6 +43,19 @@ public class ProjectServiceImpl implements ProjectService {
         System.out.println(project);
         return projectRepository.save(project);
     }
+
+    /*
+    *
+    *     @Override
+    @Transactional
+    public void addUserPhoto(Long id, UploadImage image){
+        User user = userRepository.findById(id);
+
+        user.setBigImage(image.getBigImage());
+        user.setSmallImage(image.getSmallImage());
+        userRepository.save(user);
+    }
+    * */
 
     @Override
     public void update(Project p) {
