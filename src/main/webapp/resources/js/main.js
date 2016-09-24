@@ -2,6 +2,26 @@ $(function() {
     $(".btn_project_replies").click(function () {
         $("#replies .parent").val($(this).attr("project-replies"));
     });
+    $(".deleted_image").click(function () {
+        var image_id = $(this).attr("image_id");
+        $.ajax({
+            url: '/project/deleted-image/' + image_id, // point to server-side PHP script
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'get',
+            success: function(response){
+                alert(response);
+                location.reload();
+
+            },
+            error : function(error) {
+                alert(error);
+                console.log('error: ', error);
+            }
+        });
+    });
+
 });
 
 
@@ -45,7 +65,6 @@ var edit = {
         form_data.append('image', image);
         $.ajax({
             url: '/project/add-image/' + id, // point to server-side PHP script
-            //dataType: 'json',  // what to expect back from the PHP script, if anything
             cache: false,
             contentType: false,
             processData: false,
@@ -61,5 +80,5 @@ var edit = {
                 console.log('error: ', error);
             }
         });
-    },
+    }
 };

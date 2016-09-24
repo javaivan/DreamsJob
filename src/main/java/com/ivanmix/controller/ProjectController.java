@@ -116,7 +116,7 @@ public class ProjectController {
 
     @RequestMapping(value="/project/add-image/{id}", method=RequestMethod.POST)
     @ResponseBody
-    public String addImages(@RequestParam("image") MultipartFile file, @PathVariable Long id){
+    public String addImage(@RequestParam("image") MultipartFile file, @PathVariable Long id){
         UploadImage newImage = imageUploadService.uploadNewImage(file);
         UploadImage image = imageUploadService.approveImage(newImage);
         imageService.addImage(SecurityUtil.getCurrentUserId(),id,image);
@@ -127,5 +127,13 @@ public class ProjectController {
     @RequestMapping(value = "/project-update/success", method = RequestMethod.GET)
     public String successUpdateProject(ModelMap model){
         return "project-update-success";
+    }
+
+
+    @RequestMapping(value="/project/deleted-image/{id}", method=RequestMethod.GET)
+    @ResponseBody
+    public String deletedImage(@PathVariable Long id){
+        imageService.deleteProjectImage(id, SecurityUtil.getCurrentUserId());
+        return "success";
     }
 }

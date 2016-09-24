@@ -13,6 +13,5 @@ public interface ImageComponent {
 
     String getSmallImageName(String bigImage);
 
-    Path getUploadPath(String bigImageUrl);
-
+    Path getUploadPath(String fileUploadDirectory, String bigImageUrl);
 }

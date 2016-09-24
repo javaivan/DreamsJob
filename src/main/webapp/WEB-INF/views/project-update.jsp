@@ -47,22 +47,29 @@
                                         <textarea id="description" class="form-control" name="description" rows="3">${project.description}</textarea>
                                         <form:errors path="project.description" cssClass="alert alert-danger" element="div" />
                                     </div>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Добавить</button>
+                                    <div class="form-group">
+                                        <button class="btn btn-lg btn-primary btn-block" type="submit">Добавить</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Images</div>
-                                    <div class="panel-body">
-                                        <c:forEach items="${project.images}" var="image" >
-                                            <p><c:out value="${image.big}"/></p>
-                                        </c:forEach>
+                        <c:if test="${not empty project.images}">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Images</div>
+                                        <div class="panel-body">
+                                            <c:forEach items="${project.images}" var="image" >
+                                                <p>
+                                                    <c:out value="${image.big}"/>
+                                                    <span class="deleted_image" image_id="<c:out value="${image.id}"/>" >delet</span>
+                                                </p>
+                                            </c:forEach>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

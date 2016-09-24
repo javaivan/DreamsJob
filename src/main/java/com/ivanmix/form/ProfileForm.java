@@ -7,9 +7,6 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- * Created by ivan on 31.07.2016.
- */
 @FieldExists(login = "login", email = "email", message = "The user is exists")
 public class ProfileForm {
 

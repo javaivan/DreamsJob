@@ -20,11 +20,4 @@ public class CurrentUser extends User {
     public Long getId() {
         return id;
     }
-
-/*
-    private final Long id;
-
-    public CurrentUser(com.ivanmix.entity.User user) {
-        super(user.getLogin(), user.getPassword(), user);
-    }*/
 }

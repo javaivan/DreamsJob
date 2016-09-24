@@ -38,32 +38,20 @@
                 </div>
             </div>
         </div>
-
-<%--         <sec:authorize access="hasRole('ROLE_FREELANCER')">
+        <c:if test="${not empty project.images}">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Ответить на проэкт
-                        </div>
+                        <div class="panel-heading">Images</div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form action="/project-reply/<c:out value="${project.id}"/>" modelAttribute="projectReply" method="post">
-                                        <div class="form-group">
-                                            <label>Ответить</label>
-                                            <textarea name="reply" class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        <button type="reset" class="btn btn-default">Reset Button</button>
-                                    </form>
-                                </div>
-                            </div>
+                            <c:forEach items="${project.images}" var="image" >
+                                <img src="\<c:out value="${image.small}"/>" width="100"/><hr>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
-        </sec:authorize>--%>
+        </c:if>
         <div class="row">
             <c:forEach items="${project.replies}" var="replyOne" >
                 <c:if test="${empty replyOne.parent}">

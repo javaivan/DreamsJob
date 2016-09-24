@@ -8,5 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.List;
 
 public interface ImageRepository extends PagingAndSortingRepository<Image, Long> {
+
+    Image findByIdAndUserId(Long id, Long userId);
 }
 

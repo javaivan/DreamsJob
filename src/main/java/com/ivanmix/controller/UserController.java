@@ -44,7 +44,6 @@ public class UserController {
     @Autowired
     private ImageUploadService imageUploadService;
 
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
         model.addAttribute("projects", projectService.findAll(0, Integer.parseInt(env.getProperty("home.project"))));
@@ -59,7 +58,6 @@ public class UserController {
         model.addAttribute("users", users);
         return "users";
     }
-
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(ModelMap model){
@@ -104,8 +102,6 @@ public class UserController {
         return "redirect:/user-profile";
     }
 
-
-
     @RequestMapping(value = "/user-profile-change-password", method = RequestMethod.GET)
     public String userProfileChangePassword(ModelMap model) {
         PasswordForm password = new PasswordForm();
@@ -122,24 +118,17 @@ public class UserController {
         return "redirect:/user-profile";
     }
 
-
     @RequestMapping(value = "/bootstap", method = RequestMethod.GET)
     public String bootstapPage(ModelMap model){
         return "bootstap";
     }
 
-
-
-
     @RequestMapping(value="/user-profile-photo", method=RequestMethod.POST)
     @ResponseBody
     public String savePhoto(@RequestParam("photoFile") MultipartFile file){
-
         UploadImage newImage = imageUploadService.uploadNewImage(file);
         UploadImage image = imageUploadService.approveImage(newImage);
         userService.addUserPhoto(SecurityUtil.getCurrentUserId(), image);
         return "success";
     }
-
-
 }

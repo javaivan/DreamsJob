@@ -25,7 +25,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private UserService userService;
 
-
     @Override
     public Project findById(Long id) {
         return projectRepository.findById(id);
@@ -33,7 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findByIdAndUserId(Long id, Long userID) {
-        return projectRepository.findByIdAndUserId(id, userID, ServiceHelper.getSortById());
+        return projectRepository.findByIdAndUserId(id, userID);
     }
 
     @Override
@@ -43,19 +42,6 @@ public class ProjectServiceImpl implements ProjectService {
         System.out.println(project);
         return projectRepository.save(project);
     }
-
-    /*
-    *
-    *     @Override
-    @Transactional
-    public void addUserPhoto(Long id, UploadImage image){
-        User user = userRepository.findById(id);
-
-        user.setBigImage(image.getBigImage());
-        user.setSmallImage(image.getSmallImage());
-        userRepository.save(user);
-    }
-    * */
 
     @Override
     public void update(Project p) {

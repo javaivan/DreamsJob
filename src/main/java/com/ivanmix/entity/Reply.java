@@ -124,7 +124,6 @@ public class Reply {
         if (parent != null ? !parent.equals(reply1.parent) : reply1.parent != null) return false;
         if (reply != null ? !reply.equals(reply1.reply) : reply1.reply != null) return false;
         return replyStatus == reply1.replyStatus;
-
     }
 
     @Override

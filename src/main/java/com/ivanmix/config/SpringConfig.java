@@ -25,6 +25,7 @@ import java.util.Properties;
 @ComponentScan({ "com.ivanmix" })
 @Import({ SecurityConfig.class })
 @PropertySource("classpath:application.properties")
+@PropertySource("classpath:config.properties")
 @EnableJpaRepositories("com.ivanmix.repository")
 public class SpringConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -35,6 +36,8 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+
+    private static final String FILE_UPLOAD_DIRECTORY = "upload.directory";
 
     @Resource
     private Environment env;
@@ -68,9 +71,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         Properties properties = new Properties();
         properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,	env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
-
-
-        /*properties.put("hbm2ddl.auto","create");*/
         return properties;
     }
 
@@ -108,7 +108,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-
     @Bean
     public UserDetailsService getUserDetailsService(){
         return new UserDetailsServiceImpl();
@@ -120,5 +119,9 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return multipartResolver;
     }
 
+    @Bean
+    public String fileUploadDirectory(){
+        return env.getRequiredProperty(FILE_UPLOAD_DIRECTORY);
+    }
 }
 

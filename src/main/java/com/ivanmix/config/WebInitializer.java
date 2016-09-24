@@ -19,5 +19,4 @@ public class WebInitializer extends
     protected Class<?>[] getRootConfigClasses() {
         return null;
     }
-
 }

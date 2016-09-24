@@ -10,7 +10,7 @@ public interface ProjectRepository  extends PagingAndSortingRepository<Project, 
 
     Project findById(Long id);
 
-    Project findByIdAndUserId(Long id, Long userId, Sort sort);
+    Project findByIdAndUserId(Long id, Long userId);
 
     List<Project> findByUserId(Long id, Sort sort);
 }

@@ -35,9 +35,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 buildUserAuthority(user.getUserRole());
 
         UserDetails userDetails = new CurrentUser(user.getLogin(), user.getPassword(), authorities, user.getId());
-/*                new org.springframework.security.core.userdetails.User(user.getLogin(),
-                        user.getPassword(),
-                        authorities);*/
 
         return userDetails;
     }
@@ -55,6 +52,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return Result;
     }
-
-
 }

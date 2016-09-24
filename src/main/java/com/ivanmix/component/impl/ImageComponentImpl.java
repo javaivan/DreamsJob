@@ -2,9 +2,12 @@ package com.ivanmix.component.impl;
 
 import com.ivanmix.Constants;
 import com.ivanmix.models.UploadImage;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import com.ivanmix.component.ImageComponent;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -44,7 +47,7 @@ public class ImageComponentImpl implements ImageComponent {
     }
 
     @Override
-    public Path getUploadPath(String bigImageUrl) {
-        return Paths.get(Constants.FILE_UPLOAD_DIRECTORY + "/media/loading/" + bigImageUrl);
+    public Path getUploadPath(String fileUploadDirectory, String bigImageUrl) {
+        return Paths.get(fileUploadDirectory + "/media/loading/" + bigImageUrl);
     }
 }

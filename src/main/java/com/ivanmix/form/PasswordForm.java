@@ -31,5 +31,4 @@ public class PasswordForm {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-
 }

@@ -138,7 +138,6 @@ public class Project {
         if (update != null ? !update.equals(project.update) : project.update != null) return false;
         if (replies != null ? !replies.equals(project.replies) : project.replies != null) return false;
         return status != null ? status.equals(project.status) : project.status == null;
-
     }
 
     @Override
@@ -153,31 +152,4 @@ public class Project {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
-
-    /*
-    @Override
-    public String
-    toString() {
-        String projectReplyItem = "";
-        for (ProjectReply item: projectReplies){
-            projectReplyItem += item.toString();
-            projectReplyItem += " | ";
-        }
-
-        return "Project{" +
-                "id=" + id +
-                ", user=" + user +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                ", update=" + update +
-                ", projectReplies=" + projectReplyItem +
-                ", status='" + status + '\'' +
-                '}';
-    }*/
-/*
-    @Override
-    public String toString() {
-        return String.format("%s[id=%s]", getClass().getSimpleName(),  getId());
-    }*/
 }

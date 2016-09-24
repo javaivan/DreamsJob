@@ -8,6 +8,7 @@ import com.ivanmix.repository.ImageRepository;
 import com.ivanmix.repository.ProjectRepository;
 import com.ivanmix.repository.UserRepository;
 import com.ivanmix.service.ImageService;
+import com.ivanmix.service.ImageUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Autowired
+    private ImageUploadService imageUploadService;
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -33,5 +37,13 @@ public class ImageServiceImpl implements ImageService {
         image.setProject(project);
         image.setUser(user);
         imageRepository.save(image);
+    }
+
+    @Override
+    public void deleteProjectImage(Long id, Long userId) {
+        Image image = imageRepository.findByIdAndUserId(id, userId);
+        imageUploadService.deleteImage(image.getBig());
+        imageUploadService.deleteImage(image.getSmall());
+        imageRepository.delete(image);
     }
 }

@@ -16,7 +16,6 @@ public class FieldExistsConstraintValidator implements ConstraintValidator<Field
     private String login;
     private String email;
 
-
     @Autowired
     private UserService userService;
 

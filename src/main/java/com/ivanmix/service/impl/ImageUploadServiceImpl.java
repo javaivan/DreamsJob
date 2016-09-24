@@ -7,9 +7,12 @@ import com.ivanmix.component.ImageComponent;
 import com.ivanmix.models.UploadImage;
 import com.ivanmix.service.ImageUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,6 +28,9 @@ public class ImageUploadServiceImpl implements ImageUploadService {
     @Autowired
     private ImageComponent imageComponent;
 
+    @Autowired
+    private String fileUploadDirectory;
+
     @Override
     public UploadImage uploadNewImage(MultipartFile file) {
         try {
@@ -37,19 +43,20 @@ public class ImageUploadServiceImpl implements ImageUploadService {
         }
     }
 
+    @Override
     public UploadImage approveImage(UploadImage image){
 
-        Path oldPathImageBig = Paths.get(Constants.FILE_UPLOAD_DIRECTORY + image.getBigImage());
-        Path oldPathImageSmall = Paths.get(Constants.FILE_UPLOAD_DIRECTORY + image.getSmallImage());
+        Path oldPathImageBig = Paths.get(fileUploadDirectory + image.getBigImage());
+        Path oldPathImageSmall = Paths.get(fileUploadDirectory + image.getSmallImage());
 
         String dateFolder =  new SimpleDateFormat("/yyyy/MM/").format(new Date());
 
 
-        Path newPathImageBig = Paths.get(Constants.FILE_UPLOAD_DIRECTORY + "/media" +dateFolder + oldPathImageBig.getFileName());
-        Path newPathImageSmall = Paths.get(Constants.FILE_UPLOAD_DIRECTORY + "/media" + dateFolder + oldPathImageSmall.getFileName());
+        Path newPathImageBig = Paths.get(fileUploadDirectory + "/media" +dateFolder + oldPathImageBig.getFileName());
+        Path newPathImageSmall = Paths.get(fileUploadDirectory + "/media" + dateFolder + oldPathImageSmall.getFileName());
 
 
-        Path path = Paths.get(Constants.FILE_UPLOAD_DIRECTORY + "/media" +dateFolder);
+        Path path = Paths.get(fileUploadDirectory + "/media" +dateFolder);
         if (!Files.exists(path)) {
             try {
                 Files.createDirectories(path);
@@ -65,25 +72,35 @@ public class ImageUploadServiceImpl implements ImageUploadService {
             System.err.println(e);
         }
 
-        String shortBigImagePath = newPathImageBig.toString().replace(Constants.FILE_UPLOAD_DIRECTORY,"");
-        String shortSmallImagePath = newPathImageSmall.toString().replace(Constants.FILE_UPLOAD_DIRECTORY,"");
+        String shortBigImagePath = newPathImageBig.toString().replace(fileUploadDirectory,"");
+        String shortSmallImagePath = newPathImageSmall.toString().replace(fileUploadDirectory,"");
 
         return new  UploadImage(shortBigImagePath, shortSmallImagePath);
+    }
+
+    @Override
+    public void deleteImage(String url){
+        Path path = Paths.get(fileUploadDirectory + url);
+        try {
+            Files.delete(path);
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
 
     protected UploadImage processUpload(MultipartFile file) throws IOException{
         String bigImageName = imageComponent.getBigImageName();
-        Path bigImagePath = imageComponent.getUploadPath(bigImageName);
+        Path bigImagePath = imageComponent.getUploadPath(fileUploadDirectory,bigImageName);
         multipartFileUploadToJpeg(file, bigImagePath);
 
         String smallImageName = imageComponent.getSmallImageName(bigImageName);
-        Path smallImagePath = imageComponent.getUploadPath(smallImageName);
+        Path smallImagePath = imageComponent.getUploadPath(fileUploadDirectory,smallImageName);
 
         Thumbnails.of(bigImagePath.toString()).size(100, 100).toFile(smallImagePath.toString());
 
-        String shortBigImagePath = bigImagePath.toString().replace(Constants.FILE_UPLOAD_DIRECTORY,"");
-        String shortSmallImagePath = smallImagePath.toString().replace(Constants.FILE_UPLOAD_DIRECTORY,"");
+        String shortBigImagePath = bigImagePath.toString().replace(fileUploadDirectory,"");
+        String shortSmallImagePath = smallImagePath.toString().replace(fileUploadDirectory,"");
 
         return new  UploadImage(shortBigImagePath, shortSmallImagePath);
     }
@@ -99,6 +116,8 @@ public class ImageUploadServiceImpl implements ImageUploadService {
         }
 
     }
+
+
 
     /*
     * File photo = new File(MEDIA_DIR + "/certificates/" + uid);

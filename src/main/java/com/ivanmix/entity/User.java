@@ -7,10 +7,6 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by ivan on 19.07.2016.
- */
-
 @Entity(name = "users")
 public class User {
 
@@ -42,13 +38,11 @@ public class User {
 
     private String status;
 
-
     @Column(name = "big_image", length=250)
     private String bigImage;
 
     @Column(name = "small_image", length=250)
     private String smallImage;
-
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> userRole;

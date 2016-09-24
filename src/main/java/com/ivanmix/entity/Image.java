@@ -103,7 +103,6 @@ public class Image {
         if (small != null ? !small.equals(image.small) : image.small != null) return false;
         if (status != image.status) return false;
         return created != null ? created.equals(image.created) : image.created == null;
-
     }
 
     @Override

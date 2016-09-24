@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(form.getEmail());
         user.setLogin(form.getLogin());
 
-
         String encoderPassword = passwordEncoder.encode(form.getPassword());
         user.setPassword(encoderPassword);
 
@@ -94,7 +93,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-
     @Override
     public List<User> findAll() {
         return Lists.newArrayList(userRepository.findAll(ServiceHelper.getSortById()));
@@ -109,7 +107,6 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(id);
     }
 
-
     @Override
     @Transactional
     public void addUserPhoto(Long id, UploadImage image){
@@ -119,6 +116,4 @@ public class UserServiceImpl implements UserService {
         user.setSmallImage(image.getSmallImage());
         userRepository.save(user);
     }
-
-
 }
