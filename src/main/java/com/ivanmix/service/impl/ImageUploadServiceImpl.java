@@ -1,19 +1,14 @@
 package com.ivanmix.service.impl;
 
-
-import com.ivanmix.Constants;
 import net.coobird.thumbnailator.Thumbnails;
 import com.ivanmix.component.ImageComponent;
 import com.ivanmix.models.UploadImage;
 import com.ivanmix.service.ImageUploadService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,6 +19,8 @@ import java.util.Date;
 
 @Service
 public class ImageUploadServiceImpl implements ImageUploadService {
+
+    private static final Logger logger = Logger.getLogger(ImageUploadServiceImpl.class);
 
     @Autowired
     private ImageComponent imageComponent;
@@ -37,9 +34,8 @@ public class ImageUploadServiceImpl implements ImageUploadService {
             UploadImage image = processUpload(file);
             return image;
         } catch (IOException e){
-            System.out.println(e);
+            logger.error(e);
             return null;
-            /*throw new CantCompleteClientRequestException("Can't save  image upload: " + e.getMessage(), e);*/
         }
     }
 
@@ -61,7 +57,7 @@ public class ImageUploadServiceImpl implements ImageUploadService {
             try {
                 Files.createDirectories(path);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e);
             }
         }
 
@@ -69,7 +65,7 @@ public class ImageUploadServiceImpl implements ImageUploadService {
             Files.move(oldPathImageBig,newPathImageBig, StandardCopyOption.REPLACE_EXISTING);
             Files.move(oldPathImageSmall,newPathImageSmall, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            System.err.println(e);
+            logger.error(e);
         }
 
         String shortBigImagePath = newPathImageBig.toString().replace(fileUploadDirectory,"");
@@ -84,10 +80,9 @@ public class ImageUploadServiceImpl implements ImageUploadService {
         try {
             Files.delete(path);
         } catch (IOException e) {
-            System.err.println(e);
+            logger.error(e);
         }
     }
-
 
     protected UploadImage processUpload(MultipartFile file) throws IOException{
         String bigImageName = imageComponent.getBigImageName();
@@ -111,18 +106,7 @@ public class ImageUploadServiceImpl implements ImageUploadService {
         if (fileType.contains("png")){
             imageComponent.PngToJpeg(path, path);
         } else if(!fileType.contains("jpg") && !fileType.contains("jpeg")){
-            System.out.println("Only png and jpg image formats are supported: Current content type = " + fileType);
-            //throw new CantCompleteClientRequestException("Only png and jpg image formats are supported: Current content type=" + fileType);
+            logger.error("Only png and jpg image formats are supported: Current content type = " + fileType);
         }
-
     }
-
-
-
-    /*
-    * File photo = new File(MEDIA_DIR + "/certificates/" + uid);
-			if (!photo.getParentFile().exists()) {
-				photo.getParentFile().mkdirs();
-			}
-    * */
 }

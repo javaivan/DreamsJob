@@ -1,6 +1,5 @@
 package com.ivanmix.entity;
 
-
 import javax.persistence.*;
 
 @Entity

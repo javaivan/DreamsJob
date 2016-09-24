@@ -1,7 +1,6 @@
 package com.ivanmix.annotation;
 
 import com.ivanmix.validator.FieldExistsConstraintValidator;
-import com.ivanmix.validator.FieldMatchConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

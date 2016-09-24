@@ -1,8 +1,6 @@
 package com.ivanmix.controller;
 
-import com.ivanmix.entity.Project;
 import com.ivanmix.entity.User;
-import com.ivanmix.entity.UserRole;
 import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
@@ -14,19 +12,14 @@ import com.ivanmix.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
-
 
 @Controller
 @PropertySource("classpath:config.properties")

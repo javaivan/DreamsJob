@@ -1,7 +1,6 @@
 package com.ivanmix.service;
 
 import com.ivanmix.entity.Project;
-import com.ivanmix.models.UploadImage;
 
 import java.util.List;
 

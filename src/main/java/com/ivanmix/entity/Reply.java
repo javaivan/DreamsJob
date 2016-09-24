@@ -1,13 +1,9 @@
 package com.ivanmix.entity;
 
-import org.hibernate.annotations.*;
-
 import javax.persistence.*;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity(name = "project_reply")

@@ -3,15 +3,11 @@ package com.ivanmix.validator;
 import com.ivanmix.annotation.FieldExists;
 import com.ivanmix.entity.User;
 import com.ivanmix.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-/**
- * Created by ivan on 12.09.2016.
- */
 public class FieldExistsConstraintValidator implements ConstraintValidator<FieldExists, Object> {
     private String login;
     private String email;

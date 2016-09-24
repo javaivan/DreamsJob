@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
-
 @Controller
 public class ProjectController {
 
@@ -56,7 +55,6 @@ public class ProjectController {
             return "project-not-found";
         } else {
             model.addAttribute("project", project);
-            /*model.addAttribute("replies", projectReplyService.findByProjectId(project.getId()));*/
             return "project";
         }
     }

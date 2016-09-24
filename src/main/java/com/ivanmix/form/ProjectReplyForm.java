@@ -1,12 +1,5 @@
 package com.ivanmix.form;
 
-
-import com.ivanmix.entity.Project;
-import com.ivanmix.entity.User;
-
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

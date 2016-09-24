@@ -17,7 +17,6 @@ import java.util.Set;
 
 import com.ivanmix.entity.User;
 import com.ivanmix.entity.UserRole;
-import com.ivanmix.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

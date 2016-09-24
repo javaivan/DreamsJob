@@ -1,6 +1,5 @@
 package com.ivanmix.entity;
 
-
 import com.ivanmix.entity.status.ImageStatus;
 
 import javax.persistence.*;

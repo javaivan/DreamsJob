@@ -5,9 +5,6 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-/**
- * Created by ivan on 31.07.2016.
- */
 public class CurrentUser extends User {
 
     private final Long id;

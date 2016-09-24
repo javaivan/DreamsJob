@@ -6,9 +6,6 @@ import com.ivanmix.form.PasswordForm;
 import com.ivanmix.form.ProfileForm;
 import com.ivanmix.form.RegistrationForm;
 import com.ivanmix.models.UploadImage;
-import com.ivanmix.util.SecurityUtil;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 

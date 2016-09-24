@@ -1,8 +1,6 @@
 package com.ivanmix.repository;
 
-import com.ivanmix.entity.User;
 import com.ivanmix.entity.UserRole;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

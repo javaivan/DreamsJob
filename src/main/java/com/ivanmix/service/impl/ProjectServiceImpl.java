@@ -1,17 +1,14 @@
 package com.ivanmix.service.impl;
 
 import com.google.common.collect.Lists;
-import com.ivanmix.entity.Image;
 import com.ivanmix.entity.Project;
 import com.ivanmix.entity.User;
 import com.ivanmix.helper.ServiceHelper;
-import com.ivanmix.models.UploadImage;
 import com.ivanmix.repository.ProjectRepository;
 import com.ivanmix.service.ProjectService;
 import com.ivanmix.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +36,6 @@ public class ProjectServiceImpl implements ProjectService {
     public Project create(Project project, Long userID) {
         User user = userService.findUserById(userID);
         project.setUser(user);
-        System.out.println(project);
         return projectRepository.save(project);
     }
 

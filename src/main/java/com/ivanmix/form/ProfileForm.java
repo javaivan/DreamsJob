@@ -1,7 +1,6 @@
 package com.ivanmix.form;
 
 import com.ivanmix.annotation.FieldExists;
-import com.ivanmix.annotation.FieldMatch;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
@@ -60,7 +59,6 @@ public class ProfileForm {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
     @Override
     public String toString() {
