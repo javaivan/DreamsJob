@@ -5,7 +5,7 @@ import java.nio.file.Path;
 
 public interface ImageComponent {
 
-    void PngToJpeg(Path inPath, Path outPath) throws IOException;
+    void pngToJpeg(Path inPath, Path outPath) throws IOException;
 
     String getBigImageName();
 

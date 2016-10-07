@@ -47,12 +47,15 @@ public class ImageUploadServiceImpl implements ImageUploadService {
 
         String dateFolder =  new SimpleDateFormat("/yyyy/MM/").format(new Date());
 
+        Path newPathImageBig = Paths.get(String.format("%s/media%s%s",
+                fileUploadDirectory ,dateFolder, oldPathImageBig.getFileName()));
+        //Path newPathImageBig = Paths.get(fileUploadDirectory + "/media" +dateFolder + oldPathImageBig.getFileName());
+        Path newPathImageSmall = Paths.get(String.format("%s/media%s%s",
+                fileUploadDirectory ,dateFolder, oldPathImageSmall.getFileName()));
+        //Path newPathImageSmall = Paths.get(fileUploadDirectory + "/media" + dateFolder + oldPathImageSmall.getFileName());
 
-        Path newPathImageBig = Paths.get(fileUploadDirectory + "/media" +dateFolder + oldPathImageBig.getFileName());
-        Path newPathImageSmall = Paths.get(fileUploadDirectory + "/media" + dateFolder + oldPathImageSmall.getFileName());
-
-
-        Path path = Paths.get(fileUploadDirectory + "/media" +dateFolder);
+        Path path = Paths.get(String.format("%s/media%s", fileUploadDirectory ,dateFolder));
+        //Path path = Paths.get(fileUploadDirectory + "/media" +dateFolder);
         if (!Files.exists(path)) {
             try {
                 Files.createDirectories(path);
@@ -104,7 +107,7 @@ public class ImageUploadServiceImpl implements ImageUploadService {
         String fileType = file.getContentType();
         file.transferTo(path.toFile());
         if (fileType.contains("png")){
-            imageComponent.PngToJpeg(path, path);
+            imageComponent.pngToJpeg(path, path);
         } else if(!fileType.contains("jpg") && !fileType.contains("jpeg")){
             logger.error("Only png and jpg image formats are supported: Current content type = " + fileType);
         }

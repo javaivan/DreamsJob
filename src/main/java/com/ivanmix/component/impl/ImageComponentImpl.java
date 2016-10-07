@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ImageComponentImpl implements ImageComponent {
 
     @Override
-    public void PngToJpeg(Path inPath, Path outPath) throws IOException {
+    public void pngToJpeg(Path inPath, Path outPath) throws IOException {
         BufferedImage bufferedImage = null;
         try {
             bufferedImage = ImageIO.read(inPath.toFile());
@@ -39,6 +39,7 @@ public class ImageComponentImpl implements ImageComponent {
 
     @Override
     public Path getUploadPath(String fileUploadDirectory, String bigImageUrl) {
-        return Paths.get(fileUploadDirectory + "/media/loading/" + bigImageUrl);
+        return Paths.get(String.format("%s/media/loading/%s",fileUploadDirectory,bigImageUrl));
+        //return Paths.get(fileUploadDirectory + "/media/loading/" + bigImageUrl);
     }
 }

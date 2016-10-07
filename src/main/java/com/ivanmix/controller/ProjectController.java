@@ -74,7 +74,6 @@ public class ProjectController {
         return "project-new-success";
     }
 
-
     @RequestMapping(value = "/project-all", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
         model.addAttribute("projects", projectService.findAll());

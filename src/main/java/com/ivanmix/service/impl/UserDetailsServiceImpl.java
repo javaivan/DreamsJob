@@ -21,7 +21,6 @@ import com.ivanmix.entity.UserRole;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-
     @Autowired
     private UserService userService;
 
@@ -42,7 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
-        // Build user's authorities
         for (UserRole userRole : userRoles) {
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
         }
