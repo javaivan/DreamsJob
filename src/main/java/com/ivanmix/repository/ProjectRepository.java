@@ -1,6 +1,7 @@
 package com.ivanmix.repository;
 
 import com.ivanmix.entity.Project;
+import com.ivanmix.entity.ProjectStatus;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -13,4 +14,6 @@ public interface ProjectRepository  extends PagingAndSortingRepository<Project, 
     Project findByIdAndUserId(Long id, Long userId);
 
     List<Project> findByUserId(Long id, Sort sort);
+
+    List<Project> findByStatus(ProjectStatus status, Sort sort);
 }

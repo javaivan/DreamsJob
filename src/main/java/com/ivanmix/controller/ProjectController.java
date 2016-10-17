@@ -41,6 +41,21 @@ public class ProjectController {
         return "project-new";
     }
 
+    @RequestMapping(value = "/project-new", method = RequestMethod.POST)
+    public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult,Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("status",  ProjectStatus.values());
+            return "project-new";
+        }
+        projectService.create(project,SecurityUtil.getCurrentUserId());
+        return "redirect:/project-new/success";
+    }
+
+    @RequestMapping(value = "/project-new/success", method = RequestMethod.GET)
+    public String addNewProjectSuccess(ModelMap model){
+        return "project-new-success";
+    }
+
     @RequestMapping(value = "/project-reply", method = RequestMethod.POST)
     public String saveNewProjectReply(@RequestParam("id") Long id, @RequestParam("parent") Long parent, @RequestParam("reply") String reply) {
         replyService.create(reply, id, parent , SecurityUtil.getCurrentUserId());
@@ -59,24 +74,9 @@ public class ProjectController {
         }
     }
 
-    @RequestMapping(value = "/project-new", method = RequestMethod.POST)
-    public String saveNewProject(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult,Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("status",  ProjectStatus.values());
-            return "project-new";
-        }
-        projectService.create(project,SecurityUtil.getCurrentUserId());
-        return "redirect:/project-new/success";
-    }
-
-    @RequestMapping(value = "/project-new/success", method = RequestMethod.GET)
-    public String addNewProjectSuccess(ModelMap model){
-        return "project-new-success";
-    }
-
     @RequestMapping(value = "/project-all", method = RequestMethod.GET)
     public String allProject(ModelMap model) {
-        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("projects", projectService.findAllOpen());
         return "project-all";
     }
 

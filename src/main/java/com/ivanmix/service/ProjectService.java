@@ -16,8 +16,11 @@ public interface ProjectService {
 
     List<Project> findAll();
 
+    List<Project> findAllOpen();
+
+    List<Project> findAllPending();
+
     List<Project> findAll(int page, int size);
 
     List<Project> findByUserId(Long id);
-
 }

@@ -2,6 +2,7 @@ package com.ivanmix.service.impl;
 
 import com.google.common.collect.Lists;
 import com.ivanmix.entity.Project;
+import com.ivanmix.entity.ProjectStatus;
 import com.ivanmix.entity.User;
 import com.ivanmix.helper.ServiceHelper;
 import com.ivanmix.repository.ProjectRepository;
@@ -36,6 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
     public Project create(Project project, Long userID) {
         User user = userService.findUserById(userID);
         project.setUser(user);
+        project.setStatus(ProjectStatus.PENDING);
         return projectRepository.save(project);
     }
 
@@ -51,6 +53,16 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> findAll() {
         return Lists.newArrayList(projectRepository.findAll(ServiceHelper.getSortById()));
+    }
+
+    @Override
+    public List<Project> findAllOpen() {
+        return Lists.newArrayList(projectRepository.findByStatus(ProjectStatus.OPEN, ServiceHelper.getSortById()));
+    }
+
+    @Override
+    public List<Project> findAllPending() {
+        return Lists.newArrayList(projectRepository.findByStatus(ProjectStatus.PENDING, ServiceHelper.getSortById()));
     }
 
     @Override

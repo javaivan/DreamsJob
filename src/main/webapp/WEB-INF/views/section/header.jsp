@@ -10,6 +10,21 @@
         <a class="navbar-brand" href="${rootURL}">Dreams Job</a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
+        <sec:authorize access="hasRole('ROLE_EMPLOYER')">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>Admin panel
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="<c:url value="${rootURL}"/>admin-panel/verification-profiles">
+                            <i class="fa fa-user fa-fw"></i>Verification Profiles
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </sec:authorize>
+
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-money"></i>  <i class="fa fa-caret-down"></i>
